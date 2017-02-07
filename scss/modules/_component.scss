@@ -9,43 +9,66 @@
   &__left{
     width: 20%;
     background-color: $headerGrey;
+    img{
+      width: 50px;
+      height: 50px;
+    }
   }
 
   &__right{
-
+    width: 80%;
+    text-align: center;
+    padding: 10px;
   }
 
   &__flex{
     display: flex;
+    height: 100%;
   }
 
   &__time{
     display: flex;
-    &__left{
-      img{
-        width: 50px;
-        height: 50px;
-      }
-    }
-    &__right{
-      width: 80%;
-      text-align: center;
-      padding: 10px;
-      h4{
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-weight: bold;
-      }
+    &__title{
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: bold;
     }
   }
 
   &__announcement{
-    &__left{
-      width: 20%;
-      background-color: $headerGrey;
-      img{
-        width: 50px;
-        height: 50px;
+    max-height: 650px;
+    height: 200px;
+    overflow: hidden;
+    &__right{
+      text-align: left;
+      padding: 0px;
+      overflow-x: scroll;
+      height: inherit;
+      &__item{
+        border-bottom: 1px solid $greyBorder;
+        padding: 8px;
+        &__header{
+          h4, p, h5{
+            display: inline-block;
+            vertical-align: middle;
+          }
+          h4{
+            font-weight: bold;
+          }
+          h5{
+            font-weight: bold;
+            color: red;
+            padding: 0px 3px;
+          }
+        }
+      }
+      &__item:nth-last-child(1){
+        border-bottom: 0px;
+      }
+      &__item:first-child{
+        h5{
+          display: inline-block !important;
+        }
       }
     }
   }

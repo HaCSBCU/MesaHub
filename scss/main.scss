@@ -6,3 +6,19 @@
 @import "modules/bar-left";
 @import "modules/component";
 
+/* Main App CSS */
+
+body{
+  height: 100%;
+  display: flex;
+}
+
+.bar-left, .page{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.page{
+  width: 100%;
+}
+
