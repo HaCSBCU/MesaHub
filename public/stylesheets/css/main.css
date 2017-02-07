@@ -1,0 +1,209 @@
+/* Import Lato Font */
+@font-face {
+  font-family: 'Solomon-thin';
+  src: url("../public/font/solomon-thin.ttf"), local("truetype"); }
+@font-face {
+  font-family: 'Solomon-light';
+  src: url("../public/font/solomon-light.ttf"), local("truetype"); }
+@font-face {
+  font-family: 'Solomon-bold';
+  src: url("../public/font/solomon-bold.ttf"), local("truetype"); }
+@font-face {
+  font-family: 'Solomon-black';
+  src: url("../public/font/solomon-black.ttf"), local("truetype"); }
+/* Font Variable */
+/* Colour Setup */
+html, body, header, footer, div {
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  width: 100%; }
+
+h1, h2, h3, h4, h5, h6, p, a, li {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Solomon-light", sans-serif; }
+
+h1 {
+  font-size: 3em;
+  font-weight: 400; }
+
+h2 {
+  font-size: 2em;
+  font-weight: 300; }
+
+h3 {
+  font-size: 1.5em;
+  font-weight: 300; }
+
+h4 {
+  font-size: 1.2em;
+  font-weight: 300; }
+
+h5 {
+  font-size: 0.8em;
+  font-weight: 300; }
+
+p {
+  font-size: 0.7em;
+  font-weight: 300; }
+
+strong {
+  font-weight: 700; }
+
+.container {
+  width: 80%;
+  margin: auto; }
+
+ul {
+  margin: 0px; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+button {
+  padding: 10px 20px;
+  -webkit-appearance: none;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  cursor: pointer;
+  outline: none; }
+  button.__blue {
+    color: white;
+    background-color: transparent;
+    border: 3px solid white;
+    border-radius: 3px; }
+    button.__blue:hover {
+      background-color: white;
+      color: black; }
+  button.__white-solid {
+    background-color: white;
+    color: black; }
+    button.__white-solid:hover {
+      background-color: white; }
+  buttoncapitalize {
+    text-transform: uppercase !important; }
+
+.capitalize {
+  text-transform: uppercase !important; }
+
+.uppercase {
+  text-transform: uppercase; }
+
+hr {
+  height: 4px;
+  width: 50px;
+  outline: none;
+  border: none; }
+  hr.white {
+    background-color: white; }
+  hr.black {
+    background-color: black; }
+  hr.blue {
+    background-color: #1592E6; }
+
+/* Vertical & Horizontal Positioners */
+.vertC__relative {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+.vertC__absolute {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.horizC__relative {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); }
+.horizC__absolute {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); }
+
+.bothC__relative {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+.bothC__absolute {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+
+/* Grid Setups */
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .grid .grid-item {
+    box-sizing: border-box; }
+
+/* Overlays */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+  .overlay.blue {
+    background-color: #1592E6;
+    opacity: 0.7; }
+
+/* MIXINS */
+/* MODULES */
+.nav {
+  height: 70px;
+  overflow: hidden;
+  border-bottom: 2px solid #E2E2E2; }
+  .nav__container {
+    width: 50%;
+    margin: auto;
+    text-align: center; }
+    .nav__container img, .nav__container h3 {
+      display: inline-block;
+      vertical-align: middle; }
+    .nav__container img {
+      width: 40px;
+      height: 40px;
+      margin-right: 20px; }
+
+.bar-left {
+  width: 50px;
+  height: 100%;
+  background-color: red; }
+
+.component {
+  box-shadow: #E2E2E2 0px 2px 4px;
+  overflow: hidden;
+  width: 90%;
+  height: 100px;
+  box-sizing: border-box;
+  margin: 20px auto; }
+  .component__left {
+    width: 20%;
+    background-color: #F5F5F5; }
+  .component__flex {
+    display: flex; }
+  .component__time {
+    display: flex; }
+    .component__time__left img {
+      width: 50px;
+      height: 50px; }
+    .component__time__right {
+      width: 80%;
+      text-align: center;
+      padding: 10px; }
+      .component__time__right h4 {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: bold; }
+  .component__announcement__left {
+    width: 20%;
+    background-color: #F5F5F5; }
+    .component__announcement__left img {
+      width: 50px;
+      height: 50px; }
+
+/*# sourceMappingURL=main.css.map */
