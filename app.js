@@ -31,11 +31,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req,res){
   var data = {
     title: 'Something',
-    ann: [
+    announcement: [
       {
         title: 'Title 1',
         date: '11th March 20:15',
         body: 'Here is some body text'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
       },
       {
         title: 'Title 2',

@@ -1,15 +1,20 @@
 <div class="component component__announcement">
-    <div class="component__announcement__left">
-        <img class="bothC__relative" src="/img/icons/announcement.svg"/>
-    </div>
-    <div class="component__announcement__right">
+    <div class="component__flex">
+        <div class="component__left">
+            <img class="bothC__relative" src="/img/icons/announcement.svg"/>
+        </div>
+        <div class="component__right component__announcement__right">
 
-        <% ann.forEach(function(item) { %>
+            <% announcement.forEach(function(item) { %>
 
-        <p><%= item.title %> - <%= item.date %></p>
+            <div class="component__announcement__right__item">
+                <div class="component__announcement__right__item__header">
+                    <h4><%= item.title %> <span class="vert-line"> | </span> </h4> <p><%= item.date %></p> <h5 style="display: none">NEW!</h5>
+                </div>
+                <h4><%= item.body %></h4>
+            </div>
 
-        <% }); %>
-
-
+            <% }); %>
+        </div>
     </div>
 </div>

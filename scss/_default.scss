@@ -37,6 +37,13 @@ $textGrey: #777777;
 $headerGrey: #F5F5F5;
 $greyBorder: #E2E2E2;
 
+html{
+  height: 100%;
+}
+body{
+  min-height: 100%;
+}
+
 
 html, body, header, footer, div{
   margin: 0px;
@@ -51,7 +58,7 @@ h1, h2, h3, h4, h5, h6, p, a, li{
   font-family: $font;
 }
 h1{
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 400;
 }
 h2{
@@ -144,6 +151,10 @@ hr{
   &.blue{
     background-color: $blue;
   }
+}
+
+.vert-line{
+  margin: 0px 3px;
 }
 
 /* Vertical & Horizontal Positioners */

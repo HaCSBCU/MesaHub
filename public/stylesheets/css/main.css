@@ -13,6 +13,12 @@
   src: url("../public/font/solomon-black.ttf"), local("truetype"); }
 /* Font Variable */
 /* Colour Setup */
+html {
+  height: 100%; }
+
+body {
+  min-height: 100%; }
+
 html, body, header, footer, div {
   margin: 0px;
   padding: 0px;
@@ -25,7 +31,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   font-family: "Solomon-light", sans-serif; }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 400; }
 
 h2 {
@@ -104,6 +110,9 @@ hr {
   hr.blue {
     background-color: #1592E6; }
 
+.vert-line {
+  margin: 0px 3px; }
+
 /* Vertical & Horizontal Positioners */
 .vertC__relative {
   position: relative;
@@ -170,7 +179,7 @@ hr {
       margin-right: 20px; }
 
 .bar-left {
-  width: 50px;
+  width: 70px;
   height: 100%;
   background-color: red; }
 
@@ -184,26 +193,58 @@ hr {
   .component__left {
     width: 20%;
     background-color: #F5F5F5; }
+    .component__left img {
+      width: 50px;
+      height: 50px; }
+  .component__right {
+    width: 80%;
+    text-align: center;
+    padding: 10px; }
   .component__flex {
-    display: flex; }
+    display: flex;
+    height: 100%; }
   .component__time {
     display: flex; }
-    .component__time__left img {
-      width: 50px;
-      height: 50px; }
-    .component__time__right {
-      width: 80%;
-      text-align: center;
-      padding: 10px; }
-      .component__time__right h4 {
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-weight: bold; }
-  .component__announcement__left {
-    width: 20%;
-    background-color: #F5F5F5; }
-    .component__announcement__left img {
-      width: 50px;
-      height: 50px; }
+    .component__time__title {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: bold; }
+  .component__announcement {
+    max-height: 650px;
+    height: 200px;
+    overflow: hidden; }
+    .component__announcement__right {
+      text-align: left;
+      padding: 0px;
+      overflow-x: scroll;
+      height: inherit; }
+      .component__announcement__right__item {
+        border-bottom: 1px solid #E2E2E2;
+        padding: 8px; }
+        .component__announcement__right__item__header h4, .component__announcement__right__item__header p, .component__announcement__right__item__header h5 {
+          display: inline-block;
+          vertical-align: middle; }
+        .component__announcement__right__item__header h4 {
+          font-weight: bold; }
+        .component__announcement__right__item__header h5 {
+          font-weight: bold;
+          color: red;
+          padding: 0px 3px; }
+      .component__announcement__right__item:nth-last-child(1) {
+        border-bottom: 0px; }
+      .component__announcement__right__item:first-child h5 {
+        display: inline-block !important; }
+
+/* Main App CSS */
+body {
+  height: 100%;
+  display: flex; }
+
+.bar-left, .page {
+  display: inline-block;
+  vertical-align: top; }
+
+.page {
+  width: 100%; }
 
 /*# sourceMappingURL=main.css.map */
