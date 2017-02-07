@@ -1,0 +1,15 @@
+    <div class="component component__workshops component__one-third">
+        <div class="component__header">
+            <h3>Workshops</h3>
+        </div>
+        <% workshops.forEach(function(item){ %>
+            <div class="component__workshops__item">
+                <img id="workshop-item-image" src='<%= "/img/workshops/" + item.img%>'/>
+                <div class="component__workshops__item__info">
+                    <h4><%= item.title %></h4>
+                    <p><%= item.location %> | <%= item.time %></p>
+                </div>
+            </div>
+        <% });%>
+
+    </div>
