@@ -1,40 +1,18 @@
 /* Import Lato Font */
 
-@font-face {
-  font-family: 'Solomon-thin';
-  src:
-    url('../public/font/solomon-thin.ttf'),
-    local('truetype');
-}
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 
-@font-face {
-  font-family: 'Solomon-light';
-  src:
-    url('../public/font/solomon-light.ttf'),
-    local('truetype');
-}
-
-@font-face {
-  font-family: 'Solomon-bold';
-  src:
-    url('../public/font/solomon-bold.ttf'),
-    local('truetype');
-}
-
-@font-face {
-  font-family: 'Solomon-black';
-  src:
-          url('../public/font/solomon-black.ttf'),
-local('truetype');
-}
 
 /* Font Variable */
-$font: 'Solomon-light', sans-serif;
+$font: 'Open Sans', sans-serif;
 
 /* Colour Setup */
 $blue: #1592E6;
+$lightBlue: #15aafe;
 $textGrey: #777777;
 $headerGrey: #F5F5F5;
+$darkGrey: #252525;
+$darkerWhite: #dcdcdc;
 $greyBorder: #E2E2E2;
 
 html{
@@ -194,6 +172,15 @@ hr{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+.float{
+  &__left{
+    float:left;
+  }
+  &__right{
+    float:right;
   }
 }
 

@@ -1,16 +1,5 @@
 /* Import Lato Font */
-@font-face {
-  font-family: 'Solomon-thin';
-  src: url("../public/font/solomon-thin.ttf"), local("truetype"); }
-@font-face {
-  font-family: 'Solomon-light';
-  src: url("../public/font/solomon-light.ttf"), local("truetype"); }
-@font-face {
-  font-family: 'Solomon-bold';
-  src: url("../public/font/solomon-bold.ttf"), local("truetype"); }
-@font-face {
-  font-family: 'Solomon-black';
-  src: url("../public/font/solomon-black.ttf"), local("truetype"); }
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 /* Font Variable */
 /* Colour Setup */
 html {
@@ -28,7 +17,7 @@ html, body, header, footer, div {
 h1, h2, h3, h4, h5, h6, p, a, li {
   margin: 0px;
   padding: 0px;
-  font-family: "Solomon-light", sans-serif; }
+  font-family: "Open Sans", sans-serif; }
 
 h1 {
   font-size: 2.5em;
@@ -143,6 +132,11 @@ hr {
   top: 50%;
   transform: translate(-50%, -50%); }
 
+.float__left {
+  float: left; }
+.float__right {
+  float: right; }
+
 /* Grid Setups */
 .grid {
   display: flex;
@@ -178,21 +172,37 @@ hr {
       height: 40px;
       margin-right: 20px; }
 
-.bar-left {
-  width: 70px;
+.side-bar {
+  width: 80px;
   height: 100%;
-  background-color: red; }
+  background-color: #F5F5F5;
+  border-right: 2px solid #E2E2E2; }
+  .side-bar__active > .side-bar__item {
+    background-color: #1592E6; }
+  .side-bar__item:hover {
+    background-color: #15aafe; }
+  .side-bar__item {
+    transition: all 0.3s ease;
+    position: relative;
+    height: 80px; }
+    .side-bar__item img {
+      width: 50%; }
 
 .component {
   box-shadow: #E2E2E2 0px 2px 4px;
   overflow: hidden;
-  width: 90%;
-  height: 100px;
+  width: 100%;
   box-sizing: border-box;
-  margin: 20px auto; }
+  margin: 20px auto;
+  border: 1px solid #E2E2E2; }
   .component__left {
     width: 20%;
-    background-color: #F5F5F5; }
+    background-color: #F5F5F5;
+    text-align: center; }
+    .component__left h4 {
+      padding: 10px 0px;
+      font-weight: 500;
+      letter-spacing: 1px; }
     .component__left img {
       width: 50px;
       height: 50px; }
@@ -203,6 +213,21 @@ hr {
   .component__flex {
     display: flex;
     height: 100%; }
+  .component__one-third {
+    width: 30%;
+    display: inline-block;
+    margin: 0px; }
+  .component__two-third {
+    width: 67%;
+    display: inline-block;
+    margin: 0px; }
+  .component__header {
+    text-align: center;
+    background-color: #F5F5F5; }
+    .component__header h3 {
+      padding: 10px 0px;
+      font-weight: 500;
+      letter-spacing: 1px; }
   .component__time {
     display: flex; }
     .component__time__title {
@@ -225,7 +250,9 @@ hr {
           display: inline-block;
           vertical-align: middle; }
         .component__announcement__right__item__header h4 {
-          font-weight: bold; }
+          font-weight: 600;
+          color: #252525;
+          opacity: 0.8; }
         .component__announcement__right__item__header h5 {
           font-weight: bold;
           color: red;
@@ -234,7 +261,23 @@ hr {
         border-bottom: 0px; }
       .component__announcement__right__item:first-child h5 {
         display: inline-block !important; }
+  .component__workshops__item {
+    padding: 20px 15px; }
+    .component__workshops__item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 360px;
+      display: inline-block;
+      vertical-align: middle; }
+    .component__workshops__item__info {
+      display: inline-block;
+      width: 40%;
+      vertical-align: middle;
+      margin-left: 10px; }
 
+@media screen and (max-width: 1030px) {
+  .component__left h4 {
+    display: none !important; } }
 /* Main App CSS */
 body {
   height: 100%;
@@ -246,5 +289,9 @@ body {
 
 .page {
   width: 100%; }
+
+#main {
+  width: 90%;
+  margin: auto; }
 
 /*# sourceMappingURL=main.css.map */
