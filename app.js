@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req,res){
   var data = {
     pageName: 'index',
-    title: 'Something',
+    title: 'Something'
     announcement: [
       {
         title: 'Title 1',
