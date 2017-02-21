@@ -111,6 +111,10 @@ app.get('/', function(req,res){
   res.render('pages/index', data);
 });
 
+app.get('/vue', function(req, res){
+  res.sendFile(path.join(__dirname , '/views/index.html'));
+});
+
 
 app.listen(8000);
 

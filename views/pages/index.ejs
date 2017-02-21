@@ -2,6 +2,7 @@
 <html>
   <head>
     <% include ../partials/head %>
+
   </head>
   <body>
 
@@ -13,7 +14,14 @@
       </nav>
       <section id="main">
 
-        <% include ../partials/time-component %>
+        <!--<% include ../partials/time-component %>-->
+
+
+        <!-- Vue Time Component-->
+        <div id="time">
+          <time-component v-bind:time="timeLeft"></time-component>
+
+        </div>
 
         <% include ../partials/announcement-component %>
 
@@ -26,7 +34,7 @@
       </section>
     </section>
 
-
+    <% include ../partials/footer %>
 
   </body>
 </html>
