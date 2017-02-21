@@ -3,7 +3,6 @@
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
-  margin: 20px auto;
   border: 1px solid $greyBorder;
 
   &__left{
@@ -73,6 +72,11 @@
       padding: 0px;
       overflow-x: scroll;
       height: inherit;
+      & > div:first-child{
+        h5{
+          display: inline-block !important;
+        }
+      }
       &__item{
         border-bottom: 1px solid $greyBorder;
         padding: 8px;
@@ -96,15 +100,13 @@
       &__item:nth-last-child(1){
         border-bottom: 0px;
       }
-      &__item:first-child{
-        h5{
-          display: inline-block !important;
-        }
-      }
     }
   }
 
   &__workshops{
+    width: 100%;
+    max-height: 380px;
+    overflow: scroll;
     &__item{
       padding: 20px 15px;
       img{
@@ -124,6 +126,34 @@
   }
 
 }
+
+.component-container{
+  margin: 20px auto 0px auto;
+  &__one-third{
+    position: relative;
+    width: 28%;
+    display: inline-block;
+    div{
+      vertical-align: top;
+    }
+  }
+  &__two-third{
+    position: relative;
+    width: 68%;
+    display: inline-block;
+    vertical-align: top;
+    div{
+      vertical-align: top;
+    }
+  }
+  &__left{
+    float: left;
+  }
+  &__right{
+    float: right;
+  }
+}
+
 
 @media screen and (max-width: 1030px){
   .component{
