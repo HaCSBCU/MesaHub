@@ -15,15 +15,41 @@
       <section id="main">
 
         <!--<% include ../partials/time-component %>-->
-
-
         <!-- Vue Time Component-->
         <div id="time">
-          <time-component v-bind:time="timeLeft"></time-component>
-
+          <countdown v-bind:time="timeLeft"></countdown>
         </div>
 
-        <% include ../partials/announcement-component %>
+
+        <!--<% include ../partials/announcement-component %>-->
+
+
+        <div id="announcements">
+
+          <announcements>
+            <div v-for="item in test">
+              <announcement-item :title="item.title" :body="item.body" :date="item.date"></announcement-item>
+            </div>
+          </announcements>
+
+          <!--<div class="component component__announcement">-->
+            <!--<div class="component__flex">-->
+              <!--<div class="component__left">-->
+                <!--<div class="vertC__relative">-->
+                  <!--<img src="/img/icons/announcement.svg"/>-->
+                  <!--<h4>Announcements</h4>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="component__right component__announcement__right">-->
+
+                <!--<div v-for="item in test">-->
+                    <!--<announcement-item :title="item.title" :body="item.body" :date="item.date"></announcement-item>-->
+                <!--</div>-->
+
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
 
         <% include ../partials/workshops-component %>
 
