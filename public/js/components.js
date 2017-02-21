@@ -15,6 +15,7 @@ Vue.component('countdown', {
     `
 });
 
+//Announcement Component
 Vue.component('announcements', {
     template: `
         <div id="announcements">
@@ -48,4 +49,43 @@ Vue.component('announcement-item', {
             <h4>{{body}}</h4>
          </div>
     `
+});
+
+
+//Workshop Component
+Vue.component('workshops', {
+   template: `
+            <div class="component component__workshops">
+                <div class="component__header">
+                    <h3>Workshops</h3>
+                </div>
+                <slot></slot>
+            </div>
+   `
+});
+
+Vue.component('workshop-item', {
+    props: ['image', 'title', 'room', 'time'],
+    template: `
+        <div class="component__workshops__item">
+            <img id="workshop-item-image" :src="image"/>
+            <div class="component__workshops__item__info">
+                <h4>{{title}}</h4>
+                <p>{{room}} | {{time}}</p>
+            </div>
+        </div>
+    `
+
+});
+
+//Timeline component
+Vue.component('timeline', {
+   template: `
+        <div class="component float__right">
+            <div class="component__header">
+                <h3>Timeline</h3>
+            </div>
+            <div id="timetable-item" class="timetable"></div>
+        </div>
+   `
 });
