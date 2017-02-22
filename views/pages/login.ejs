@@ -7,15 +7,27 @@
 <body>
 
 <% include ../partials/side-bar %>
+<nav>
+    <% include ../partials/nav %>
+</nav>
 
 <section class="page">
-    <nav>
-        <% include ../partials/nav %>
-    </nav>
+
     <section id="main">
 
-        Some content be here
-
+        <div class="floating-box floating-box__small floating-box__login vertC__relative">
+            <div class="floating-box__content">
+                <div class="floating-box__login__icon">
+                    <img class="vertC__relative" src="/img/icons/login.svg"/>
+                </div>
+                <h3>Admin Login</h3>
+                <form action="/login/submit">
+                    <input type="text" placeholder="Username"/>
+                    <input type="password" placeholder="Password"/>
+                    <input type="submit" placeholder="Login"/>
+                </form>
+            </div>
+        </div>
 
     </section>
 </section>

@@ -1,0 +1,63 @@
+.floating-box{
+  border: 1px solid $greyBorder;
+  box-shadow: $greyBorder 0px 2px 4px;
+  background-color: $headerGrey;
+  &__small{
+    width: 40%;
+    margin: auto;
+  }
+  &__content{
+    text-align: center;
+    img{
+      width: 50%;
+      text-align: center;
+
+    }
+    box-sizing: border-box;
+    padding: 30px;
+  }
+  &__login{
+    &__icon{
+      background-color: $lightBlue;
+      width: 80px;
+      height: 80px;
+      border-radius: 360px;
+      margin: 15px auto;
+    }
+    h3{
+      padding: 10px;
+    }
+    form{
+      input{
+        width: 80%;
+        display: block;
+        margin: 5px auto;
+      }
+      input[type="text"], input[type="password"]{
+        -webkit-appearance: none;
+        padding: 10px 10px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-family: $font;
+        font-weight: 300;
+        box-sizing: border-box;
+      }
+      input[type="submit"]{
+        width: 30%;
+        -webkit-appearance: none;
+        outline: none;
+        padding: 15px 0px;
+        border: none;
+        font-family: $font;
+        font-size: 15px;
+        background-color: $lightBlue;
+        color: white;
+        text-transform: uppercase;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}

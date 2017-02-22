@@ -229,10 +229,13 @@ body{
 
 .page{
   width: 100%;
+  overflow: auto;
+  padding-bottom: 20px;
 }
 
 #main{
   width: 90%;
   margin: auto;
+  position: relative;
 }
 
