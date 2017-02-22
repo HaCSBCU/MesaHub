@@ -29,7 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', index);
 
 app.get('/', function(req,res){
-  res.render('pages/index', data);
+  res.render('pages/index', {title: 'Home', pageName: 'index'});
+});
+
+app.get('/login', function(re, res){
+  res.render('pages/login', {title: 'Login', pageName: 'login'});
 });
 
 app.get('/vue', function(req, res){

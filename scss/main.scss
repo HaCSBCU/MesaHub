@@ -6,26 +6,10 @@
 @import "modules/bar-left";
 @import "modules/component";
 
+/* PAGE SPECIFIC */
+@import "modules/floating-box";
+
 /* Main App CSS */
-
-body{
-  height: 100%;
-  display: flex;
-}
-
-.bar-left, .page{
-  display: inline-block;
-  vertical-align: top;
-}
-
-.page{
-  width: 100%;
-}
-
-#main{
-  width: 90%;
-  margin: auto;
-}
 
 
 
