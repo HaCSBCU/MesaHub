@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req,res){
   var data = {
+    pageName: 'index',
     title: 'Something',
     announcement: [
       {
@@ -51,10 +52,67 @@ app.get('/', function(req,res){
         title: 'Title 2',
         date: '11th March 20:17',
         body: 'Here is some body text which is the second item!'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
+      },
+      {
+        title: 'Title 2',
+        date: '11th March 20:17',
+        body: 'Here is some body text which is the second item!'
+      }
+    ],
+    workshops: [
+      {
+        title: "Node JS",
+        img: 'alex.jpg',
+        location: 'MP242',
+        time: "3pm"
+      },
+      {
+        title: "Git",
+        img: 'panda.jpg',
+        location: 'MP242',
+        time: "3pm"
+      }
+      ,
+      {
+        title: "Hackathons",
+        img: 'joe.jpg',
+        location: 'MP242',
+        time: "3pm"
+      }
+      ,
+      {
+        title: "Something",
+        img: 'oliver.jpg',
+        location: 'MP242',
+        time: "3pm"
       }
     ]
   };
   res.render('pages/index', data);
+});
+
+app.get('/vue', function(req, res){
+  res.sendFile(path.join(__dirname , '/views/index.html'));
 });
 
 

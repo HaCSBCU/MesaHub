@@ -2,6 +2,7 @@
 <html>
   <head>
     <% include ../partials/head %>
+
   </head>
   <body>
 
@@ -13,15 +14,40 @@
       </nav>
       <section id="main">
 
-        <% include ../partials/time-component %>
+        <!-- Vue Time Component-->
+        <div id="time" class="component-container">
+          <countdown v-bind:time="timeLeft"></countdown>
+        </div>
 
-        <% include ../partials/announcement-component %>
+
+        <div id="announcements" class="component-container">
+          <announcements>
+            <div v-for="item in test">
+              <announcement-item :title="item.title" :body="item.body" :date="item.date"></announcement-item>
+            </div>
+          </announcements>
+        </div>
+
+
+        <div id="workshops" class="component-container component-container__one-third">
+          <workshops id="workshops">
+            <div v-for="item in events">
+              <workshop-item :title="item.title" :room="item.location" :image="item.img" :time="item.time"></workshop-item>
+            </div>
+          </workshops>
+        </div>
+
+
+        <div id="timeline" class="component-container component-container__two-third component-container__right">
+          <timeline></timeline>
+        </div>
+
 
 
       </section>
     </section>
 
-
+    <% include ../partials/footer %>
 
   </body>
 </html>
