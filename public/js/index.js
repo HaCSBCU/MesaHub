@@ -10,53 +10,14 @@ var announcements = new Vue({
     data: {
         test: [
             {
-                title: 'Title 1',
+                title: 'This is from js',
                 date: '11th March 20:15',
                 body: 'Here is some body text'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
             }
         ]
     }
 });
+
 
 var workshops = new Vue({
     el: '#workshops',
