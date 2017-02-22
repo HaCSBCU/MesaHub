@@ -88,3 +88,7 @@ Vue.component('timeline', {
         </div>
    `
 });
+
+// Vue.component('floating-box', {
+//     template:
+// })

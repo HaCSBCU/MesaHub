@@ -4,12 +4,8 @@
 
 @import "modules/nav";
 @import "modules/bar-left";
-@import "modules/component";
-
-/* PAGE SPECIFIC */
 @import "modules/floating-box";
 
-/* Main App CSS */
-
-
-
+#main{
+  height: 90%;
+}

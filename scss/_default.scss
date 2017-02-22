@@ -217,5 +217,25 @@ hr{
   background-repeat: $repeat;
 }
 
+body{
+  height: 100%;
+  display: flex;
+}
 
+.bar-left, .page{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.page{
+  width: 100%;
+  overflow: auto;
+  padding-bottom: 20px;
+}
+
+#main{
+  width: 90%;
+  margin: auto;
+  position: relative;
+}
 
