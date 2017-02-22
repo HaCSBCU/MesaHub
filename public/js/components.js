@@ -51,7 +51,6 @@ Vue.component('announcement-item', {
     `
 });
 
-
 //Workshop Component
 Vue.component('workshops', {
    template: `

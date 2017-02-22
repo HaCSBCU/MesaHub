@@ -121,6 +121,5 @@ var timeline = new Vue({
         //     var renderer = new Timetable.Renderer(timetable);
         //     renderer.draw('.timetable');
         // },100);
-
     }
 });
