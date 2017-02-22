@@ -61,7 +61,7 @@ var announcements = new Vue({
 var workshops = new Vue({
     el: '#workshops',
     data: {
-        workshops: [
+        events: [
             {
                 title: "Node JS",
                 img: '/img/workshops/alex.jpg',
@@ -88,15 +88,18 @@ var workshops = new Vue({
                 location: 'MP242',
                 time: "3pm"
             }
-            ,
-            {
-                title: "Something",
+        ]
+    },
+    created: function() {
+        setTimeout(function(){
+            workshops.events.unshift({
+               title: "New event",
                 img: '/img/workshops/oliver.jpg',
                 location: 'MP242',
                 time: "3pm"
-            }
-
-        ]
+            });
+            clearTimeout();
+        },3000);
     }
 });
 
