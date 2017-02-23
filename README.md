@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/HaCSBCU/MesaHub.svg?branch=master)](https://travis-ci.org/HaCSBCU/MesaHub)
+
+
 # Building the project
 
 This project uses docker-compose to build
