@@ -8,6 +8,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var users = require('login-mongo');
 
+var db = require('./db/db.js');
+
+//Require ID.
+var uniqid = require('uniqid');
+
 var app = express();
 
 // view engine setup
@@ -82,7 +87,22 @@ app.post('/createuser', function(req,res){
 // API AUTH
 
 app.get('/login', function(req, res){
-  res.render('pages/login', {title: 'Login', pageName: 'login'});
+  var id = req.cookies.uID;
+  if(id){
+    db.verifyID(id, function(user){
+      console.log("USER: " + user);
+      if(user == undefined){
+        console.log('USER IS UNDEFINED');
+        res.render('pages/login', {title: 'Login', pageName: 'login'});
+      }
+      console.log('USER IS DEFINED');
+      res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
+    });
+  }
+  else{
+    console.log('NO ID');
+    res.render('pages/login', {title: 'Login', pageName: 'login'});
+  }
 });
 
 app.post('/login', function(req, res) {
@@ -92,9 +112,15 @@ app.post('/login', function(req, res) {
   }
   users.checkPassword(req.body.user, req.body.pass, function(success) {
     if (success) {
+      var uID = uniqid();
       req.session.users[req.body.user] = req.body.user;
-      res.cookie('name', req.body.user);
-      return res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: req.body.user});
+      res.cookie('uID', uID, {maxAge: 3600 * 1000});
+      db.uniqueID(uID, req. body.user, function(i){
+        console.log(i.session);
+      });
+      db.findUser(req.body.user, function(user){
+        return res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
+      })
     } else {
       req.session.user[req.body.user] = void 0;
       return res.redirect('/login');
@@ -115,6 +141,21 @@ app.post('/login', function(req, res) {
 app.get('/test', function(req, res){
   res.send(req.session.count.toString() + "<br>" + req.session.alex);
 });
+
+app.get('/get-user', function(req, res){
+  db.findUser('alex', function(record){
+    res.send("User record: " + record);
+  })
+});
+
+app.get('/id', function(req, res){
+  db.verifyID('123xm49iwizynyovm', function(user){
+    console.log(user);
+    res.send(user)
+  })
+});
+
+
 
 
 module.exports = app;
