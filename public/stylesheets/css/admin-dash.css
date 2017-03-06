@@ -67,12 +67,12 @@ button {
   outline: none; }
   button.__blue {
     color: white;
-    background-color: transparent;
-    border: 3px solid white;
-    border-radius: 3px; }
+    background-color: #15aafe;
+    border-radius: 3px;
+    border: none; }
     button.__blue:hover {
-      background-color: white;
-      color: black; }
+      background-color: #1592E6;
+      color: white; }
   button.__white-solid {
     background-color: white;
     color: black; }
@@ -260,13 +260,61 @@ nav {
     margin-top: 20px;
     cursor: pointer; }
 
-.profile-info {
+#profile-info {
+  margin: 50px auto;
   width: 50%;
-  margin: auto;
   text-align: center; }
-  .profile-info img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%; }
+  #profile-info h2 {
+    padding: 10px;
+    font-size: 26px; }
+
+.profile-info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; }
+
+.admin-controls {
+  text-align: center; }
+  .admin-controls__item {
+    display: inline-block;
+    vertical-align: top;
+    text-align: inherit;
+    width: 30%;
+    height: auto;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    margin: 10px; }
+    .admin-controls__item * {
+      display: inline-block;
+      vertical-align: middle; }
+    .admin-controls__item img {
+      height: 50px;
+      margin-right: 30px; }
+    .admin-controls__item h3 {
+      text-transform: capitalize; }
+
+.upload-event {
+  width: 94%;
+  margin: 13px auto;
+  height: 230px; }
+  .upload-event__left, .upload-event__right {
+    display: inline-block;
+    vertical-align: top; }
+  .upload-event__left {
+    position: relative;
+    height: 100%;
+    width: 30%;
+    background-color: #dcdcdc; }
+    .upload-event__left img {
+      height: 60%; }
+  .upload-event__right {
+    margin-left: -6px;
+    width: 70%;
+    height: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box; }
+    .upload-event__right p {
+      padding: 10px 0px;
+      font-size: 20px; }
 
 /*# sourceMappingURL=admin-dash.css.map */

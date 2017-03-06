@@ -25,6 +25,15 @@ module.exports.findUser = (user, cb) => {
     });
 };
 
+module.exports.findUserByID = (id, cb) => {
+    users.findOne({session: id}, function(err, record){
+        if(err){
+            console.log(err);
+        }
+        cb(record);
+    });
+};
+
 module.exports.uniqueID = (id, user, cb) => {
     users.findOne({name: user}, function(err, record){
         record.session = id;

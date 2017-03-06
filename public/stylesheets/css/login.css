@@ -67,12 +67,12 @@ button {
   outline: none; }
   button.__blue {
     color: white;
-    background-color: transparent;
-    border: 3px solid white;
-    border-radius: 3px; }
+    background-color: #15aafe;
+    border-radius: 3px;
+    border: none; }
     button.__blue:hover {
-      background-color: white;
-      color: black; }
+      background-color: #1592E6;
+      color: white; }
   button.__white-solid {
     background-color: white;
     color: black; }

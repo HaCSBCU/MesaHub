@@ -1,7 +1,14 @@
-.profile-info{
+#profile-info{
+  margin: 50px auto;
   width: 50%;
-  margin: auto;
   text-align: center;
+  h2{
+    padding: 10px;
+    font-size: 26px;
+  }
+}
+
+.profile-info{
   img{
     width: 100px;
     height: 100px;

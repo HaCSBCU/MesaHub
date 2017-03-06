@@ -58,7 +58,6 @@ app.get('/', function(req, res){
   } else{
     req.session.count++;
   }
-  console.log(req.session);
   res.render('pages/index', {title: 'Home', pageName: 'index'});
 });
 
@@ -90,12 +89,10 @@ app.get('/login', function(req, res){
   var id = req.cookies.uID;
   if(id){
     db.verifyID(id, function(user){
-      console.log("USER: " + user);
       if(user == undefined){
-        console.log('USER IS UNDEFINED');
         res.render('pages/login', {title: 'Login', pageName: 'login'});
       }
-      console.log('USER IS DEFINED');
+      console.log(user);
       res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
     });
   }
