@@ -24,22 +24,19 @@ users.config(opts);
 router.get('/', function(req, res){
     var id = req.cookies.uID;
     if(id){
-        db.verifyID(id, function(user){
-            if(user == undefined){
-                res.render('pages/login', {title: 'Login', pageName: 'login'});
+        auth.verifySession(id, function(data){
+            console.log(data.validated);
+            if(data.validated == true){
+                return res.redirect('/admin');
             }
-            console.log(user);
-            res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
         });
     }
     else{
-        console.log('NO ID');
         res.render('pages/login', {title: 'Login', pageName: 'login'});
     }
 });
 
 router.post('/sign-in', function(req, res) {
-    console.log('SUBMIT');
     if(!req.session.users){
         req.session.users = {};
     }
@@ -54,11 +51,11 @@ router.post('/sign-in', function(req, res) {
                 console.log(i.session);
             });
             db.findUser(userName, function(user){
-                return res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
+                return res.redirect('/admin');
             })
         }
-        else if(!userName || pass){
-            res.redirect('/');
+        else if(!userName || !pass){
+            res.redirect('/login');
         }
         else {
             req.session.user[userName] = void 0;

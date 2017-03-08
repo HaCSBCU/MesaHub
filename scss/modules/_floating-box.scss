@@ -9,26 +9,36 @@
   &__large{
     width: 60%;
     margin: auto;
-
+    padding: 30px 0px;
+    box-sizing: border-box;
+    form{
+      input, textarea{
+        margin: 10px auto 0px auto;
+      }
+      input[type="submit"]{
+        margin-top: 30px;
+        display: inline-block;
+        width: 30%;
+      }
+    }
+    &__icon{
+      img{
+        width: 60px;
+        height: 60px;
+      }
+      margin: 20px auto;
+    }
   }
-  &__send-text{
+  &__send-text, &__event{
     &__content{
       text-align: center;
       p{
         font-size: 13px;
       }
-      &__icon{
-        img{
-          width: 60px;
-          height: 60px;
-        }
-        height: 70px;
-        margin-top: 40px;
-      }
+
       form{
         textarea, input{
           display: block;
-          margin: auto;
         }
         textarea{
           margin: 30px auto;
@@ -55,6 +65,26 @@
       p:nth-last-child(1){
         padding: 0px 10% 35px 10%;
       }
+    }
+  }
+  &__event{
+    form{
+      width: 80%;
+      margin: auto;
+      input.input-half:nth-last-child(2){
+        float: right;
+      }
+      input.input-half:nth-last-child(3){
+        float: left;
+      }
+    }
+    input{
+      width: 100%;
+    }
+    input.input-half{
+      width: 48%;
+      display: inline-block;vertical-align: top;
+
     }
   }
   &__content{

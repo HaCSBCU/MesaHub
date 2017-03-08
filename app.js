@@ -39,125 +39,18 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//Setup user connection
-var opts = {
-  connect: 'mongodb://localhost:27017/bullhacks',
-  iterations: 10,  //number of rounds used in generating salt
-  collection: 'users',
-  sendEmails: false
-};
-
-users.config(opts);
-
-
-
-
-//API Endpoints
-
-
-
-//Routes
+// API ROUTES
 //Homepage
 app.use('/', require('./routes/index.js'));
+
 //Login
 app.use('/login', require('./routes/login.js'));
+
 //Create user
 app.use('/register', require('./routes/register.js'));
 
-
-// app.get('/user', function(req, res){
-//   res.sendFile(path.join(__dirname , '/views/index.html'));
-// });
-//
-// app.post('/createuser', function(req,res){
-//
-//   users.add(req.body.email, req.body.user, req.body.pass, function(err, success) {
-//     return res.end(JSON.stringify({
-//       error: err,
-//       success: success
-//     }));
-//   });
-//
-// });
-
-// API AUTH
-
-// LOGGED IN USERS
-
-app.get('/admin/send-text', function(req, res){
-  var id = req.cookies.uID;
-  auth.verifySession(id, function(data){
-    console.log(data);
-    if(data.validated == true){
-      res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin'});
-    }
-    else{
-      res.redirect('/login');
-    }
-  });
-});
-
-
-// ADMIN DASHBOARD REQUESTS
-app.post('/admin/send-text-request', function(req, res){
-  var id = req.cookies.uID;
-  auth.verifySession(id, function(data){
-    console.log(data.validated);
-    if(data.validated == true){
-      console.log(escape(req.body.message));
-      //Call text system from here.
-      res.send('Congrats!');
-    }
-  });
-  res.status(500).send('You must be authenticated in order to send a message.')
-});
-
-
-//API AUTH TESTING
-app.get('/test', function(req, res){
-  res.send(req.session.count.toString() + "<br>" + req.session.alex);
-});
-
-app.get('/get-user', function(req, res){
-  db.findUser('alex', function(record){
-    res.send("User record: " + record);
-  })
-});
-
-app.get('/id', function(req, res){
-  db.verifyID('123xm49iwizynyovm', function(user){
-    console.log(user);
-    res.send(user)
-  })
-});
-
-//Workshops
-app.get('/workshops', function(req, res){
-  res.sendFile(path.join(__dirname, '/views/workshops.html'));
-});
-
-app.get('/workshops-list', function(req, res){
-  var workshop = require('./db/workshops.js');
-  workshop.getWorkshops(function(data){
-    console.log(data);
-    res.send(data);
-  })
-});
-
-app.post('/create-workshop', function(req, res){
-  var workshop = require('./db/workshops.js');
-  var name = escape(req.body.name);
-  var location = escape(req.body.location);
-  var time = escape(req.body.time);
-  var picture = escape(req.body.picture);
-  workshop.addWorkshop(name, location, time, picture, function(){
-    console.log('Callback received');
-    res.send("Workshop added!");
-  });
-});
-
-
+//Admin-backend
+app.use('/admin', require('./routes/admin.js'));
 
 
 module.exports = app;
