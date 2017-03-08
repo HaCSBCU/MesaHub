@@ -56,84 +56,32 @@ users.config(opts);
 //API Endpoints
 
 
-app.get('/', function(req, res){
-  if(!req.session.count){
-    req.session.count = 1;
-  } else{
-    req.session.count++;
-  }
-  res.render('pages/index', {title: 'Home', pageName: 'index'});
-});
 
-app.get('/set', function(req, res){
-  req.session.name = "Alex";
-  res.redirect('/test');
-});
+//Routes
+//Homepage
+app.use('/', require('./routes/index.js'));
+//Login
+app.use('/login', require('./routes/login.js'));
+//Create user
+app.use('/register', require('./routes/register.js'));
 
 
-
-app.get('/user', function(req, res){
-  res.sendFile(path.join(__dirname , '/views/index.html'));
-});
-
-app.post('/createuser', function(req,res){
-
-  users.add(req.body.email, req.body.user, req.body.pass, function(err, success) {
-    return res.end(JSON.stringify({
-      error: err,
-      success: success
-    }));
-  });
-
-});
+// app.get('/user', function(req, res){
+//   res.sendFile(path.join(__dirname , '/views/index.html'));
+// });
+//
+// app.post('/createuser', function(req,res){
+//
+//   users.add(req.body.email, req.body.user, req.body.pass, function(err, success) {
+//     return res.end(JSON.stringify({
+//       error: err,
+//       success: success
+//     }));
+//   });
+//
+// });
 
 // API AUTH
-
-app.get('/login', function(req, res){
-  var id = req.cookies.uID;
-  if(id){
-    db.verifyID(id, function(user){
-      if(user == undefined){
-        res.render('pages/login', {title: 'Login', pageName: 'login'});
-      }
-      console.log(user);
-      res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
-    });
-  }
-  else{
-    console.log('NO ID');
-    res.render('pages/login', {title: 'Login', pageName: 'login'});
-  }
-});
-
-app.post('/login', function(req, res) {
-  console.log('SUBMIT');
-  if(!req.session.users){
-    req.session.users = {};
-  }
-  var userName = escape(req.body.user);
-  var pass = escape(req.body.pass);
-  users.checkPassword(userName, pass, function(success) {
-    if (success) {
-      var uID = uniqid();
-      req.session.users[userName] = userName;
-      res.cookie('uID', uID, {maxAge: 3600 * 1000});
-      db.uniqueID(uID, userName, function(i){
-        console.log(i.session);
-      });
-      db.findUser(userName, function(user){
-        return res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
-      })
-    }
-    else if(!userName || pass){
-      res.redirect('/');
-    }
-    else {
-      req.session.user[userName] = void 0;
-      return res.redirect('/login');
-    }
-  });
-});
 
 // LOGGED IN USERS
 
