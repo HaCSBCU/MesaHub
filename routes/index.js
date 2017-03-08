@@ -1,24 +1,21 @@
 var express = require('express');
 var router = express.Router();
+// var utilities = require('../libs/middleware/utilities.js');
+// var config = require('../config/config.js');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  var data = {
-    title: 'Test',
-    announcements: [
-      {
-        title: 'Title 1',
-        date: '11th March 20:15',
-        body: 'Here is some body text'
-      },
-      {
-        title: 'Title 2',
-        date: '11th March 20:17',
-        body: 'Here is some body text which is the second item!'
-      }
-    ]
-  };
-  res.render('index', data);
+router.get('/', function(req, res){
+  if(!req.session.count){
+    req.session.count = 1;
+  } else{
+    req.session.count++;
+  }
+  res.render('pages/index', {title: 'Home', pageName: 'index'});
+});
+
+
+router.get('/set', function(req, res){
+  req.session.name = "Alex";
+  res.redirect('/test');
 });
 
 module.exports = router;
