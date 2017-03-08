@@ -4,32 +4,32 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var workshopSchema = new Schema({
+var eventSchema = new Schema({
     name: String,
     location: String,
     time: String,
     picture: String
 });
 
-var workshops = mongoose.model('workshops', workshopSchema);
+var events = mongoose.model('workshops', eventSchema);
 
-module.exports.addWorkshop = (name, location, time, picture, cb) => {
-    var newWorkshop = new workshops({
+module.exports.addEvent = (name, location, time, picture, cb) => {
+    var newEvent = new workshops({
         name,
         location,
         time,
         picture
     });
 
-    newWorkshop.save(function(err){
+    newEvent.save(function(err){
         if(err) throw err;
         console.log('Workshop created');
         cb();
     });
 };
 
-module.exports.getWorkshops = (cb) => {
-  workshops.findOne({}, function(err, workshopsList){
+module.exports.getEvents = (cb) => {
+  events.findOne({}, function(err, workshopsList){
     cb(workshopsList);
   });
 };

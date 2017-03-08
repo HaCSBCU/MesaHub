@@ -56,7 +56,7 @@ Vue.component('workshops', {
    template: `
             <div class="component component__workshops">
                 <div class="component__header">
-                    <h3>Workshops</h3>
+                    <h3>Events</h3>
                 </div>
                 <slot></slot>
             </div>

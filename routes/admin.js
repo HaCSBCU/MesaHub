@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var auth = require('../auth/authentication.js');
+var multer = require('multer');
 
 //Other modules
 var escape = require('escape-html');
@@ -13,7 +14,8 @@ router.get('/', function(req, res){
 });
 
 
-//Workshops
+// EVENTS
+
 router.get('/event', function(req, res){
     var id = req.cookies.uID;
     if(id){
@@ -30,23 +32,79 @@ router.get('/event', function(req, res){
     }
 });
 
-// WORKSHOPS
-
-router.get('/workshops-list', function(req, res){
-    var workshop = require('../db/workshops.js');
-    workshop.getWorkshops(function(data){
-        console.log(data);
+router.get('/get-events', function(req, res){
+    var events = require('../db/events.js');
+    events.getEvents(function(data){
         res.send(data);
     })
 });
 
-router.post('/create-workshop', function(req, res){
-    var workshop = require('../db/workshops.js');
-    var name = escape(req.body.name);
-    var location = escape(req.body.location);
-    var time = escape(req.body.time);
-    var picture = escape(req.body.picture);
-    workshop.addWorkshop(name, location, time, picture, function(){
+// Handle file uploads
+
+var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './uploads');
+    },
+    filename: function (req, file, callback) {
+        callback(null,Date.now()+file.originalname);
+    }
+});
+
+
+var upload = multer({ storage : storage}).single('upl');
+
+router.post('/create-event', function(req, res){
+
+    //File uploaded
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        res.end("File is uploaded");
+    });
+
+    // var events = require('../db/events.js');
+    // var name = escape(req.body.name);
+    // var location = escape(req.body.location);
+    // var time = escape(req.body.time);
+    // var picture = escape(req.body.picture);
+    // events.addEvent(name, location, time, picture, function(){
+    //     res.send("Workshop added!");
+    // });
+});
+
+// ANNOUNCEMENTS
+
+router.get('/announcement', function(req, res){
+    var id = req.cookies.uID;
+    if(id){
+        auth.verifySession(id, function(data){
+            if(data.validated == true){
+                res.render('pages/create-announcement', {title: 'Create Announcement', pageName: 'create-announcement'});
+            }
+            else{
+                res.redirect('/login');
+            }
+        });
+    } else{
+        res.redirect('/login');
+    }
+});
+
+router.get('/get-announcements', function(req, res){
+    var announcement = require('../db/announcements.js');
+    announcement.getAnnouncements(function(data){
+        res.send(data);
+    })
+});
+
+router.post('/create-announcement', function(req, res){
+    var announcements = require('../db/announcements.js');
+    var title = escape(req.body.title);
+    var body = escape(req.body.body);
+    var date = new Date();
+    date.toString().split(" ").splice(1,4);
+    announcements.addAnnouncement(title, date, body, function(){
         console.log('Callback received');
         res.send("Workshop added!");
     });
@@ -58,7 +116,6 @@ router.get('/send-text', function(req, res){
     var id = req.cookies.uID;
     if(id){
         auth.verifySession(id, function(data){
-            console.log(data);
             if(data.validated == true){
                 res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin'});
             }

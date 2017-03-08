@@ -12,13 +12,27 @@
     padding: 30px 0px;
     box-sizing: border-box;
     form{
+      width: 80%;
+      margin: auto;
       input, textarea{
         margin: 10px auto 0px auto;
+        width: 100%;
+      }
+      textarea{
+        margin: 30px auto;
+        min-height: 200px;
+        width: 100%;
+        max-width: 100%;
+        max-height: 300px;
       }
       input[type="submit"]{
         margin-top: 30px;
         display: inline-block;
         width: 30%;
+      }
+      input[type="checkbox"]{
+        width: 20px;
+        margin: 0px !important;
       }
     }
     &__icon{
@@ -39,13 +53,6 @@
       form{
         textarea, input{
           display: block;
-        }
-        textarea{
-          margin: 30px auto;
-          min-height: 200px;
-          width: 80%;
-          max-width: 80%;
-          max-height: 300px;
         }
         input[type="checkbox"], p{
           display: inline-block;
@@ -68,14 +75,38 @@
     }
   }
   &__event{
+    &__content{
+
+    }
     form{
       width: 80%;
       margin: auto;
-      input.input-half:nth-last-child(2){
+      input.input-half:nth-last-child(4){
         float: right;
       }
       input.input-half:nth-last-child(3){
         float: left;
+      }
+      .form__add-image{
+        margin-top: 10px;
+        display: inline-block;
+        *{
+          display: inline-block;
+          vertical-align: top;
+        }
+        text-align: left;
+        &__image{
+          width: 50px;
+          height: 50px;
+          background-color: $greyBorder;
+          img{
+            width: 50%;
+          }
+        }
+        h3{
+          padding: 11px 0px 0px 10px;
+          font-size: 18px;
+        }
       }
     }
     input{
@@ -85,6 +116,11 @@
       width: 48%;
       display: inline-block;vertical-align: top;
 
+    }
+  }
+  &__announcement{
+    textarea{
+      margin: 10px auto 20px auto !important;
     }
   }
   &__content{

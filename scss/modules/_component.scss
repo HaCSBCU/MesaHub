@@ -104,11 +104,11 @@
   }
 
   &__workshops{
-    width: 100%;
     max-height: 380px;
     overflow: scroll;
     &__item{
       padding: 20px 15px;
+      width: auto;
       img{
         width: 40px;
         height: 40px;

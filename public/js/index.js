@@ -8,53 +8,30 @@ var time = new Vue({
 var announcements = new Vue({
     el: '#announcements',
     data: {
-        test: [
+        announcementsList: [
             {
-                title: 'Title 1',
                 date: '11th March 20:15',
-                body: 'Here is some body text'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
-            },
-            {
-                title: 'Title 2',
-                date: '11th March 20:17',
-                body: 'Here is some body text which is the second item!'
+                body: 'Here is some body text',
+                title: 'Title 1'
             }
         ]
+    },
+    created: function(){
+        // var refresh = function(){
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '/admin/get-announcements',
+        //         success: function(data){
+        //             console.log(data);
+        //             announcements.announcementsList = data.reverse();
+        //         },
+        //         error: function(err){
+        //             console.log(err);
+        //         }
+        //     })
+        // };
+        // refresh();
+        // setInterval(refresh,3000);
     }
 });
 
@@ -67,39 +44,25 @@ var workshops = new Vue({
                 img: '/img/workshops/alex.jpg',
                 location: 'MP242',
                 time: "3pm"
-            },
-            {
-                title: "Git",
-                img: '/img/workshops/panda.jpg',
-                location: 'MP242',
-                time: "3pm"
-            }
-            ,
-            {
-                title: "Hackathons",
-                img: '/img/workshops/joe.jpg',
-                location: 'MP242',
-                time: "3pm"
-            }
-            ,
-            {
-                title: "Something",
-                img: '/img/workshops/oliver.jpg',
-                location: 'MP242',
-                time: "3pm"
             }
         ]
     },
-    created: function() {
-        setTimeout(function(){
-            workshops.events.unshift({
-               title: "New event",
-                img: '/img/workshops/oliver.jpg',
-                location: 'MP242',
-                time: "3pm"
-            });
-            clearTimeout();
-        },3000);
+    created: function(){
+        // var refresh = function(){
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '/admin/get-events',
+        //         success: function(data){
+        //             console.log(data);
+        //             workshops.events = data.reverse();
+        //         },
+        //         error: function(err){
+        //             console.log(err);
+        //         }
+        //     })
+        // };
+        // refresh();
+        // setInterval(refresh,3000);
     }
 });
 

@@ -229,12 +229,25 @@ nav {
     margin: auto;
     padding: 30px 0px;
     box-sizing: border-box; }
-    .floating-box__large form input, .floating-box__large form textarea {
-      margin: 10px auto 0px auto; }
-    .floating-box__large form input[type="submit"] {
-      margin-top: 30px;
-      display: inline-block;
-      width: 30%; }
+    .floating-box__large form {
+      width: 80%;
+      margin: auto; }
+      .floating-box__large form input, .floating-box__large form textarea {
+        margin: 10px auto 0px auto;
+        width: 100%; }
+      .floating-box__large form textarea {
+        margin: 30px auto;
+        min-height: 200px;
+        width: 100%;
+        max-width: 100%;
+        max-height: 300px; }
+      .floating-box__large form input[type="submit"] {
+        margin-top: 30px;
+        display: inline-block;
+        width: 30%; }
+      .floating-box__large form input[type="checkbox"] {
+        width: 20px;
+        margin: 0px !important; }
     .floating-box__large__icon {
       margin: 20px auto; }
       .floating-box__large__icon img {
@@ -246,12 +259,6 @@ nav {
       font-size: 13px; }
     .floating-box__send-text__content form textarea, .floating-box__send-text__content form input, .floating-box__event__content form textarea, .floating-box__event__content form input {
       display: block; }
-    .floating-box__send-text__content form textarea, .floating-box__event__content form textarea {
-      margin: 30px auto;
-      min-height: 200px;
-      width: 80%;
-      max-width: 80%;
-      max-height: 300px; }
     .floating-box__send-text__content form input[type="checkbox"], .floating-box__send-text__content form p, .floating-box__event__content form input[type="checkbox"], .floating-box__event__content form p {
       display: inline-block;
       font-size: 16px;
@@ -267,16 +274,34 @@ nav {
   .floating-box__event form {
     width: 80%;
     margin: auto; }
-    .floating-box__event form input.input-half:nth-last-child(2) {
+    .floating-box__event form input.input-half:nth-last-child(4) {
       float: right; }
     .floating-box__event form input.input-half:nth-last-child(3) {
       float: left; }
+    .floating-box__event form .form__add-image {
+      margin-top: 10px;
+      display: inline-block;
+      text-align: left; }
+      .floating-box__event form .form__add-image * {
+        display: inline-block;
+        vertical-align: top; }
+      .floating-box__event form .form__add-image__image {
+        width: 50px;
+        height: 50px;
+        background-color: #E2E2E2; }
+        .floating-box__event form .form__add-image__image img {
+          width: 50%; }
+      .floating-box__event form .form__add-image h3 {
+        padding: 11px 0px 0px 10px;
+        font-size: 18px; }
   .floating-box__event input {
     width: 100%; }
   .floating-box__event input.input-half {
     width: 48%;
     display: inline-block;
     vertical-align: top; }
+  .floating-box__announcement textarea {
+    margin: 10px auto 20px auto !important; }
   .floating-box__content {
     text-align: center;
     box-sizing: border-box;

@@ -22,10 +22,17 @@
                     <img src="/img/icons/add-event.svg"/>
                     <h3>Create Event</h3>
                 </div>
-                <form id="send-text" method="post">
-                    <input type="text" placeholder="Event Name"/>
-                    <input class="input-half" type="text" placeholder="Event Time"/>
-                    <input class="input-half" type="text" placeholder="Where"/>
+                <form id="send-text" method="post" action="/admin/create-event" enctype="multipart/form-data">
+                    <input class="send-text-name" type="text" placeholder="Event Name"/>
+                    <input class="input-half send-text-title" type="text" placeholder="Event Time"/>
+                    <input class="input-half send-text-location" type="text" placeholder="Where"/>
+                    <div class="form__add-image">
+                        <div class="form__add-image__image">
+                            <img class="bothC__relative" src="/img/icons/add-image.svg"/>
+                        </div>
+                        <h3>Add image</h3>
+                    </div>
+                    <input type="file" name="upl"/>
                     <input class="button __blue" type="submit" placeholder="ADD"/>
                 </form>
             </div>
@@ -34,62 +41,54 @@
     </section>
 </section>
 
-<script>
-    $('#send-text').submit(function(e){
-        e.preventDefault();
-        var confirm = $(this).children('#confirm');
-        var checkBox = $(this).children("input[type='checkbox']");
-        var confirmText = $(this).children(".confirm-text")
-        var messageBox = $(this).children("textarea");
-        var message = messageBox.val();
-        var data = {
-            message: message
-        }
-        console.log("Text: " + message);
-        if(confirm.prop("checked") == true){
-            swal({
-                title: "Are you sure?",
-                text: "This message will be sent to everybody. Please make sure that you are ready to send.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, send it!",
-                closeOnConfirm: false
-            },
-            function(){
-                $.ajax({
-                    type: 'POST',
-                    url: '/admin/send-text-request',
-                    data: data,
-                    success: function(data){
-                        console.log(data);
-                        messageBox.val("");
-                        checkBox.prop('checked', false);
-                        confirmText.removeClass("red");
-                        swal({
-                            title: "Message Sent!",
-                            text: "Your message has been sent out to all participants at this hackathon",
-                            type: "success",
-                            confirmButtonText: "Great!"
-                        });
-                    },
-                    error: function(data){
-                        swal({
-                            title: "Message not sent",
-                            text: data.responseText,
-                            type: "error",
-                            confirmButtonText: "Okay"
-                        });
-                    }
-                })
-            });
-        }
-        else{
-            confirmText.addClass("red");
-        }
+<!--<script>-->
+    <!--$('#send-text').submit(function(e){-->
+        <!--e.preventDefault();-->
+        <!--var confirm = $(this).children('#confirm');-->
+        <!--var checkBox = $(this).children("input[type='checkbox']");-->
+        <!--var confirmText = $(this).children(".confirm-text")-->
+        <!--var messageBox = $(this).children("textarea");-->
+        <!--var message = messageBox.val();-->
 
-    });
-</script>
+
+
+
+        <!--var data = {-->
+            <!--message: message-->
+        <!--}-->
+        <!--if(confirm.prop("checked") == true){-->
+            <!--$.ajax({-->
+                <!--type: 'POST',-->
+                <!--url: '/admin/create-event',-->
+                <!--data: data,-->
+                <!--success: function(data){-->
+                    <!--console.log(data);-->
+                    <!--messageBox.val("");-->
+                    <!--checkBox.prop('checked', false);-->
+                    <!--confirmText.removeClass("red");-->
+                    <!--swal({-->
+                        <!--title: "Message Sent!",-->
+                        <!--text: "Your message has been sent out to all participants at this hackathon",-->
+                        <!--type: "success",-->
+                        <!--confirmButtonText: "Great!"-->
+                    <!--});-->
+                <!--},-->
+                <!--error: function(data){-->
+                    <!--swal({-->
+                        <!--title: "Message not sent",-->
+                        <!--text: data.responseText,-->
+                        <!--type: "error",-->
+                        <!--confirmButtonText: "Okay"-->
+                    <!--});-->
+                <!--}-->
+            <!--})-->
+        <!--}-->
+        <!--else{-->
+            <!--confirmText.addClass("red");-->
+        <!--}-->
+
+    <!--});-->
+<!--</script>-->
 
 <% include ../partials/footer %>
 
