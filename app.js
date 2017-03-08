@@ -189,6 +189,14 @@ app.get('/workshops', function(req, res){
   res.sendFile(path.join(__dirname, '/views/workshops.html'));
 });
 
+app.get('/workshops-list', function(req, res){
+  var workshop = require('./db/workshops.js');
+  workshop.getWorkshops(function(data){
+    console.log(data);
+    res.send(data);
+  })
+});
+
 app.post('/create-workshop', function(req, res){
   var workshop = require('./db/workshops.js');
   var name = escape(req.body.name);

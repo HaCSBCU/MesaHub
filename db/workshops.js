@@ -27,3 +27,9 @@ module.exports.addWorkshop = (name, location, time, picture, cb) => {
         cb();
     });
 };
+
+module.exports.getWorkshops = (cb) => {
+  workshops.findOne({}, function(err, workshopsList){
+    cb(workshopsList);
+  });
+};
