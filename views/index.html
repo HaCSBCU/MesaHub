@@ -6,18 +6,15 @@
     </head>
 
     <body>
-        <div id="app">
-            {{ message }}
-        </div>
+
+        <form action="/createuser" method="post">
+            <input name="email" type="email"/>
+            <input name="user" type="text"/>
+            <input name="pass" type="password"/>
+            <input type="submit" placeholder="Send"/>
+        </form>
+
     </body>
 
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
-            }
-        })
-    </script>
 
 </html>
