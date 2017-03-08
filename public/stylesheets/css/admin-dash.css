@@ -217,121 +217,6 @@ nav {
     .side-bar__item img {
       width: 50%; }
 
-.component {
-  box-shadow: #E2E2E2 0px 2px 4px;
-  overflow: hidden;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #E2E2E2; }
-  .component__left {
-    width: 20%;
-    background-color: #F5F5F5;
-    text-align: center; }
-    .component__left h4 {
-      padding: 10px 0px;
-      font-weight: 500;
-      letter-spacing: 1px; }
-    .component__left img {
-      width: 50px;
-      height: 50px; }
-  .component__right {
-    width: 80%;
-    text-align: center;
-    padding: 10px; }
-  .component__flex {
-    display: flex;
-    height: 100%; }
-  .component__one-third {
-    width: 30%;
-    display: inline-block;
-    margin: 0px; }
-  .component__two-third {
-    width: 67%;
-    display: inline-block;
-    margin: 0px; }
-  .component__header {
-    text-align: center;
-    background-color: #F5F5F5; }
-    .component__header h3 {
-      padding: 10px 0px;
-      font-weight: 500;
-      letter-spacing: 1px; }
-  .component__time {
-    display: flex; }
-    .component__time__title {
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-weight: bold; }
-  .component__announcement {
-    max-height: 650px;
-    height: 200px;
-    overflow: hidden; }
-    .component__announcement__right {
-      text-align: left;
-      padding: 0px;
-      overflow-x: scroll;
-      height: inherit; }
-      .component__announcement__right > div:first-child h5 {
-        display: inline-block !important; }
-      .component__announcement__right__item {
-        border-bottom: 1px solid #E2E2E2;
-        padding: 8px; }
-        .component__announcement__right__item__header h4, .component__announcement__right__item__header p, .component__announcement__right__item__header h5 {
-          display: inline-block;
-          vertical-align: middle; }
-        .component__announcement__right__item__header h4 {
-          font-weight: 600;
-          color: #252525;
-          opacity: 0.8; }
-        .component__announcement__right__item__header h5 {
-          font-weight: bold;
-          color: red;
-          padding: 0px 3px; }
-      .component__announcement__right__item:nth-last-child(1) {
-        border-bottom: 0px; }
-  .component__workshops {
-    width: 100%;
-    max-height: 380px;
-    overflow: scroll; }
-    .component__workshops__item {
-      padding: 20px 15px; }
-      .component__workshops__item img {
-        width: 40px;
-        height: 40px;
-        border-radius: 360px;
-        display: inline-block;
-        vertical-align: middle; }
-      .component__workshops__item__info {
-        display: inline-block;
-        width: 40%;
-        vertical-align: middle;
-        margin-left: 10px; }
-
-.component-container {
-  margin: 20px auto 0px auto; }
-  .component-container__one-third {
-    position: relative;
-    width: 28%;
-    display: inline-block; }
-    .component-container__one-third div {
-      vertical-align: top; }
-  .component-container__two-third {
-    position: relative;
-    width: 68%;
-    display: inline-block;
-    vertical-align: top; }
-    .component-container__two-third div {
-      vertical-align: top; }
-  .component-container__left {
-    float: left; }
-  .component-container__right {
-    float: right; }
-
-@media screen and (max-width: 1030px) {
-  .component__left h4 {
-    display: none !important; } }
-
-/* PAGE SPECIFIC */
 .floating-box {
   border: 1px solid #E2E2E2;
   box-shadow: #E2E2E2 0px 2px 4px;
@@ -426,4 +311,59 @@ nav {
     margin-top: 20px;
     cursor: pointer; }
 
-/* Main App CSS */
+#profile-info {
+  margin: 50px auto;
+  width: 50%;
+  text-align: center; }
+  #profile-info h2 {
+    padding: 10px;
+    font-size: 26px; }
+
+.profile-info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; }
+
+.admin-controls {
+  text-align: center; }
+  .admin-controls__item {
+    display: inline-block;
+    vertical-align: top;
+    text-align: inherit;
+    width: 30%;
+    height: auto;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    margin: 10px; }
+    .admin-controls__item * {
+      display: inline-block;
+      vertical-align: middle; }
+    .admin-controls__item img {
+      height: 50px;
+      margin-right: 30px; }
+    .admin-controls__item h3 {
+      text-transform: capitalize; }
+
+.upload-event {
+  width: 94%;
+  margin: 13px auto;
+  height: 230px; }
+  .upload-event__left, .upload-event__right {
+    display: inline-block;
+    vertical-align: top; }
+  .upload-event__left {
+    position: relative;
+    height: 100%;
+    width: 30%;
+    background-color: #dcdcdc; }
+    .upload-event__left img {
+      height: 60%; }
+  .upload-event__right {
+    margin-left: -6px;
+    width: 70%;
+    height: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box; }
+    .upload-event__right p {
+      padding: 10px 0px;
+      font-size: 20px; }

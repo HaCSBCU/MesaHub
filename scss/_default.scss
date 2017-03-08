@@ -78,7 +78,11 @@ a{
   color: inherit;
 }
 
-button{
+form{
+  font-family: $font;
+}
+
+button, .button{
   padding: 10px 20px;
   -webkit-appearance: none;
   font-size: 1em;
@@ -88,12 +92,12 @@ button{
   outline: none;
   &.__blue{
     color: white;
-    background-color: transparent;
-    border: 3px solid white;
+    background-color: $lightBlue;
     border-radius: 3px;
+    border: none;
     &:hover{
-      background-color: white;
-      color: black;
+      background-color: $blue;
+      color: white;
     }
   }
   &.__white-solid{
