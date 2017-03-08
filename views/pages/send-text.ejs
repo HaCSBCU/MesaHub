@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/headers/login-head %>
+
+</head>
+<body>
+
+<% include ../partials/side-bar %>
+
+<section class="page">
+
+    <nav>
+        <% include ../partials/nav %>
+    </nav>
+
+    <section id="main">
+
+        <div class="floating-box floating-box__large floating-box__send-text vertC__relative">
+            <div class="floating-box__send-text__content">
+                <div class="floating-box__send-text__content__icon">
+                    <img class="vertC__relative" src="/img/icons/send-text.svg"/>
+                </div>
+                <h3>Send Text</h3>
+                <form id="send-text" method="post">
+                    <textarea name="text" placeholder="Type your message here..."></textarea>
+                    <input id="confirm" type="checkbox" name="confirm" value="yes">
+                    <p class="confirm-text">I confirm that I have checked the above message.</p><br>
+                    <input class="button __blue" type="submit" placeholder="Login"/>
+                    <p>The following message will be sent to all hackathon participants who have provided mobile numbers
+                        on sign up.
+                    </p>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+<script>
+    $('#send-text').submit(function(e){
+        e.preventDefault();
+        var confirm = $(this).children('#confirm');
+        var checkBox = $(this).children("input[type='checkbox']");
+        var confirmText = $(this).children(".confirm-text")
+        var messageBox = $(this).children("textarea");
+        var message = messageBox.val();
+        var data = {
+            message: message
+        }
+        console.log("Text: " + message);
+        if(confirm.prop("checked") == true){
+            swal({
+                title: "Are you sure?",
+                text: "This message will be sent to everybody. Please make sure that you are ready to send.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, send it!",
+                closeOnConfirm: false
+            },
+            function(){
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/send-text-request',
+                    data: data,
+                    success: function(data){
+                        console.log(data);
+                        messageBox.val("");
+                        checkBox.prop('checked', false);
+                        confirmText.removeClass("red");
+                        swal({
+                            title: "Message Sent!",
+                            text: "Your message has been sent out to all participants at this hackathon",
+                            type: "success",
+                            confirmButtonText: "Great!"
+                        });
+                    },
+                    error: function(){
+                        alert('error')
+                    }
+                })
+            });
+        }
+        else{
+            confirmText.addClass("red");
+        }
+
+    });
+</script>
+
+<% include ../partials/footer %>
+
+</body>
+</html>

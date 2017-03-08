@@ -57,7 +57,10 @@ a {
   text-decoration: none;
   color: inherit; }
 
-button {
+form {
+  font-family: "Open Sans", sans-serif; }
+
+button, .button {
   padding: 10px 20px;
   -webkit-appearance: none;
   font-size: 1em;
@@ -65,20 +68,20 @@ button {
   text-transform: capitalize;
   cursor: pointer;
   outline: none; }
-  button.__blue {
+  button.__blue, .button.__blue {
     color: white;
     background-color: #15aafe;
     border-radius: 3px;
     border: none; }
-    button.__blue:hover {
+    button.__blue:hover, .button.__blue:hover {
       background-color: #1592E6;
       color: white; }
-  button.__white-solid {
+  button.__white-solid, .button.__white-solid {
     background-color: white;
     color: black; }
-    button.__white-solid:hover {
+    button.__white-solid:hover, .button.__white-solid:hover {
       background-color: white; }
-  buttoncapitalize {
+  buttoncapitalize, .buttoncapitalize {
     text-transform: uppercase !important; }
 
 .capitalize {
@@ -107,6 +110,7 @@ hr {
   position: relative;
   top: 50%;
   transform: translateY(-50%); }
+
 .vertC__absolute {
   position: absolute;
   top: 50%;
@@ -116,6 +120,7 @@ hr {
   position: relative;
   left: 50%;
   transform: translateX(-50%); }
+
 .horizC__absolute {
   position: absolute;
   left: 50%;
@@ -126,6 +131,7 @@ hr {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%); }
+
 .bothC__absolute {
   position: absolute;
   left: 50%;
@@ -134,6 +140,7 @@ hr {
 
 .float__left {
   float: left; }
+
 .float__right {
   float: right; }
 
@@ -217,6 +224,40 @@ nav {
   .floating-box__small {
     width: 40%;
     margin: auto; }
+  .floating-box__large {
+    width: 60%;
+    margin: auto; }
+  .floating-box__send-text__content {
+    text-align: center; }
+    .floating-box__send-text__content p {
+      font-size: 13px; }
+    .floating-box__send-text__content__icon {
+      height: 70px;
+      margin-top: 40px; }
+      .floating-box__send-text__content__icon img {
+        width: 60px;
+        height: 60px; }
+    .floating-box__send-text__content form textarea, .floating-box__send-text__content form input {
+      display: block;
+      margin: auto; }
+    .floating-box__send-text__content form textarea {
+      margin: 30px auto;
+      min-height: 200px;
+      width: 80%;
+      max-width: 80%;
+      max-height: 300px; }
+    .floating-box__send-text__content form input[type="checkbox"], .floating-box__send-text__content form p {
+      display: inline-block;
+      font-size: 16px;
+      vertical-align: middle; }
+    .floating-box__send-text__content form input[type="checkbox"] {
+      margin-right: 10px; }
+    .floating-box__send-text__content form .button {
+      margin: 30px auto; }
+    .floating-box__send-text__content form .confirm-text.red {
+      color: red; }
+    .floating-box__send-text__content p:nth-last-child(1) {
+      padding: 0px 10% 35px 10%; }
   .floating-box__content {
     text-align: center;
     box-sizing: border-box;
@@ -224,6 +265,16 @@ nav {
     .floating-box__content img {
       width: 50%;
       text-align: center; }
+  .floating-box input[type="text"], .floating-box textarea {
+    -webkit-appearance: none;
+    padding: 10px 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    box-sizing: border-box; }
   .floating-box__login__icon {
     background-color: #15aafe;
     width: 80px;
@@ -262,5 +313,3 @@ nav {
 
 #main {
   height: 90%; }
-
-/*# sourceMappingURL=login.css.map */

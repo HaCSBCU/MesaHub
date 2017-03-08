@@ -9,6 +9,10 @@ var mongoose = require('mongoose');
 var users = require('login-mongo');
 
 var db = require('./db/db.js');
+var auth = require('./auth/authentication.js');
+
+//Other modules
+var escape = require('escape-html');
 
 //Require ID.
 var uniqid = require('uniqid');
@@ -107,19 +111,25 @@ app.post('/login', function(req, res) {
   if(!req.session.users){
     req.session.users = {};
   }
-  users.checkPassword(req.body.user, req.body.pass, function(success) {
+  var userName = escape(req.body.user);
+  var pass = escape(req.body.pass);
+  users.checkPassword(userName, pass, function(success) {
     if (success) {
       var uID = uniqid();
-      req.session.users[req.body.user] = req.body.user;
+      req.session.users[userName] = userName;
       res.cookie('uID', uID, {maxAge: 3600 * 1000});
-      db.uniqueID(uID, req. body.user, function(i){
+      db.uniqueID(uID, userName, function(i){
         console.log(i.session);
       });
-      db.findUser(req.body.user, function(user){
+      db.findUser(userName, function(user){
         return res.render('pages/admin-dashboard', {title: 'Admin Dashboard', pageName: 'admin', name: user.name, picture: null});
       })
-    } else {
-      req.session.user[req.body.user] = void 0;
+    }
+    else if(!userName || pass){
+      res.redirect('/');
+    }
+    else {
+      req.session.user[userName] = void 0;
       return res.redirect('/login');
     }
   });
@@ -127,12 +137,28 @@ app.post('/login', function(req, res) {
 
 // LOGGED IN USERS
 
-// app.get('/admin-dashboard', function(req, res){
-//   console.log(req.session.user);
-//   if(req.session.user != null){
-//     res.send("You're an admin");
-//   }
-// });
+app.get('/admin/send-text', function(req, res){
+  var id = req.cookies.uID;
+  auth.verifySession(id, function(data){
+    console.log(data);
+    if(data.validated == true){
+      res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin'});
+    }
+    else{
+      res.redirect('/login');
+    }
+  });
+});
+
+
+// ADMIN DASHBOARD REQUESTS
+app.post('/admin/send-text-request', function(req, res){
+
+  console.log(escape(req.body.message));
+  //Call text system from here.
+  res.send('Congrats!');
+});
+
 
 //API AUTH TESTING
 app.get('/test', function(req, res){

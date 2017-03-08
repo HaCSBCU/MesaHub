@@ -78,7 +78,11 @@ a{
   color: inherit;
 }
 
-button{
+form{
+  font-family: $font;
+}
+
+button, .button{
   padding: 10px 20px;
   -webkit-appearance: none;
   font-size: 1em;

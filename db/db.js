@@ -47,7 +47,7 @@ module.exports.uniqueID = (id, user, cb) => {
 
 module.exports.verifyID = (id, cb) => {
     users.findOne({session: id}, function(err, result){
-        if(err){
+        if(err || result == null){
             console.log("error: " + err);
             return err;
         }
