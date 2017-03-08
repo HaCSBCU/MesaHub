@@ -76,8 +76,13 @@
                             confirmButtonText: "Great!"
                         });
                     },
-                    error: function(){
-                        alert('error')
+                    error: function(data){
+                        swal({
+                            title: "Message not sent",
+                            text: data.responseText,
+                            type: "error",
+                            confirmButtonText: "Okay"
+                        });
                     }
                 })
             });

@@ -153,10 +153,16 @@ app.get('/admin/send-text', function(req, res){
 
 // ADMIN DASHBOARD REQUESTS
 app.post('/admin/send-text-request', function(req, res){
-
-  console.log(escape(req.body.message));
-  //Call text system from here.
-  res.send('Congrats!');
+  var id = req.cookies.uID;
+  auth.verifySession(id, function(data){
+    console.log(data.validated);
+    if(data.validated == true){
+      console.log(escape(req.body.message));
+      //Call text system from here.
+      res.send('Congrats!');
+    }
+  });
+  res.status(500).send('You must be authenticated in order to send a message.')
 });
 
 
