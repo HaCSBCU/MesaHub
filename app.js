@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var users = require('login-mongo');
 
-var db = require('./db/db.js');
+var db = require('./db/users.js');
 var auth = require('./auth/authentication.js');
 
 //Other modules
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Setup user connection
 var opts = {
-  connect: 'mongodb://localhost:27017/user',
+  connect: 'mongodb://localhost:27017/bullhacks',
   iterations: 10,  //number of rounds used in generating salt
   collection: 'users',
   sendEmails: false
@@ -182,6 +182,31 @@ app.get('/id', function(req, res){
     console.log(user);
     res.send(user)
   })
+});
+
+//Workshops
+app.get('/workshops', function(req, res){
+  res.sendFile(path.join(__dirname, '/views/workshops.html'));
+});
+
+app.get('/workshops-list', function(req, res){
+  var workshop = require('./db/workshops.js');
+  workshop.getWorkshops(function(data){
+    console.log(data);
+    res.send(data);
+  })
+});
+
+app.post('/create-workshop', function(req, res){
+  var workshop = require('./db/workshops.js');
+  var name = escape(req.body.name);
+  var location = escape(req.body.location);
+  var time = escape(req.body.time);
+  var picture = escape(req.body.picture);
+  workshop.addWorkshop(name, location, time, picture, function(){
+    console.log('Callback received');
+    res.send("Workshop added!");
+  });
 });
 
 

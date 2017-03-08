@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/user');
+mongoose.connect('mongodb://localhost:27017/bullhacks');
+
+// DATABASE SCHEMAS
 
 var Schema = mongoose.Schema;
 
-//User Schema
-//Schema
-
+// User Schema
 var userSchema = new Schema({
     email: String,
     name: String,
@@ -13,6 +13,8 @@ var userSchema = new Schema({
     passhash: String,
     session: String
 });
+
+// Workshops schema
 
 var users = mongoose.model('users', userSchema);
 
