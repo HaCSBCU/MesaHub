@@ -1,4 +1,4 @@
-var db = require('../db/db.js');
+var db = require('../db/users.js');
 
 module.exports.verifySession = (clientID, cb) => {
     if(!clientID){
