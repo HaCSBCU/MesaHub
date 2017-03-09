@@ -17,52 +17,45 @@ var announcements = new Vue({
         ]
     },
     created: function(){
-        // var refresh = function(){
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: '/admin/get-announcements',
-        //         success: function(data){
-        //             console.log(data);
-        //             announcements.announcementsList = data.reverse();
-        //         },
-        //         error: function(err){
-        //             console.log(err);
-        //         }
-        //     })
-        // };
-        // refresh();
-        // setInterval(refresh,3000);
+        var refresh = function(){
+            $.ajax({
+                type: 'GET',
+                url: '/admin/get-announcements',
+                success: function(data){
+                    announcements.announcementsList = data.reverse();
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
+        };
+        refresh();
+        setInterval(refresh,3000);
     }
 });
+
 
 var workshops = new Vue({
     el: '#workshops',
     data: {
-        events: [
-            {
-                title: "Node JS",
-                img: '/img/workshops/alex.jpg',
-                location: 'MP242',
-                time: "3pm"
-            }
-        ]
+        events: []
     },
     created: function(){
-        // var refresh = function(){
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: '/admin/get-events',
-        //         success: function(data){
-        //             console.log(data);
-        //             workshops.events = data.reverse();
-        //         },
-        //         error: function(err){
-        //             console.log(err);
-        //         }
-        //     })
-        // };
-        // refresh();
-        // setInterval(refresh,3000);
+        var refresh = function(){
+            $.ajax({
+                type: 'GET',
+                url: '/admin/get-events',
+                success: function(data){
+                    console.log(data);
+                    workshops.events = data.reverse();
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
+        };
+        refresh();
+        setInterval(refresh,3000);
     }
 });
 

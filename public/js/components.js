@@ -64,13 +64,13 @@ Vue.component('workshops', {
 });
 
 Vue.component('workshop-item', {
-    props: ['image', 'title', 'room', 'time'],
+    props: ['name', 'picture', 'location', 'time', 'time2'],
     template: `
         <div class="component__workshops__item">
-            <img id="workshop-item-image" :src="image"/>
+            <img id="workshop-item-image" :src="picture"/>
             <div class="component__workshops__item__info">
-                <h4>{{title}}</h4>
-                <p>{{room}} | {{time}}</p>
+                <h4>{{name}}</h4>
+                <p>{{location}} | {{time}} <span v-if="time2">:</span> {{time2}} </p>
             </div>
         </div>
     `

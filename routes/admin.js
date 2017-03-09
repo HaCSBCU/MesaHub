@@ -41,36 +41,47 @@ router.get('/get-events', function(req, res){
 
 // Handle file uploads
 
-var storage =   multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads');
-    },
-    filename: function (req, file, callback) {
-        callback(null,Date.now()+file.originalname);
-    }
-});
 
-
-var upload = multer({ storage : storage}).single('upl');
 
 router.post('/create-event', function(req, res){
 
+    var fileName;
     //File uploaded
+    var storage =   multer.diskStorage({
+        destination: function (req, file, callback) {
+            callback(null, './public/img/workshops');
+        },
+        filename: function (req, file, callback) {
+            fileName = Date.now() + file.originalname;
+            callback(null,fileName);
+        }
+    });
+
+    var upload = multer({ storage : storage}).single('upl');
+
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        res.end("File is uploaded");
+        var events = require('../db/events.js');
+        var name = escape(req.body.name);
+        var location = escape(req.body.location);
+        var time = escape(req.body.time);
+        var timeA;
+        var timeB;
+        if(time.split(":").length > 1){
+            timeA = time.split(":")[0];
+            timeB = time.split(":")[1];
+        }
+        else{
+            timeA = time;
+            timeB = "";
+        }
+        var filePath = '/img/workshops/' + fileName.toString();
+        events.addEvent(name, location, parseInt(timeA), timeB, filePath, function(){
+            res.send("Workshop added!");
+        });
     });
-
-    // var events = require('../db/events.js');
-    // var name = escape(req.body.name);
-    // var location = escape(req.body.location);
-    // var time = escape(req.body.time);
-    // var picture = escape(req.body.picture);
-    // events.addEvent(name, location, time, picture, function(){
-    //     res.send("Workshop added!");
-    // });
 });
 
 // ANNOUNCEMENTS

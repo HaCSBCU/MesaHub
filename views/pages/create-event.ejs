@@ -23,9 +23,9 @@
                     <h3>Create Event</h3>
                 </div>
                 <form id="send-text" method="post" action="/admin/create-event" enctype="multipart/form-data">
-                    <input class="send-text-name" type="text" placeholder="Event Name"/>
-                    <input class="input-half send-text-title" type="text" placeholder="Event Time"/>
-                    <input class="input-half send-text-location" type="text" placeholder="Where"/>
+                    <input name="name" class="send-text-name" type="text" placeholder="Event Name"/>
+                    <input name="time" class="input-half send-text-title" type="text" placeholder="Event Time"/>
+                    <input name="location" class="input-half send-text-location" type="text" placeholder="Where"/>
                     <div class="form__add-image">
                         <div class="form__add-image__image">
                             <img class="bothC__relative" src="/img/icons/add-image.svg"/>

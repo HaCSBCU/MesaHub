@@ -7,29 +7,31 @@ var Schema = mongoose.Schema;
 var eventSchema = new Schema({
     name: String,
     location: String,
-    time: String,
+    time: Number,
+    time2: String,
     picture: String
 });
 
 var events = mongoose.model('workshops', eventSchema);
 
-module.exports.addEvent = (name, location, time, picture, cb) => {
-    var newEvent = new workshops({
+module.exports.addEvent = (name, location, time, time2, picture, cb) => {
+    var newEvent = new events({
         name,
         location,
         time,
+        time2,
         picture
     });
 
     newEvent.save(function(err){
         if(err) throw err;
-        console.log('Workshop created');
         cb();
     });
 };
 
 module.exports.getEvents = (cb) => {
-  events.findOne({}, function(err, workshopsList){
-    cb(workshopsList);
-  });
+    events.find({}).sort({time: -1}).exec(function(err, workshopsList){
+        if(err) throw err;
+        cb(workshopsList);
+    });
 };
