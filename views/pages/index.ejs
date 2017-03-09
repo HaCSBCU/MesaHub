@@ -22,7 +22,7 @@
 
         <div id="announcements" class="component-container">
           <announcements>
-            <div v-for="item in test">
+            <div v-for="item in announcementsList">
               <announcement-item :title="item.title" :body="item.body" :date="item.date"></announcement-item>
             </div>
           </announcements>
@@ -32,7 +32,7 @@
         <div id="workshops" class="component-container component-container__one-third">
           <workshops id="workshops">
             <div v-for="item in events">
-              <workshop-item :title="item.title" :room="item.location" :image="item.img" :time="item.time"></workshop-item>
+              <workshop-item :name="item.name" :location="item.location" :picture="item.picture" :time="item.time" :time2="item.time2"></workshop-item>
             </div>
           </workshops>
         </div>

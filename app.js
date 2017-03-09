@@ -13,6 +13,8 @@ var auth = require('./auth/authentication.js');
 
 //Other modules
 var escape = require('escape-html');
+var multer = require('multer');
+
 
 //Require ID.
 var uniqid = require('uniqid');
@@ -38,6 +40,7 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // API ROUTES
 //Homepage

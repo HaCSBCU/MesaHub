@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/headers/login-head %>
+
+</head>
+<body>
+
+<% include ../partials/side-bar %>
+
+<section class="page">
+
+    <nav>
+        <% include ../partials/nav %>
+    </nav>
+
+    <section id="main">
+
+        <div class="floating-box floating-box__large floating-box__announcement vertC__relative">
+            <div class="floating-box__event__content">
+                <div class="floating-box__large__icon">
+                    <img src="/img/icons/announcement.svg"/>
+                    <h3>Create Announcement</h3>
+                </div>
+                <form id="send-text" method="post">
+                    <input type="text" placeholder="Announcement Title"/>
+                    <textarea placeholder="Announcement message..."></textarea>
+                    <input id="confirm" type="checkbox" name="confirm" value="yes">
+                    <p class="confirm-text">I confirm that I have checked the above message.</p><br>
+                    <input class="button __blue" type="submit" placeholder="SEND"/>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+<script>
+    $('#send-text').submit(function(e){
+        e.preventDefault();
+        var confirm = $(this).children('#confirm');
+        var checkBox = $(this).children("input[type='checkbox']");
+        var confirmText = $(this).children(".confirm-text")
+        var messageBox = $(this).children("textarea");
+        var title = $(this).children("input[type='text']")
+        var titleBox = title.val();
+        var body = messageBox.val();
+        var data = {
+            title: titleBox,
+            body: body
+        }
+        if(confirm.prop("checked") == true){
+            $.ajax({
+                type: 'POST',
+                url: '/admin/create-announcement',
+                data: data,
+                success: function(data){
+                    console.log(data);
+                    messageBox.val("");
+                    title.val("");
+                    checkBox.prop('checked', false);
+                    confirmText.removeClass("red");
+                    swal({
+                        title: "Announcement Added!",
+                        text: "Your announcement has been sent out and will be visible on the dashboard",
+                        type: "success",
+                        confirmButtonText: "Great!"
+                    });
+                },
+                error: function(data){
+                    swal({
+                        title: "Announcement not sent :(",
+                        text: data.responseText,
+                        type: "error",
+                        confirmButtonText: "Okay"
+                    });
+                }
+            })
+        }
+        else{
+            confirmText.addClass("red");
+        }
+
+    });
+</script>
+
+<% include ../partials/footer %>
+
+</body>
+</html>

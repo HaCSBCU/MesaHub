@@ -6,14 +6,16 @@ var Schema = mongoose.Schema;
 
 var announcementSchema = new Schema({
     title: String,
+    date: String,
     body: String
 });
 
 var announcement = mongoose.model('announcements', announcementSchema);
 
-module.exports.addAnnouncement = (title, body, cb) => {
+module.exports.addAnnouncement = (title, date, body, cb) => {
     var newAnnouncement = new announcement({
         title,
+        date,
         body
     });
 
@@ -25,7 +27,7 @@ module.exports.addAnnouncement = (title, body, cb) => {
 };
 
 module.exports.getAnnouncements = (cb) => {
-    announcement.findOne({}, function(err, announcementList){
+    announcement.find({}, function(err, announcementList){
         cb(announcementList);
     });
 };
