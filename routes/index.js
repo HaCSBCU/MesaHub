@@ -9,7 +9,7 @@ router.get('/', function(req, res){
   } else{
     req.session.count++;
   }
-  res.render('pages/index', {title: 'Home', pageName: 'index'});
+  res.render('pages/index', {title: 'Home', pageName: 'index', verified: false});
 });
 
 

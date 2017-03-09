@@ -2,6 +2,7 @@
   height: 70px;
   overflow: hidden;
   width: 100%;
+  position: relative;
   &__container{
     width: 50%;
     margin: auto;
@@ -22,4 +23,15 @@
 
 nav{
   width: 100%;
+}
+
+.logout{
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  h4{
+    text-align: right;
+  }
 }

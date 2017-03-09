@@ -50,12 +50,37 @@ module.exports.uniqueID = (id, user, cb) => {
 module.exports.verifyID = (id, cb) => {
     users.findOne({session: id}, function(err, result){
         if(err || result == null){
-            console.log("error: " + err);
+            console.log("error verify id: " + err);
             return err;
         }
         cb(result);
     });
 
+};
+
+module.exports.addPicture = (email, path, cb) => {
+    users.findOne({email: email}, function(err, result){
+        if(err || result == null){
+            console.log("error: " + err);
+            return err;
+        }
+        result.picture = path;
+        result.save();
+        cb(result);
+    });
+};
+
+module.exports.logout = (id, cb) => {
+    users.findOne({session: id}, function(err, result){
+        if(err || result == null){
+            console.log("error: " + err);
+            return err;
+        }
+        delete result["session"];
+        console.log(result);
+        result.save();
+        cb(result);
+    });
 };
 
 module.exports.compareID = (clientID, serverID) => {

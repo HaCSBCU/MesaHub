@@ -27,12 +27,12 @@ router.get('/', function(req, res){
         auth.verifySession(id, function(data){
             console.log(data.validated);
             if(data.validated == true){
-                return res.redirect('/admin');
+                res.redirect('/admin');
             }
         });
     }
     else{
-        res.render('pages/login', {title: 'Login', pageName: 'login'});
+        res.render('pages/login', {title: 'Login', pageName: 'admin', verified: false});
     }
 });
 
@@ -40,7 +40,9 @@ router.post('/sign-in', function(req, res) {
     if(!req.session.users){
         req.session.users = {};
     }
-    var userName = escape(req.body.user);
+    console.log(req.body.name);
+    console.log(req.body.pass);
+    var userName = escape(req.body.name);
     var pass = escape(req.body.pass);
     users.checkPassword(userName, pass, function(success) {
         if (success) {
@@ -51,17 +53,31 @@ router.post('/sign-in', function(req, res) {
                 console.log(i.session);
             });
             db.findUser(userName, function(user){
-                return res.redirect('/admin');
+                console.log("Should of logged in");
+                res.send({
+                    redirect: '/admin'
+                })
             })
         }
         else if(!userName || !pass){
+            console.log('No user or password');
             res.redirect('/login');
         }
         else {
-            req.session.user[userName] = void 0;
-            return res.redirect('/login');
+            // req.session.user[userName] = void 0;
+            console.log("Other");
+            res.status(500).send("Incorrect username / password. Please try again.");
+            // return res.redirect('/login');
         }
     });
+});
+
+router.get('/logout', function(req, res){
+    var id = req.cookies.uID;
+    db.logout(id, function(data){
+        res.clearCookie("uID");
+        res.redirect('/')
+    })
 });
 
 
