@@ -9,9 +9,14 @@
 }
 
 .profile-info{
-  img{
+  &__picture{
     width: 100px;
     height: 100px;
+    overflow: hidden;
     border-radius: 50%;
+    img{
+      height: 100%;
+      width: auto;
+    }
   }
 }

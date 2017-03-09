@@ -81,11 +81,11 @@
     form{
       width: 80%;
       margin: auto;
-      input.input-half:nth-last-child(4){
-        float: right;
-      }
-      input.input-half:nth-last-child(3){
+      #time{
         float: left;
+      }
+      #location{
+        float: right;
       }
       .form__add-image{
         margin-top: 10px;

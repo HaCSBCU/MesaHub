@@ -185,6 +185,7 @@ body {
   height: 70px;
   overflow: hidden;
   width: 100%;
+  position: relative;
   border-bottom: 2px solid #E2E2E2; }
   .nav__container {
     width: 50%;
@@ -200,6 +201,15 @@ body {
 
 nav {
   width: 100%; }
+
+.logout {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto; }
+  .logout h4 {
+    text-align: right; }
 
 .side-bar {
   width: 80px;
@@ -391,10 +401,10 @@ nav {
   .floating-box__event form {
     width: 80%;
     margin: auto; }
-    .floating-box__event form input.input-half:nth-last-child(4) {
-      float: right; }
-    .floating-box__event form input.input-half:nth-last-child(3) {
+    .floating-box__event form #time {
       float: left; }
+    .floating-box__event form #location {
+      float: right; }
     .floating-box__event form .form__add-image {
       margin-top: 10px;
       display: inline-block;

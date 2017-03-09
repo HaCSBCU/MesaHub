@@ -22,9 +22,9 @@
                     <img class="vertC__relative" src="/img/icons/login.svg"/>
                 </div>
                 <h3>Admin Login</h3>
-                <form action="/login/sign-in" method="post">
-                    <input type="text" name="user" placeholder="Username"/>
-                    <input type="password" name="pass" placeholder="Password"/>
+                <form id="login">
+                    <input id="user" type="text" name="user" placeholder="Username"/>
+                    <input id="pass" type="password" name="pass" placeholder="Password"/>
                     <input type="submit" placeholder="Login"/>
                 </form>
             </div>
@@ -33,7 +33,37 @@
     </section>
 </section>
 
-<% include ../partials/footer %>
+    <script>
+        $('#login').submit(function(e) {
+            e.preventDefault();
+            var name = $(this).children('#user').val();
+            var pass = $(this).children('#pass').val();
+            var data = {
+                name: name,
+                pass: pass
+            };
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: '/login/sign-in',
+                data: data,
+                success: function (returnData) {
+                    window.location = returnData.redirect;
+                },
+                error: function (error) {
+                    console.log(error)
+                    swal({
+                        title: "Login failed!",
+                        text: error.responseText,
+                        type: "error",
+                        confirmButtonText: "Okay"
+                    });
+                }
+            });
+        });
+    </script>
+
+<% include ../partials/footers/admin-footer %>
 
 </body>
 </html>

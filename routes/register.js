@@ -11,7 +11,7 @@ var escape = require('escape-html');
 var uniqid = require('uniqid');
 
 router.get('/', function(req, res){
-    res.render('pages/register', {title: 'Register', pageName: 'register'});
+    res.render('pages/register', {title: 'Register', pageName: 'register', verified: false});
 });
 
 router.post('/create-user', function(req, res){

@@ -15,6 +15,11 @@ var eventSchema = new Schema({
 var events = mongoose.model('workshops', eventSchema);
 
 module.exports.addEvent = (name, location, time, time2, picture, cb) => {
+    // console.log("Name: " + name);
+    // console.log("Location: " + location);
+    // console.log("Time: " + time);
+    // console.log("Time2: " + time2);
+    // console.log("Picture: " + picture);
     var newEvent = new events({
         name,
         location,
