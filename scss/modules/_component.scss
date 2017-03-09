@@ -80,6 +80,9 @@
       &__item{
         border-bottom: 1px solid $greyBorder;
         padding: 8px;
+        h4{
+          font-size: 1.0em;
+        }
         &__header{
           h4, p, h5{
             display: inline-block;

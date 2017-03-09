@@ -276,6 +276,8 @@ nav {
       .component__announcement__right__item {
         border-bottom: 1px solid #E2E2E2;
         padding: 8px; }
+        .component__announcement__right__item h4 {
+          font-size: 1.0em; }
         .component__announcement__right__item__header h4, .component__announcement__right__item__header p, .component__announcement__right__item__header h5 {
           display: inline-block;
           vertical-align: middle; }
