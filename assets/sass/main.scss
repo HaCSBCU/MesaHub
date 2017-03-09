@@ -1,0 +1,80 @@
+html{
+  overflow: hidden;
+}
+
+html, body{
+  width: 100%;
+  height: 100%
+}
+
+body{
+  background-color: #f9f9f9;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+$font: 'Lato', sans-serif;
+$green: #3eb991;
+$darkGreen: #57aa87;
+
+h1, h3{
+  margin: 0px;
+  padding: 0px;
+  font-family: $font;
+}
+
+#main{
+  .main-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    img{
+      width: 200px;
+    }
+    h1{
+      font-size: 50px;
+      padding: 40px 0px 20px 0px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+    h3{
+      font-size: 25px;
+      font-weight: 300;
+    }
+    button{
+      -webkit-appearence: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: $green;
+      outline: none;
+      border: none;
+      border-radius: 2px;
+      color: white;
+      font-family: $font;
+      margin: 40px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    button:hover{
+      background-color: $darkGreen;
+    }
+  }
+}
+
+@media screen and (max-height: 650px){
+  #main{
+    .main-content{
+      img{
+        width: 150px;
+      }
+      h1{
+        font-size: 45px;
+      }
+      h3{
+        font-size: 20px;
+      }
+    }
+  }
+}
