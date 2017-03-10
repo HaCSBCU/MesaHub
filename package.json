@@ -10,6 +10,7 @@
   "dependencies": {
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
+    "csv": "^1.1.1",
     "debug": "~2.6.0",
     "ejs": "~2.5.5",
     "escape-html": "^1.0.3",
