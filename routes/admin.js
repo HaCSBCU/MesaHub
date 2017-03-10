@@ -4,6 +4,7 @@ var users = require('login-mongo');
 var auth = require('../auth/authentication.js');
 var userDB = require('../db/users.js');
 var multer = require('multer');
+var csvImport = require('../scripts/csvconversion')
 
 //Other modules
 var escape = require('escape-html');
@@ -40,39 +41,31 @@ router.get('/', function(req, res){
 // ATTENDEES
 
 router.post('/upload-csv', function(req, res){
+  var storage = multer.memoryStorage()
+  var upload = multer({ storage: storage,
+    onFileUploadComplete: function (file) {
+console.log(file.fieldname + ' uploaded to ' + file.path)
+}}).single('csv')
 
-    var fileName;
-    //File uploaded
-    var storage = multer.memoryStorage()
-    var upload = multer({ storage: storage })
+  upload(req, res, function (err) {
+    if(err) {
+        return res.end("Error uploading file.");
+    }
+    console.log(req.file)
+    csvImport.processFile(req.file.buffer)
+      .then( (data)=>{
+        console.log(data)
 
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        var attendees = require('../db/events.js');
-        var name = escape(req.body.name);
-        var location = escape(req.body.location);
-        var time = escape(req.body.time);
-        var timeA;
-        var timeB = "";
-        if(time.split(":").length > 1){
-            timeA = time.split(":")[0];
-            timeB = time.split(":")[1];
-            console.log("Time A: " + parseInt(timeA));
-            console.log(timeB);
-        }
-        else{
-            timeA = time;
-            timeB = "";
-        }
-        var filePath = '/img/workshops/' + fileName.toString();
-        console.log("Time A: " + timeA);
-        console.log("TimeB: " + timeB);
-        events.addEvent(name, location, parseInt(timeA), timeB, filePath, function(){
-            res.send("Workshop added!");
-        });
-    });
+
+
+
+
+      })
+      .catch( (err)=>{console.log(err)})
+    res.end("File is uploaded");
+  })
+
+
 });
 
 
