@@ -14,15 +14,30 @@ var announcements = new Vue({
                 body: 'Here is some body text',
                 title: 'Title 1'
             }
-        ]
+        ],
+        refreshComp: false
     },
     created: function(){
+        var refreshComp = this.refreshComp;
         var refresh = function(){
             $.ajax({
                 type: 'GET',
                 url: '/admin/get-announcements',
                 success: function(data){
+                    if(data.length > announcements.announcementsList.length && refreshComp){
+                        var icon = "/img/bullhacks-head.png";
+                        Push.create("New Announcement!", {
+                            body: data[data.length - 1].body,
+                            icon: icon,
+                            timeout: 4000,
+                            onClick: function () {
+                                window.focus();
+                                this.close();
+                            }
+                        });
+                    }
                     announcements.announcementsList = data.reverse();
+                    refreshComp = true;
                 },
                 error: function(err){
                     console.log(err);
@@ -38,16 +53,30 @@ var announcements = new Vue({
 var workshops = new Vue({
     el: '#workshops',
     data: {
-        events: []
+        events: [],
+        refreshComp: false
     },
     created: function(){
+        var refreshComp = this.refreshComp;
         var refresh = function(){
             $.ajax({
                 type: 'GET',
                 url: '/admin/get-events',
                 success: function(data){
-                    console.log(data);
+                    var icon = "/img/bullhacks-head.png";
+                    if(data.length > workshops.events.length && refreshComp){
+                        Push.create("New Event!", {
+                            body: "A new event has been added. Check it out now on MesaHub!",
+                            icon: icon,
+                            timeout: 4000,
+                            onClick: function () {
+                                window.focus();
+                                this.close();
+                            }
+                        });
+                    }
                     workshops.events = data.reverse();
+                    refreshComp = true;
                 },
                 error: function(err){
                     console.log(err);

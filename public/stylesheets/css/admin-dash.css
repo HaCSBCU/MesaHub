@@ -377,7 +377,8 @@ nav {
   width: 100px;
   height: 100px;
   overflow: hidden;
-  border-radius: 50%; }
+  border-radius: 50%;
+  margin: auto; }
   .profile-info__picture img {
     height: 100%;
     width: auto; }
