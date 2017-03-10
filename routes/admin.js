@@ -3,6 +3,7 @@ var router = express.Router();
 var users = require('login-mongo');
 var auth = require('../auth/authentication.js');
 var userDB = require('../db/users.js');
+var attendeeDB = require('../db/attendees')
 var multer = require('multer');
 var csvImport = require('../scripts/csvconversion')
 
@@ -56,6 +57,27 @@ console.log(file.fieldname + ' uploaded to ' + file.path)
       .then( (data)=>{
         console.log(data)
 
+
+var debugNum = 0
+        data.forEach(item => {
+          debugNum += 1
+          attendeeDB.add(
+            item[1],
+            item[2],
+            item[4],
+            item[3],
+            item[6]
+          ).then(()=>{
+            console.log(item[0] + ' added successfully ' + debugNum)
+          }).catch((err)=>{
+            console.log(err)
+          })
+
+
+
+
+
+        })
 
 
 
