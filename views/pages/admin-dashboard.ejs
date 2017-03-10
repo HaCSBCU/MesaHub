@@ -53,8 +53,10 @@
                         <p>Upload a CSV to instantly load all hackathon attendees to this system. Once done, you can send
                             texts out to any participant that has registered a mobile number.
                         </p>
-                        <button class="__blue">Choose file</button>
-                        <button class="__blue">Send</button>
+                        <form id="send-text" method="post" action="/admin/upload-csv" enctype="multipart/form-data">
+                            <input type="file" class="button __blue" name="csv"/>
+                            <input class="button __blue" type="submit" placeholder="ADD"/>
+                        </form>
                     </div>
                 </div>
             </div>
