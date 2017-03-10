@@ -44,7 +44,7 @@ function addMany(manyObjects){
 
 
 function getAll () {
-  new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     Attendee.find({}).exec(function(err, workshopsList){
         if(err) return reject(err)
         resolve(workshopsList)

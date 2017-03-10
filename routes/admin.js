@@ -1,14 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var users = require('login-mongo');
-var auth = require('../auth/authentication.js');
-var userDB = require('../db/users.js');
-var attendeeDB = require('../db/attendees')
-var multer = require('multer');
-var csvImport = require('../scripts/csvconversion')
+const express = require('express');
+const router = express.Router();
+const users = require('login-mongo');
+const auth = require('../auth/authentication.js');
+const userDB = require('../db/users.js');
+const attendeeDB = require('../db/attendees')
+const multer = require('multer');
+const csvImport = require('../scripts/csvconversion')
+const text = require('../scripts/texting')
 
 //Other modules
-var escape = require('escape-html');
+const escape = require('escape-html');
 
 //Other Config
 
@@ -73,10 +74,6 @@ var debugNum = 0
             console.log(err)
           })
 
-
-
-
-
         })
 
 
@@ -97,7 +94,7 @@ router.get('/event', function(req, res){
     var id = req.cookies.uID;
     if(id){
         auth.verifySession(id, function(data){
-            if(data.validated == true){
+            if(data.validated === true){
                 res.render('pages/create-event', {title: 'Create Event', pageName: 'admin', verified: true});
             }
             else{
@@ -208,7 +205,7 @@ router.get('/send-text', function(req, res){
     var id = req.cookies.uID;
     if(id){
         auth.verifySession(id, function(data){
-            if(data.validated == true){
+            if(data.validated === true){
                 res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin', verified: true});
             }
             else{
@@ -220,13 +217,34 @@ router.get('/send-text', function(req, res){
     }
 });
 
+
+function getAttendeesNumbers() {
+
+}
+
 router.post('/send-text-request', function(req, res){
     var id = req.cookies.uID;
     if(id){
         auth.verifySession(id, function(data){
             console.log(data.validated);
-            if(data.validated == true){
+            if(data.validated === true){
                 console.log(escape(req.body.message));
+
+
+                attendeeDB.getAll().then((attendee)=>{
+                  let phones = attendee.map((x)=>{
+                    return x.phone
+                  })
+
+                  text.sendMany(phones, req.body.message)
+                  
+                }).catch((err)=>{
+                  console.log('error retrieving attendees from db ' + err)
+                })
+
+
+
+
                 //Call text system from here.
                 res.send('Congrats!');
             }
