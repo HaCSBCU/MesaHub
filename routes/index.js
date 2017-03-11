@@ -12,6 +12,14 @@ router.get('/', function(req, res){
   res.render('pages/index', {title: 'Home', pageName: 'index', verified: false});
 });
 
+router.get('/timeline', function(req, res){
+  res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
+});
+
+router.get('/workshops', function(req, res){
+  res.render('pages/workshops', {title: 'Timeline', pageName: 'workshops', verified: false});
+});
+
 
 router.get('/set', function(req, res){
   req.session.name = "Alex";

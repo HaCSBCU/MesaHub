@@ -3,8 +3,6 @@
   <head>
     <% include ../partials/headers/index %>
 
-    <link type="text/css" rel="stylesheet" href="./stylesheets/css/modules/timeline.css"/>
-
   </head>
   <body>
 
@@ -16,35 +14,8 @@
       </nav>
       <section id="main">
 
-        <!-- Vue Time Component-->
-        <div id="time" class="component-container">
-          <countdown v-bind:time="timeLeft"></countdown>
-        </div>
+        Workshops page
 
-
-        <div id="announcements" class="component-container">
-          <announcements>
-            <div v-for="item in announcementsList">
-              <announcement-item :title="item.title" :body="item.body" :date="item.date"></announcement-item>
-            </div>
-          </announcements>
-        </div>
-
-
-        <div id="workshops" class="component-container component-container__one-third">
-          <workshops id="workshops">
-            <div v-for="item in events">
-              <workshop-item :name="item.name" :location="item.location" :picture="item.picture" :time="item.time" :time2="item.time2"></workshop-item>
-            </div>
-          </workshops>
-        </div>
-
-
-        <div id="timeline" class="component-container component-container__two-third component-container__right">
-          <timeline></timeline>
-        </div>
-
-      </section>
     </section>
 
     <script>
