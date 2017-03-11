@@ -115,7 +115,7 @@ Vue.component('timeline', {
             </tr>
 
             <tr>
-              <td>MP242</td>
+              <td>Curzon Building</td>
               <td>9:30am</td>
               <td>11am</td>
               <td>Arrival</td>
@@ -123,7 +123,7 @@ Vue.component('timeline', {
             </tr>
 
             <tr>
-              <td>MP242</td>
+              <td>Main Hall</td>
               <td>11am</td>
               <td>12pm</td>
               <td>Opening talk</td>
@@ -131,7 +131,7 @@ Vue.component('timeline', {
             </tr>
 
             <tr>
-              <td>MP242</td>
+              <td>Main Hall</td>
               <td>12pm</td>
               <td>Sunday 4pm</td>
               <td>Start hacking</td>
@@ -139,7 +139,7 @@ Vue.component('timeline', {
             </tr>
 
             <tr>
-              <td>MP242</td>
+              <td>Main Hall</td>
               <td>12pm</td>
               <td>12:30pm</td>
               <td>Team Building</td>
