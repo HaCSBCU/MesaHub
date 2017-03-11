@@ -177,15 +177,17 @@ body {
 
 #main {
   width: 90%;
-  margin: auto;
-  position: relative; }
+  position: relative;
+  margin: 120px auto 0px auto; }
 
 /* MODULES */
 .nav {
   height: 70px;
   overflow: hidden;
-  width: 100%;
-  position: relative;
+  width: calc(100% - 70px);
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
   border-bottom: 2px solid #E2E2E2; }
   .nav__container {
     width: 50%;
@@ -218,14 +220,21 @@ nav {
   border-right: 2px solid #E2E2E2; }
   .side-bar__active > .side-bar__item {
     background-color: #1592E6; }
+    .side-bar__active > .side-bar__item p {
+      color: white; }
   .side-bar__item:hover {
     background-color: #15aafe; }
   .side-bar__item {
     transition: all 0.3s ease;
     position: relative;
-    height: 80px; }
+    height: 80px;
+    box-sizing: border-box;
+    text-align: center; }
     .side-bar__item img {
+      margin-top: 10px;
       width: 50%; }
+    .side-bar__item p {
+      color: black; }
 
 .component {
   box-shadow: #E2E2E2 0px 2px 4px;
@@ -301,23 +310,26 @@ nav {
           padding: 0px 3px; }
       .component__announcement__right__item:nth-last-child(1) {
         border-bottom: 0px; }
-  .component__workshops {
-    max-height: 380px;
-    overflow: scroll; }
-    .component__workshops__item {
-      padding: 20px 15px;
-      width: auto; }
-      .component__workshops__item img {
-        width: 40px;
-        height: 40px;
-        border-radius: 360px;
-        display: inline-block;
-        vertical-align: middle; }
-      .component__workshops__item__info {
-        display: inline-block;
-        width: 40%;
-        vertical-align: middle;
-        margin-left: 10px; }
+  .component__workshops__list {
+    overflow-y: scroll;
+    max-height: 400px; }
+  .component__workshops__item {
+    padding: 20px 15px;
+    width: auto; }
+    .component__workshops__item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 360px;
+      display: inline-block;
+      vertical-align: middle; }
+    .component__workshops__item__info {
+      display: inline-block;
+      width: 40%;
+      vertical-align: middle;
+      margin-left: 10px; }
+  .component__timetable {
+    max-height: 400px;
+    overflow-y: scroll; }
 
 .component-container {
   margin: 20px auto 0px auto; }

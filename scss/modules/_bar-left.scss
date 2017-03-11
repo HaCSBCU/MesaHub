@@ -5,6 +5,9 @@
   border-right: 2px solid $greyBorder;
   &__active > &__item{
     background-color: $blue;
+    p{
+      color: white;
+    }
   }
   &__item:hover{
     background-color: $lightBlue;
@@ -13,8 +16,14 @@
     transition: all 0.3s ease;
     position: relative;
     height: 80px;
+    box-sizing: border-box;
+    text-align: center;
     img{
+      margin-top: 10px;
       width: 50%;
+    }
+    p{
+      color: black;
     }
   }
 }

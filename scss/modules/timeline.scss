@@ -1,0 +1,55 @@
+@import "../main";
+
+$off-white: #ecf4ed;
+$grey: #e1e9e2;
+$grey-dark: #777c77;
+
+.timeline{
+
+  margin: auto;
+  &__page{
+    width: 80%;
+  }
+
+  &__component{
+    width: 95%;
+  }
+
+  table{
+    text-align: center;
+    font-family: $font;
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+    border: 2px solid $off-white;
+    tr:nth-child(1){
+      background-color: $off-white;
+    }
+    tr{
+      th{
+        padding: 20px 15px;
+        border-right: 1px solid $grey;
+      }
+      td{
+        padding: 15px 10px;
+        border-top: 1px solid $grey;
+        color: $grey-dark;
+
+      }
+      td.description{
+        text-align: justify;
+      }
+      td:nth-child(4){
+        text-transform: capitalize;
+      }
+    }
+  }
+  &__day{
+    font-size: 25px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background-color: $off-white;
+  }
+
+}
+

@@ -1,27 +1,26 @@
 <div class="side-bar">
     <a href="/" <% if(pageName === 'index') { %> class="side-bar__active" <% } %>>
         <div class="side-bar__item">
-            <img class="bothC__relative" src="/img/icons/home.svg"/>
+            <img src="/img/icons/home.svg"/>
+            <p>Home</p>
         </div>
     </a>
-    <a href="/" <% if(pageName === 'events') { %> class="side-bar__active" <% } %>>
+    <a href="/workshops" <% if(pageName === 'workshops') { %> class="side-bar__active" <% } %>>
         <div class="side-bar__item">
-            <img class="bothC__relative" src="/img/icons/events.svg"/>
+            <img src="/img/icons/workshops.svg"/>
+            <p>Workshops</p>
         </div>
     </a>
-    <a href="/" <% if(pageName === 'social') { %> class="side-bar__active" <% } %>>
+    <a href="/timeline" <% if(pageName === 'timeline') { %> class="side-bar__active" <% } %>>
         <div class="side-bar__item">
-            <img class="bothC__relative" src="/img/icons/social.svg"/>
-        </div>
-    </a>
-    <a href="/" <% if(pageName === 'challenges') { %> class="side-bar__active" <% } %>>
-        <div class="side-bar__item">
-            <img class="bothC__relative" src="/img/icons/challenges.svg"/>
+            <img src="/img/icons/timeline.svg"/>
+            <p>Timeline</p>
         </div>
     </a>
     <a href="/login" <% if(pageName === 'admin') { %> class="side-bar__active" <% } %>>
         <div class="side-bar__item">
-            <img class="side-bar__item__lock bothC__relative" src="/img/icons/login.svg"/>
+            <img class="side-bar__item__lock" src="/img/icons/login.svg"/>
+            <p>Login</p>
         </div>
     </a>
 </div>

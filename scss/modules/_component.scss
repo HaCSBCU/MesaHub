@@ -107,8 +107,10 @@
   }
 
   &__workshops{
-    max-height: 380px;
-    overflow: scroll;
+    &__list{
+      overflow-y: scroll;
+      max-height: 400px;
+    }
     &__item{
       padding: 20px 15px;
       width: auto;
@@ -126,6 +128,10 @@
         margin-left: 10px;
       }
     }
+  }
+  &__timetable{
+    max-height: 400px;
+    overflow-y: scroll;
   }
 
 }
