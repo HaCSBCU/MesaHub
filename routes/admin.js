@@ -6,7 +6,7 @@ const attendeeDB = require('../db/attendees')
 const multer = require('multer');
 const csvImport = require('../scripts/csvconversion')
 const text = require('../scripts/texting')
-const s3 = require('../scripts/s3')
+const aws = require('../scripts/s3')
 
 //Other modules
 const escape = require('escape-html');
