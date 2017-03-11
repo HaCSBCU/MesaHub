@@ -4,15 +4,9 @@ const auth = require('../auth/authentication.js');
 const userDB = require('../db/users.js');
 const attendeeDB = require('../db/attendees')
 const multer = require('multer');
-<<<<<<< HEAD
-const csvImport = require('../scripts/csvconversion')
-const text = require('../scripts/texting')
-const aws = require('../scripts/s3')
-=======
 const csvImport = require('../scripts/csvconversion');
 const text = require('../scripts/texting');
 const aws = require('../scripts/s3');
->>>>>>> 4c09311a69c90796a4bfb49b7c2dae00653ac0ea
 
 //Other modules
 const escape = require('escape-html');
