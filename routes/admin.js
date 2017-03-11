@@ -14,7 +14,7 @@ const escape = require('escape-html');
 //Other Config
 
 var opts = {
-    connect: 'mongodb://localhost:27017/bullhacks',
+    connect: process.env.MONGO_URI,
     iterations: 10,  //number of rounds used in generating salt
     collection: 'users',
     sendEmails: false
@@ -237,7 +237,7 @@ router.post('/send-text-request', function(req, res){
                   })
 
                   text.sendMany(phones, req.body.message)
-                  
+
                 }).catch((err)=>{
                   console.log('error retrieving attendees from db ' + err)
                 })

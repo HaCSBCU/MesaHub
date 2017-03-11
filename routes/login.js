@@ -13,7 +13,7 @@ var uniqid = require('uniqid');
 //Login options
 //Setup user connection
 var opts = {
-    connect: 'mongodb://localhost:27017/bullhacks',
+    connect: process.env.MONGO_URI,
     iterations: 10,  //number of rounds used in generating salt
     collection: 'users',
     sendEmails: false
