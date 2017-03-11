@@ -107,14 +107,6 @@ Vue.component('timeline', {
           <table>
 
             <tr>
-              <th>Location</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Title</th>
-              <th>Description</th>
-            </tr>
-
-            <tr>
               <td>Curzon Building</td>
               <td>9:30am</td>
               <td>11am</td>
@@ -127,7 +119,7 @@ Vue.component('timeline', {
               <td>11am</td>
               <td>12pm</td>
               <td>Opening talk</td>
-              <td class="description">We shall breif you on the hackathon and give you any information that you may need!</td>
+              <td class="description">We shall brief you on the hackathon and give you any information that you may need!</td>
             </tr>
 
             <tr>
@@ -143,7 +135,7 @@ Vue.component('timeline', {
               <td>12pm</td>
               <td>12:30pm</td>
               <td>Team Building</td>
-              <td class="description">Alex & Pandelis are hosting a team building session incase anybody does not have a
+              <td class="description">Alex & Pandelis are hosting a team building session in-case anybody does not have a
                 team yet. Come along, don't be shy!
               </td>
             </tr>
@@ -174,7 +166,7 @@ Vue.component('timeline', {
               <td>3pm</td>
               <td>4pm</td>
               <td>Capgemini Workshop</td>
-              <td class="description">Camgemini will be hosting a workshop, be sure to come and check it out!</td>
+              <td class="description">Capgemini will be hosting a workshop, be sure to come and check it out!</td>
             </tr>
 
             <tr>
@@ -200,7 +192,7 @@ Vue.component('timeline', {
               <td>8pm</td>
               <td>10pm</td>
               <td>Games Competiton</td>
-              <td class="description">Ollie will be hosting a games competiton in the main room. Head on over for some chill time
+              <td class="description">Ollie will be hosting a games competition in the main room. Head on over for some chill time
                 to relax and play some games with fellow hackers.
               </td>
             </tr>
@@ -235,7 +227,7 @@ Vue.component('timeline', {
             <tr>
               <td>Sleeping Room</td>
               <td>12am</td>
-              <td>8pm</td>
+              <td>8am</td>
               <td>Sleep Time!</td>
               <td class="description">You've worked real hard, take some well deserved time to get some shut eye so that
               you are even just a little bit more refreshed in the morning.</td>
@@ -274,7 +266,7 @@ Vue.component('timeline', {
             </tr>
 
             <tr>
-              <td>MP242</td>
+              <td>Main Room</td>
               <td>3pm</td>
               <td>3:30pm</td>
               <td>Games Intermission</td>
@@ -282,7 +274,7 @@ Vue.component('timeline', {
             </tr>
 
             <tr>
-              <td>MP242</td>
+              <td>Main Room</td>
               <td>2pm</td>
               <td>3pm</td>
               <td>Winners Presentation</td>
