@@ -87,7 +87,7 @@ module.exports.logout = (id, cb) => {
 module.exports.verifyPassword = (username, password, cb) => {
     users.findOne({name: username}, function(err, result){
         if(err) throw err;
-        console.log(result)
+        console.log(result);
         if(result.passhash === password){
             var data = {
                 verified: true,

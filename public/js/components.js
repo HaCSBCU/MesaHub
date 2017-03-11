@@ -6,9 +6,25 @@ Vue.component('countdown', {
                 <div class="component__left">
                     <img class="vertC__relative" src="/img/icons/time.svg"/>
                 </div>
-                <div class="component__right">
-                    <h4 class="component__time__title">Time left:</h4>
-                    <h1 class="component__time__time">{{time}}</h1>
+                <div id="countdownClock" class="component__right">
+                      <h4 class="component__time__title">Time left:</h4>
+                      <div id="clockdiv">
+                          <div>
+                            <span class="days"></span>
+                            <div class="smalltext">Days</div>
+                          </div>
+                          <div>
+                            <span class="hours"></span>
+                            <div class="smalltext">Hours</div>
+                          </div>
+                          <div>
+                            <span class="minutes"></span>
+                            <div class="smalltext">Minutes</div>
+                          </div>
+                          <div>
+                            <span class="seconds"></span>
+                            <div class="smalltext">Seconds</div>
+                          </div>
                 </div>
             </div>
         </div>
