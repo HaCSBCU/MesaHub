@@ -1,8 +1,10 @@
 .nav{
   height: 70px;
   overflow: hidden;
-  width: 100%;
-  position: relative;
+  width: calc(100% - 70px);
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
   &__container{
     width: 50%;
     margin: auto;

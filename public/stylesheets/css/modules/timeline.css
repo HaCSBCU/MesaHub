@@ -236,6 +236,126 @@ nav {
     .side-bar__item p {
       color: black; }
 
+.component {
+  box-shadow: #E2E2E2 0px 2px 4px;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #E2E2E2; }
+  .component__left {
+    width: 20%;
+    background-color: #F5F5F5;
+    text-align: center; }
+    .component__left h4 {
+      padding: 10px 0px;
+      font-weight: 500;
+      letter-spacing: 1px; }
+    .component__left img {
+      width: 50px;
+      height: 50px; }
+  .component__right {
+    width: 80%;
+    text-align: center;
+    padding: 10px; }
+  .component__flex {
+    display: flex;
+    height: 100%; }
+  .component__one-third {
+    width: 30%;
+    display: inline-block;
+    margin: 0px; }
+  .component__two-third {
+    width: 67%;
+    display: inline-block;
+    margin: 0px; }
+  .component__header {
+    text-align: center;
+    background-color: #F5F5F5; }
+    .component__header h3 {
+      padding: 10px 0px;
+      font-weight: 500;
+      letter-spacing: 1px; }
+  .component__time {
+    display: flex; }
+    .component__time__title {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: bold; }
+  .component__announcement {
+    max-height: 650px;
+    height: 200px;
+    overflow: hidden; }
+    .component__announcement__right {
+      text-align: left;
+      padding: 0px;
+      overflow-x: scroll;
+      height: inherit; }
+      .component__announcement__right > div:first-child h5 {
+        display: inline-block !important; }
+      .component__announcement__right__item {
+        border-bottom: 1px solid #E2E2E2;
+        padding: 8px; }
+        .component__announcement__right__item h4 {
+          font-size: 1.0em; }
+        .component__announcement__right__item__header h4, .component__announcement__right__item__header p, .component__announcement__right__item__header h5 {
+          display: inline-block;
+          vertical-align: middle; }
+        .component__announcement__right__item__header h4 {
+          font-weight: 600;
+          color: #252525;
+          opacity: 0.8; }
+        .component__announcement__right__item__header h5 {
+          font-weight: bold;
+          color: red;
+          padding: 0px 3px; }
+      .component__announcement__right__item:nth-last-child(1) {
+        border-bottom: 0px; }
+  .component__workshops__list {
+    overflow-y: scroll;
+    max-height: 400px; }
+  .component__workshops__item {
+    padding: 20px 15px;
+    width: auto; }
+    .component__workshops__item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 360px;
+      display: inline-block;
+      vertical-align: middle; }
+    .component__workshops__item__info {
+      display: inline-block;
+      width: 40%;
+      vertical-align: middle;
+      margin-left: 10px; }
+  .component__timetable {
+    max-height: 400px;
+    overflow-y: scroll; }
+
+.component-container {
+  margin: 20px auto 0px auto; }
+  .component-container__one-third {
+    position: relative;
+    width: 28%;
+    display: inline-block; }
+    .component-container__one-third div {
+      vertical-align: top; }
+  .component-container__two-third {
+    position: relative;
+    width: 68%;
+    display: inline-block;
+    vertical-align: top; }
+    .component-container__two-third div {
+      vertical-align: top; }
+  .component-container__left {
+    float: left; }
+  .component-container__right {
+    float: right; }
+
+@media screen and (max-width: 1030px) {
+  .component__left h4 {
+    display: none !important; } }
+
+/* PAGE SPECIFIC */
 .floating-box {
   border: 1px solid #E2E2E2;
   box-shadow: #E2E2E2 0px 2px 4px;
@@ -374,5 +494,35 @@ nav {
     margin-top: 20px;
     cursor: pointer; }
 
-#main {
-  height: 90%; }
+/* Main App CSS */
+.timeline {
+  margin: auto; }
+  .timeline__page {
+    width: 80%; }
+  .timeline__component {
+    width: 95%; }
+  .timeline table {
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+    border: 2px solid #ecf4ed; }
+    .timeline table tr:nth-child(1) {
+      background-color: #ecf4ed; }
+    .timeline table tr th {
+      padding: 20px 15px;
+      border-right: 1px solid #e1e9e2; }
+    .timeline table tr td {
+      padding: 15px 10px;
+      border-top: 1px solid #e1e9e2;
+      color: #777c77; }
+    .timeline table tr td.description {
+      text-align: justify; }
+    .timeline table tr td:nth-child(4) {
+      text-transform: capitalize; }
+  .timeline__day {
+    font-size: 25px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background-color: #ecf4ed; }
