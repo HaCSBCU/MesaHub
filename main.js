@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var users = require('login-mongo');
 
 var db = require('./db/users.js');
 var auth = require('./auth/authentication.js');
@@ -15,13 +14,6 @@ var auth = require('./auth/authentication.js');
 var escape = require('escape-html');
 var multer = require('multer');
 
-var opts = {
-    connect: process.env.MONGO_URI,
-    iterations: 10,  //number of rounds used in generating salt
-    collection: 'users',
-    sendEmails: false
-};
-users.config(opts);
 
 //Require ID.
 var uniqid = require('uniqid');

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const users = require('login-mongo');
 const auth = require('../auth/authentication.js');
 const userDB = require('../db/users.js');
 const attendeeDB = require('../db/attendees')
@@ -13,15 +12,6 @@ const s3 = require('../scripts/s3')
 const escape = require('escape-html');
 
 //Other Config
-
-var opts = {
-    connect: process.env.MONGO_URI,
-    iterations: 10,  //number of rounds used in generating salt
-    collection: 'users',
-    sendEmails: false
-};
-
-users.config(opts);
 
 //Default route
 
@@ -311,15 +301,17 @@ router.post('/create-user', function(req, res){
         var password = escape(req.body.password);
 
         var filePath = '/img/users/' + fileName.toString();
-        users.add(email, name, password, function(err, success){
-            if(err) throw err;
-            if(success){
-                userDB.addPicture(email, filePath, function(data){
-                    console.log("File at: " + data.picture);
-                    res.send("Done!");
-                })
-            }
-        });
+        // users.add(email, name, password, function(err, success){
+        //     if(err) throw err;
+        //     if(success){
+        //         userDB.addPicture(email, filePath, function(data){
+        //             console.log("File at: " + data.picture);
+        //             res.send("Done!");
+        //         })
+        //     }
+        // });
+        //Add new user
+
 
     });
 });
