@@ -191,8 +191,8 @@ router.get('/get-announcements', function(req, res){
 
 router.post('/create-announcement', function(req, res){
     var announcements = require('../db/announcements.js');
-    var title = escape(req.body.title);
-    var body = escape(req.body.body);
+    var title = req.body.title;
+    var body = req.body.body;
     var date = new Date();
     date.toString().split(" ").splice(1,4);
     announcements.addAnnouncement(title, date, body, function(){
