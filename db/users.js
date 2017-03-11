@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI);
+// mongoose.connect(process.env.MONGO_URI);
+
+
 
 // DATABASE SCHEMAS
 
@@ -81,6 +84,21 @@ module.exports.logout = (id, cb) => {
         result.save();
         cb(result);
     });
+};
+
+module.exports.verifyPassword = (username, password, cb) => {
+    users.findOne({name: username}, function(err, result){
+        if(err) throw err;
+        console.log(result)
+        if(result.passhash === password){
+            var data = {
+                verified: true,
+                result
+            };
+            cb(data)
+        }
+    });
+
 };
 
 module.exports.compareID = (clientID, serverID) => {
