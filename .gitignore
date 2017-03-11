@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+
+.elasticbeanstalk
+
 # Runtime data
 pids
 *.pid
@@ -43,3 +46,8 @@ jspm_packages
 #sass
 .sass-cache/
 *.css.map
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
