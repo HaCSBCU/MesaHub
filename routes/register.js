@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var users = require('login-mongo');
+// var users = require('login-mongo');
 var db = require('../db/users.js');
 var auth = require('../auth/authentication.js');
 
