@@ -1,6 +1,6 @@
 @import "../main";
 
-$off-white: #ecf4ed;
+$off-white: #f4f4f4;
 $grey: #e1e9e2;
 $grey-dark: #777c77;
 
@@ -13,7 +13,10 @@ $grey-dark: #777c77;
 
   &__component{
     width: 100%;
-    margin-top: 0px !important;
+    border-top: 2px solid $grey;
+    table{
+      margin-top: 0px !important;
+    }
   }
 
   table{

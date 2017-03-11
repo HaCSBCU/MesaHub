@@ -501,16 +501,18 @@ nav {
     width: 80%; }
   .timeline__component {
     width: 100%;
-    margin-top: 0px !important; }
+    border-top: 2px solid #e1e9e2; }
+    .timeline__component table {
+      margin-top: 0px !important; }
   .timeline table {
     text-align: center;
     font-family: "Open Sans", sans-serif;
     width: 100%;
     margin-top: 40px;
     border-collapse: collapse;
-    border: 2px solid #ecf4ed; }
+    border: 2px solid #f4f4f4; }
     .timeline table tr:nth-child(1) {
-      background-color: #ecf4ed; }
+      background-color: #f4f4f4; }
     .timeline table tr th {
       padding: 20px 15px;
       border-right: 1px solid #e1e9e2; }
@@ -526,4 +528,4 @@ nav {
     font-size: 25px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    background-color: #ecf4ed; }
+    background-color: #f4f4f4; }
