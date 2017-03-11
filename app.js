@@ -15,6 +15,13 @@ var auth = require('./auth/authentication.js');
 var escape = require('escape-html');
 var multer = require('multer');
 
+var opts = {
+    connect: process.env.MONGO_URI,
+    iterations: 10,  //number of rounds used in generating salt
+    collection: 'users',
+    sendEmails: false
+};
+users.config(opts);
 
 //Require ID.
 var uniqid = require('uniqid');
