@@ -8,14 +8,17 @@
     "test": "mocha -R spec tests/spec.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.27.0",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
+    "crypto": "^0.0.3",
     "csv": "^1.1.1",
     "debug": "~2.6.0",
     "ejs": "~2.5.5",
     "escape-html": "^1.0.3",
     "express": "~4.14.1",
     "express-session": "^1.15.1",
+    "file-type": "^4.1.0",
     "login-mongo": "^1.2.0",
     "mongoose": "^4.8.5",
     "morgan": "~1.7.0",

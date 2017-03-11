@@ -7,6 +7,7 @@ const attendeeDB = require('../db/attendees')
 const multer = require('multer');
 const csvImport = require('../scripts/csvconversion')
 const text = require('../scripts/texting')
+const s3 = require('../scripts/s3')
 
 //Other modules
 const escape = require('escape-html');
@@ -47,7 +48,7 @@ router.post('/upload-csv', function(req, res){
     var id = req.cookies.uID;
     if(id){
         auth.verifySession(id, function(user){
-            if(user.verified == true){
+            if(user.verified === true){
                 var storage = multer.memoryStorage()
                 var upload = multer({ storage: storage,
                     onFileUploadComplete: function (file) {
@@ -132,19 +133,11 @@ router.get('/get-events', function(req, res){
 
 router.post('/create-event', function(req, res){
 
-    var fileName;
-    //File uploaded
-    var storage =   multer.diskStorage({
-        destination: function (req, file, callback) {
-            callback(null, './public/img/workshops');
-        },
-        filename: function (req, file, callback) {
-            fileName = Date.now() + file.originalname;
-            callback(null,fileName);
-        }
-    });
+  var storage = multer.memoryStorage()
+  var upload = multer({ storage: storage}).single('upl');
 
-    var upload = multer({ storage : storage}).single('upl');
+
+
 
     upload(req,res,function(err) {
         if(err) {
@@ -166,12 +159,18 @@ router.post('/create-event', function(req, res){
             timeA = time;
             timeB = "";
         }
-        var filePath = '/img/workshops/' + fileName.toString();
-        console.log("Time A: " + timeA);
-        console.log("TimeB: " + timeB);
-        events.addEvent(name, location, parseInt(timeA), timeB, filePath, function(){
-            res.send("Workshop added!");
-        });
+        aws.upload(req.file.buffer).then((url) => {
+            var filePath = url
+            console.log("Time A: " + timeA);
+            console.log("TimeB: " + timeB);
+            events.addEvent(name, location, parseInt(timeA), timeB, filePath, function(){
+                res.send("Workshop added!");
+            });
+          }).catch((err)=>{
+            console.log(err)
+          })
+
+
     });
 });
 
