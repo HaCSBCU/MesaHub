@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="./stylesheets/css/modules/timeline.css"/>
 
   </head>
-  <body>npm
+  <body>
 
     <% include ../partials/side-bar %>
 
@@ -86,6 +86,9 @@
             }
           });
           setCookie("uniq", true, 999);
+        }
+        if(getCookie("refresh") == true){
+          document.cookie = "refresh" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         }
       }
       checkCookie();
