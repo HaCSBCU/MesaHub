@@ -52,7 +52,7 @@ router.post('/upload-csv', function(req, res){
                     if(err) {
                         return res.end("Error uploading file.");
                     }
-                    console.log(req.file)
+                    console.log(req.file);
                     csvImport.processFile(req.file.buffer)
                         .then( (data) => {
                             console.log(data)
