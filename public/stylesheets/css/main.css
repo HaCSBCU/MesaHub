@@ -495,3 +495,8 @@ nav {
     cursor: pointer; }
 
 /* Main App CSS */
+.typeform {
+  margin: auto;
+  text-align: center; }
+  .typeform button {
+    margin: 40px auto; }

@@ -14,7 +14,6 @@ router.get('/', function(req, res){
     var id = req.cookies.uID;
     if(id){
         auth.verifySession(id, function(data){
-            console.log(data.validated);
             if(data.validated == true){
                 res.redirect('/admin');
             }
@@ -33,7 +32,6 @@ router.post('/sign-in', function(req, res) {
     var pass = escape(req.body.pass);
     db.verifyPassword(userName, pass, function(data){
         if(data.verified){
-            console.log('success');
             var uID = uniqid();
             req.session.users[userName] = userName;
             res.cookie('uID', uID, {maxAge: 3600 * 1000});
@@ -41,21 +39,17 @@ router.post('/sign-in', function(req, res) {
                 console.log(i.session);
             });
             db.findUser(userName, function(user){
-                console.log("Should of logged in");
                 res.send({
                     redirect: '/admin'
                 })
             })
         }
         else if(!userName || !pass){
-            console.log('No user or password');
             res.redirect('/login');
         }
         else {
             // req.session.user[userName] = void 0;
-            console.log("Other");
             res.status(500).send("Incorrect username / password. Please try again.");
-            // return res.redirect('/login');
         }
 
     });
