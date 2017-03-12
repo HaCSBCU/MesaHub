@@ -20,6 +20,13 @@ router.get('/workshops', function(req, res){
   res.render('pages/workshops', {title: 'Timeline', pageName: 'workshops', verified: false});
 });
 
+router.get('/feedback', function(req, res){
+  res.render('pages/feedback', {title: 'Feedback', pageName: 'feedback', verified: false});
+});
+
+router.get('/bullhacks', function(req, res){
+  res.render('pages/bullhacks', {title: 'BullHacks', pageName: 'bullhacks', verified: false});
+});
 
 router.get('/set', function(req, res){
   req.session.name = "Alex";

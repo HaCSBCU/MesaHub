@@ -51,7 +51,7 @@ module.exports.uniqueID = (id, user, cb) => {
 module.exports.verifyID = (id, cb) => {
     users.findOne({session: id}, function(err, result){
         if(err || result == null){
-            console.log("error verify id: " + err);
+            console.log("error in verify id: " + err);
             return err;
         }
         cb(result);
@@ -78,7 +78,6 @@ module.exports.logout = (id, cb) => {
             return err;
         }
         delete result["session"];
-        console.log(result);
         result.save();
         cb(result);
     });
@@ -87,13 +86,25 @@ module.exports.logout = (id, cb) => {
 module.exports.verifyPassword = (username, password, cb) => {
     users.findOne({name: username}, function(err, result){
         if(err) throw err;
-        console.log(result);
-        if(result.passhash === password){
-            var data = {
-                verified: true,
-                result
-            };
-            cb(data)
+        var data;
+        var verified = {
+            verified: true,
+            result
+        };
+        var notVerified = {
+            verified: false,
+            result
+        };
+        if(result){
+            if(result.passhash == password){
+                cb(verified);
+            }
+            else{
+                cb(notVerified);
+            }
+        }
+        else{
+            cb(notVerified);
         }
     });
 
