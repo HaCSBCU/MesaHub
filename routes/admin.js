@@ -36,9 +36,12 @@ router.get('/', function(req, res){
 router.post('/upload-csv', function(req, res){
     console.log("Upload");
     var id = req.cookies.uID;
+    console.log(id);
     if(id){
         auth.verifySession(id, function(user){
-            if(user.verified === true){
+          console.log("User:");
+          console.log(user.user.session);
+            if(user.user.session === id){
                 var storage = multer.memoryStorage()
                 var upload = multer({ storage: storage,
                     onFileUploadComplete: function (file) {
@@ -51,7 +54,7 @@ router.post('/upload-csv', function(req, res){
                     }
                     console.log(req.file);
                     csvImport.processFile(req.file.buffer)
-                        .then( (data)=>{
+                        .then( (data) => {
                             console.log(data)
 
 
@@ -71,10 +74,6 @@ router.post('/upload-csv', function(req, res){
                                 })
 
                             })
-
-
-
-
                         })
                         .catch( (err)=>{console.log(err)})
                     res.end("File is uploaded");
