@@ -13,11 +13,32 @@
       <div class="main-content">
         <img src="assets/logo.png"/>
         <h1>Coming Soon!</h1>
+        <h3 class="reference">You're arriving from: <span class="website"></h3>
         <h3>We're the Hackathon Dashboard Tracking software. We've just started up so haven't got a site live at the moment
         but check back soon!</h3>
       </div>
     </div>
 
+    <script>
+    function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+     if(getParameterByName("ref") != null){
+        $('.website').html(getParameterByName("ref"));
+     }
+     else{
+       $('.reference').remove();
+     }
+
+    </script>
 
   </body>
 
