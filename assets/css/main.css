@@ -19,7 +19,9 @@ h1, h3 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center; }
+  text-align: center;
+  width: 90%;
+  margin: auto; }
   #main .main-content img {
     width: 90%; }
   #main .main-content h1 {
@@ -48,7 +50,7 @@ h1, h3 {
 
 @media screen and (max-height: 650px) {
   #main .main-content img {
-    width: 70%; }
+    width: 90%; }
   #main .main-content h1 {
     font-size: 45px; }
   #main .main-content h3 {

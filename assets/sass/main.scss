@@ -30,6 +30,8 @@ h1, h3{
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 90%;
+    margin: auto;
     img{
       width: 90%;
     }
@@ -67,7 +69,7 @@ h1, h3{
   #main{
     .main-content{
       img{
-        width: 70%;
+        width: 90%;
       }
       h1{
         font-size: 45px;
