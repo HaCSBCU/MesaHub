@@ -31,7 +31,9 @@
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
+      getParameterByName("ref")
      if(getParameterByName("ref") != null){
+
         $('.website').html(getParameterByName("ref"));
      }
      else{
