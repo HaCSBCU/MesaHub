@@ -45,12 +45,7 @@ h1, h3{
       font-size: 25px;
       font-weight: 300;
     }
-    .reference{
-      margin: 10px 0px 15px 0px;
-      .website{
-        font-weight: bold;
-      }
-    }
+
     button{
       -webkit-appearence: none;
       padding: 15px 25px;
@@ -68,6 +63,13 @@ h1, h3{
     button:hover{
       background-color: $darkGreen;
     }
+  }
+}
+
+.reference{
+  margin: 10px 0px 15px 0px;
+  .website{
+    font-weight: bold;
   }
 }
 

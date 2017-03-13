@@ -32,10 +32,6 @@ h1, h3 {
   #main .main-content h3 {
     font-size: 25px;
     font-weight: 300; }
-  #main .main-content .reference {
-    margin: 10px 0px 15px 0px; }
-    #main .main-content .reference .website {
-      font-weight: bold; }
   #main .main-content button {
     -webkit-appearence: none;
     padding: 15px 25px;
@@ -51,6 +47,11 @@ h1, h3 {
     cursor: pointer; }
   #main .main-content button:hover {
     background-color: #57aa87; }
+
+.reference {
+  margin: 10px 0px 15px 0px; }
+  .reference .website {
+    font-weight: bold; }
 
 @media screen and (max-height: 650px) {
   #main .main-content img {
