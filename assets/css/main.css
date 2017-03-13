@@ -21,7 +21,7 @@ h1, h3 {
   transform: translate(-50%, -50%);
   text-align: center; }
   #main .main-content img {
-    width: 200px; }
+    width: 90%; }
   #main .main-content h1 {
     font-size: 50px;
     padding: 40px 0px 20px 0px;
@@ -41,13 +41,14 @@ h1, h3 {
     color: white;
     font-family: "Lato", sans-serif;
     margin: 40px;
-    transition: all 0.3s ease; }
+    transition: all 0.3s ease;
+    cursor: pointer; }
   #main .main-content button:hover {
     background-color: #57aa87; }
 
 @media screen and (max-height: 650px) {
   #main .main-content img {
-    width: 150px; }
+    width: 70%; }
   #main .main-content h1 {
     font-size: 45px; }
   #main .main-content h3 {
