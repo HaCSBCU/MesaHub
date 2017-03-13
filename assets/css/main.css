@@ -32,6 +32,10 @@ h1, h3 {
   #main .main-content h3 {
     font-size: 25px;
     font-weight: 300; }
+  #main .main-content .reference {
+    margin: 10px 0px 15px 0px; }
+    #main .main-content .reference .website {
+      font-weight: bold; }
   #main .main-content button {
     -webkit-appearence: none;
     padding: 15px 25px;
