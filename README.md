@@ -40,13 +40,15 @@ Then authentication used by referencing the module:
 ```js
 app.get('/protected', function(req, res){
   var id = req.cookies.uID;
-  auth.verifySession(id, function(data){
-      if(data.validated == true){
-        res.render('/pages/admin');
-      }
-      else{
-        res.redirect('/');
-      }
-  });
+  if(id){
+    auth.verifySession(id, function(data){
+        if(data.validated == true){
+          res.render('/pages/admin');
+        }
+        else{
+          res.redirect('/');
+        }
+    });
+  }
 }
 ```
