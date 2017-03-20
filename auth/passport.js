@@ -1,6 +1,8 @@
 var user = require('../db/users');
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 
+var hash = require('bcrypt');
+
 passport.use(new LocalStrategy(
     (user, pass, done) => {
         user.findUser(user).then(function(err, data){
