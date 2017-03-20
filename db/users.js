@@ -110,6 +110,21 @@ module.exports.verifyPassword = (username, password, cb) => {
 
 };
 
+module.exports.credentials = (user, pass, done) => {
+    users.findOne({user}, function(err, user){
+       if(err){
+           return err;
+       }
+       if(!user){
+           return done(null, false, {message:"Incorrect username."});
+       }
+       if(user.password != pass){
+           return done(null, false, {message: "Incorrect password."})
+       }
+       return done(null, user)
+    })
+};
+
 module.exports.compareID = (clientID, serverID) => {
   if(clientID == serverID){
       return true;

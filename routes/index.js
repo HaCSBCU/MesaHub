@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 // var utilities = require('../libs/middleware/utilities.js');
 // var config = require('../config/config.js');
 
@@ -13,6 +14,12 @@ router.get('/', function(req, res){
 });
 
 router.get('/timeline', function(req, res){
+  res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
+});
+
+router.get('/auth',
+    passport.authenticate('local'),
+    function(req, res){
   res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
 });
 
