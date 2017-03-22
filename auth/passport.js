@@ -1,19 +1,84 @@
-var user = require('../db/users');
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var userDb = require('../db/users');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var hash = require('bcrypt');
+//
+// passport.use('login', new LocalStrategy({
+//         passReqToCallback: true
+//     },
+//     (req, user, pass, done) => {
+//         console.log("HERE");
+//         userDb.findUser(user).then(function(err, data){
+//             if(err) throw err;
+//             if(!data){
+//                 console.log("User not found");
+//                 return done(null, false, {message: "User not found"});
+//             }
+//             //Use bycrypt
+//             if(pass != data.password){
+//                 console.log("Password incorrect");
+//                 return done(null, false, {message: "Incorrect password"})
+//             }
+//             return done(null, user);
+//         });
+//     }
+// ));
 
-passport.use(new LocalStrategy(
-    (user, pass, done) => {
-        user.findUser(user).then(function(err, data){
+passport.use('login', new LocalStrategy({
+        passReqToCallback : true
+    },
+    function(req, username, password, done) {
+        console.log('We got here!');
+        // check in mongo if a user with username exists or not
+        userDb.findUser(username, function(err, user){
             if(err) throw err;
-            if(!data){
-                return done(null, false, {message: "User not found"});
+            // In case of any error, return using the done method
+            if (err)
+                return done(err);
+            // Username does not exist, log error & redirect back
+            if (!user){
+                console.log('User Not Found with username '+username);
+                return done(null, false);
             }
-            //Use bycrypt
-            if(pass != data.password){
-                return done(null, false, {message: "Incorrect password"})
+            // User exists but wrong password, log the error
+            if (password != user.passhash){
+                console.log('Invalid Password');
+                return done(null, false);
             }
+            // User and password both match, return user from
+            // done method which will be treated like success
+            console.log("logged in");
+            return done(null, user);
         });
-    }
-));
+        // userDb.findUser({ 'user' :  username },
+        //     function(err, user) {
+        //         // In case of any error, return using the done method
+        //         if (err)
+        //             return done(err);
+        //         // Username does not exist, log error & redirect back
+        //         if (!user){
+        //             console.log('User Not Found with username '+username);
+        //             return done(null, false);
+        //         }
+        //         // User exists but wrong password, log the error
+        //         if (password != user.passhash){
+        //             console.log('Invalid Password');
+        //             return done(null, false);
+        //         }
+        //         // User and password both match, return user from
+        //         // done method which will be treated like success
+        //         return done(null, user);
+        //     }
+        // );
+    }));
+
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+    userDb.findUserByID(id, function(err, user) {
+        done(null, false);
+    });
+});

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/headers/login-head %>
+
+</head>
+<body>
+
+<% include ../partials/side-bar %>
+
+<section class="page">
+
+    <nav>
+        <% include ../partials/nav %>
+    </nav>
+
+    <section id="main">
+
+        <div class="floating-box floating-box__small floating-box__login vertC__relative">
+            <div class="floating-box__content">
+                <div class="floating-box__login__icon">
+                    <img class="vertC__relative" src="/img/icons/login.svg"/>
+                </div>
+                <h3>Admin Login</h3>
+                <form id="login" method="post" action="/auth-login">
+                    <input id="user" type="text" name="username" placeholder="Username"/>
+                    <input id="pass" type="password" name="password" placeholder="Password"/>
+                    <input type="submit" placeholder="Login"/>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+    <!--<script>-->
+        <!--$('#login').submit(function(e) {-->
+            <!--e.preventDefault();-->
+            <!--var name = $(this).children('#user').val();-->
+            <!--var pass = $(this).children('#pass').val();-->
+            <!--var data = {-->
+                <!--username: name,-->
+                <!--password: pass-->
+            <!--};-->
+            <!--console.log(data);-->
+            <!--$.ajax({-->
+                <!--type: 'POST',-->
+                <!--url: '/auth-login',-->
+                <!--data: data,-->
+                <!--success: function (returnData) {-->
+                    <!--window.location = returnData.redirect;-->
+                <!--},-->
+                <!--error: function (error) {-->
+                    <!--swal({-->
+                        <!--title: "Login failed!",-->
+                        <!--text: error.responseText,-->
+                        <!--type: "error",-->
+                        <!--confirmButtonText: "Okay"-->
+                    <!--});-->
+                <!--}-->
+            <!--});-->
+        <!--});-->
+    <!--</script>-->
+
+<% include ../partials/footers/admin-footer %>
+
+</body>
+</html>

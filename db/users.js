@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI);
 
+console.log(process.env.MONGO_URI);
+
 
 // DATABASE SCHEMAS
 
@@ -8,6 +10,7 @@ var Schema = mongoose.Schema;
 
 // User Schema
 var userSchema = new Schema({
+    id: String,
     email: String,
     name: String,
     picture: String,
@@ -117,3 +120,19 @@ module.exports.compareID = (clientID, serverID) => {
   }
   return false;
 };
+
+
+module.exports.addId = (user, id, cb) => {
+    users.findOne({user: user}, function(err, result){
+        result.id = id;
+        cb();
+    })
+};
+
+module.exports.addId = (id, cb) => {
+    users.findOne({_id: id}, function(err, result){
+        if(err) throw err;
+        cb(result);
+    })
+};
+

@@ -17,10 +17,25 @@ router.get('/timeline', function(req, res){
   res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
 });
 
+router.get('/test-login', function(req, res){
+      res.render('pages/login-test', {title: 'Login', pageName: 'login', verified: false});
+});
+
 router.get('/auth',
-    passport.authenticate('local'),
+    passport.authenticate('login', {
+      successRedirect: '/dashboard',
+      failureRedirect: '/login'
+    }),
     function(req, res){
   res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
+});
+
+router.post('/auth-login', passport.authenticate('login', {successRedirect: '/timeline', failureRedirect: '/login'}), function(req, res){
+  console.log(req.body);
+});
+
+router.post('/auth-test', function(req, res){
+  console.log(req.body);
 });
 
 router.get('/workshops', function(req, res){
