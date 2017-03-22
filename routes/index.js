@@ -17,6 +17,10 @@ router.get('/timeline', function(req, res){
   res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
 });
 
+//////////////////////////
+// PASSPORT TESTS START //
+/////////////////////////
+
 router.get('/test-login', function(req, res){
       res.render('pages/login-test', {title: 'Login', pageName: 'login', verified: false});
 });
@@ -37,6 +41,10 @@ router.post('/auth-login', passport.authenticate('login', {successRedirect: '/ti
 router.post('/auth-test', function(req, res){
   console.log(req.body);
 });
+
+////////////////////////
+// PASSPORT TESTS END //
+///////////////////////
 
 router.get('/workshops', function(req, res){
   res.render('pages/workshops', {title: 'Timeline', pageName: 'workshops', verified: false});
