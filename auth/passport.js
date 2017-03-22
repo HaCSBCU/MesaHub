@@ -51,26 +51,6 @@ passport.use('login', new LocalStrategy({
             console.log("logged in");
             return done(null, user);
         });
-        // userDb.findUser({ 'user' :  username },
-        //     function(err, user) {
-        //         // In case of any error, return using the done method
-        //         if (err)
-        //             return done(err);
-        //         // Username does not exist, log error & redirect back
-        //         if (!user){
-        //             console.log('User Not Found with username '+username);
-        //             return done(null, false);
-        //         }
-        //         // User exists but wrong password, log the error
-        //         if (password != user.passhash){
-        //             console.log('Invalid Password');
-        //             return done(null, false);
-        //         }
-        //         // User and password both match, return user from
-        //         // done method which will be treated like success
-        //         return done(null, user);
-        //     }
-        // );
     }));
 
 passport.serializeUser(function(user, done) {
@@ -79,6 +59,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     userDb.findUserByID(id, function(err, user) {
+        console.log(user);
         done(null, false);
     });
 });
