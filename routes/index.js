@@ -3,13 +3,22 @@ var router = express.Router();
 // var utilities = require('../libs/middleware/utilities.js');
 // var config = require('../config/config.js');
 
+
+
+//Send locals to all router instances
+router.use(function (req, res, next) {
+  res.locals.subdomain = req.subdomains[0] || 'Subdomain Not Congfigured';
+  next()
+})
+
+
 router.get('/', function(req, res){
   if(!req.session.count){
     req.session.count = 1;
   } else{
     req.session.count++;
   }
-  res.render('pages/index', {title: 'Home', pageName: 'index', verified: false, subdomain: req.subdomains[0] || 'No Domain'});
+  res.render('pages/index', {title: 'Home', pageName: 'index', verified: false});
 });
 
 router.get('/timeline', function(req, res){
