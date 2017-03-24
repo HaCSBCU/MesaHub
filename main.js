@@ -10,6 +10,9 @@ var mongoose = require('mongoose');
 var db = require('./db/users.js');
 var auth = require('./auth/authentication.js');
 
+//postgresql
+const sql = require('./scripts/db/query')
+
 //Other modules
 var escape = require('escape-html');
 var multer = require('multer');

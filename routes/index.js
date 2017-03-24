@@ -9,7 +9,7 @@ router.get('/', function(req, res){
   } else{
     req.session.count++;
   }
-  res.render('pages/index', {title: 'Home', pageName: 'index', verified: false});
+  res.render('pages/index', {title: 'Home', pageName: 'index', verified: false, subdomain: req.subdomains[0] || 'No Domain'});
 });
 
 router.get('/timeline', function(req, res){
