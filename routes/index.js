@@ -7,10 +7,12 @@ const sql = require('../scripts/db/query')
 
 //Send locals to all router instances
 router.use(function (req, res, next) {
-  res.locals.hackathon = {name: 'Empty Name'}
-  sql.select("select name from hackathon where subdomain='brumhack'")
+  res.locals.hackathon = {name: 'Not a valid Hackathon'}
+  sql.select(`select name from hackathon where subdomain='${req.subdomains[0]}'`)
   .then((query)=>{
-    res.locals.hackathon.name = query[0].name
+    if(query.name === []){
+       res.locals.hackathon.name = query[0].name
+    }
     next()
   }).catch((e)=>{
     console.log(e)
