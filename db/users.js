@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI);
 
+console.log(process.env.MONGO_URI);
+
 
 // DATABASE SCHEMAS
 
@@ -8,6 +10,7 @@ var Schema = mongoose.Schema;
 
 // User Schema
 var userSchema = new Schema({
+    id: String,
     email: String,
     name: String,
     picture: String,
@@ -24,16 +27,18 @@ module.exports.findUser = (user, cb) => {
         if(err){
             console.log(err);
         }
-        cb(record);
+        cb(err, record);
     });
 };
 
+
 module.exports.findUserByID = (id, cb) => {
-    users.findOne({session: id}, function(err, record){
+    var ObjectId = require('mongoose').Types.ObjectId;
+    users.findOne({_id: new ObjectId(id)}, function(err, record){
         if(err){
-            console.log(err);
+            console.log("Error : " + err);
         }
-        cb(record);
+        cb(err, record);
     });
 };
 
@@ -110,9 +115,23 @@ module.exports.verifyPassword = (username, password, cb) => {
 
 };
 
-module.exports.compareID = (clientID, serverID) => {
-  if(clientID == serverID){
-      return true;
-  }
-  return false;
+module.exports.addUser = (name, password, picture, email, cb) => {
+    var organiser = new users({
+        email: email,
+        name: name,
+        picture: picture,
+        passhash: password
+    });
+    organiser.save(function(err){
+        cb(err, "Done!")
+    })
 };
+
+
+module.exports.compareID = (clientID, serverID) => {
+    if (clientID == serverID) {
+        return true;
+    }
+    return false;
+}
+
