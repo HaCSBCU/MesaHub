@@ -3,27 +3,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var hash = require('bcrypt');
-//
-// passport.use('login', new LocalStrategy({
-//         passReqToCallback: true
-//     },
-//     (req, user, pass, done) => {
-//         console.log("HERE");
-//         userDb.findUser(user).then(function(err, data){
-//             if(err) throw err;
-//             if(!data){
-//                 console.log("User not found");
-//                 return done(null, false, {message: "User not found"});
-//             }
-//             //Use bycrypt
-//             if(pass != data.password){
-//                 console.log("Password incorrect");
-//                 return done(null, false, {message: "Incorrect password"})
-//             }
-//             return done(null, user);
-//         });
-//     }
-// ));
 
 passport.use('login', new LocalStrategy({
         passReqToCallback : true
@@ -54,12 +33,15 @@ passport.use('login', new LocalStrategy({
     }));
 
 passport.serializeUser(function(user, done) {
+    console.log("SERIALIZING");
+    console.log(user);
     done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
+    console.log("DESERIALIZING");
     userDb.findUserByID(id, function(err, user) {
         console.log(user);
-        done(null, false);
+        done(null, user);
     });
 });

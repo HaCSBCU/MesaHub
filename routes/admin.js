@@ -1,33 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth/authentication.js');
-const userDB = require('../db/users.js');
+// const auth = require('../auth/authentication.js');
+const db = require('../db/users.js');
 const attendeeDB = require('../db/attendees')
 const multer = require('multer');
 const csvImport = require('../scripts/csvconversion');
 const text = require('../scripts/texting');
 const aws = require('../scripts/s3');
+var passport = require("passport");
 
 //Other modules
 const escape = require('escape-html');
+var auth = require('connect-ensure-login').ensureLoggedIn();
 
 //Other Config
 
 //Default route
 
-router.get('/', function(req, res){
-    var id = req.cookies.uID;
-    if(id){
-        auth.verifySession(id, function(data){
-            data = data.user;
-            console.log(data.name);
-            console.log(data.picture);
-            res.render('pages/admin-dashboard', {title: 'Admin Test', pageName: 'admin', name: data.name, picture: data.picture, verified: true});
-        });
-    }
-    else{
-        res.redirect('/');
-    }
+router.get('/', auth, function(req, res){
+    db.findUserByID(req.session.passport.user, function(err, user){
+        if(err) throw err;
+        console.log('user');
+        res.render('pages/admin-dashboard', {title: "Dashboard", pageName: "admin", verified: "true", name: user.name, picture: user.picture});
+    })
 
 });
 
@@ -93,20 +88,9 @@ router.post('/upload-csv', function(req, res){
 
 // EVENTS
 
-router.get('/event', function(req, res){
-    var id = req.cookies.uID;
-    if(id){
-        auth.verifySession(id, function(data){
-            if(data.validated === true){
-                res.render('pages/create-event', {title: 'Create Event', pageName: 'admin', verified: true});
-            }
-            else{
-                res.redirect('/login');
-            }
-        });
-    } else{
-        res.redirect('/login');
-    }
+
+router.get('/event', auth, function(req, res){
+    res.render('pages/create-event', {title: 'Create Event', pageName: 'admin', verified: true});
 });
 
 router.get('/get-events', function(req, res){
@@ -165,20 +149,8 @@ router.post('/create-event', function(req, res){
 
 // ANNOUNCEMENTS
 
-router.get('/announcement', function(req, res){
-    var id = req.cookies.uID;
-    if(id){
-        auth.verifySession(id, function(data){
-            if(data.validated == true){
-                res.render('pages/create-announcement', {title: 'Create Announcement', pageName: 'admin', verified: true});
-            }
-            else{
-                res.redirect('/login');
-            }
-        });
-    } else{
-        res.redirect('/login');
-    }
+router.get('/announcement', auth, function(req, res){
+    res.render('pages/create-announcement', {title: 'Create Announcement', pageName: 'admin', verified: true});
 });
 
 router.get('/get-announcements', function(req, res){
@@ -188,7 +160,7 @@ router.get('/get-announcements', function(req, res){
     })
 });
 
-router.post('/create-announcement', function(req, res){
+router.post('/create-announcement', auth, function(req, res){
     var announcements = require('../db/announcements.js');
     var title = req.body.title;
     var body = req.body.body;
@@ -202,79 +174,40 @@ router.post('/create-announcement', function(req, res){
 
 // TEXT SYSTEM
 
-router.get('/send-text', function(req, res){
-    var id = req.cookies.uID;
-    if(id){
-        auth.verifySession(id, function(data){
-            if(data.validated === true){
-                res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin', verified: true});
-            }
-            else{
-                res.redirect('/login');
-            }
-        });
-    } else{
-        res.redirect('/login');
-    }
+router.get('/send-text', auth, function(req, res){
+    res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin', verified: true});
 });
 
 
-function getAttendeesNumbers() {
+router.post('/send-text-request', function(req, res, next) {
+    if(req.isAuthenticated()){
+        attendeeDB.getAll().then((attendee)=>{
+            let phones = attendee.map((x)=>{
+                return x.phone
+            });
 
-}
+            text.sendMany(phones, req.body.message)
 
-router.post('/send-text-request', function(req, res){
-    var id = req.cookies.uID;
-    if(id){
-        auth.verifySession(id, function(data){
-            console.log(data.validated);
-            if(data.validated === true){
-                console.log(escape(req.body.message));
-
-
-                attendeeDB.getAll().then((attendee)=>{
-                  let phones = attendee.map((x)=>{
-                    return x.phone
-                  })
-
-                  text.sendMany(phones, req.body.message)
-
-                }).catch((err)=>{
-                  console.log('error retrieving attendees from db ' + err)
-                })
-
-
-
-
-                //Call text system from here.
-                res.send('Congrats!');
-            }
+        }).catch((err)=>{
+            console.log('error retrieving attendees from db ' + err)
         });
+
+        //Call text system from here.
+        console.log(req.body.message);
+        res.send('Congrats!');
     }
     else{
-        res.status(500).send('You must be authenticated in order to send a message.')
+       res.status(500).send("Not authenticated");
     }
 });
 
 // CREATE USER
 
-router.get('/create-user', function(req, res){
-    var id = req.cookies.uID;
-    if(id){
-        auth.verifySession(id, function(data){
-            if(data.validated == true){
-                res.render('pages/create-user', {title: 'create-user', pageName: 'admin', verified: true});
-            }
-            else{
-                res.redirect('/login');
-            }
-        });
-    } else{
-        res.redirect('/login');
-    }
+router.get('/create-user', auth, function(req, res){
+    res.render('pages/create-user', {title: 'create-user', pageName: 'admin', verified: true});
 });
 
-router.post('/create-user', function(req, res){
+router.post('/create-user', auth, function(req, res){
 
     var fileName;
     //File uploaded

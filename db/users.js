@@ -31,12 +31,14 @@ module.exports.findUser = (user, cb) => {
     });
 };
 
+
 module.exports.findUserByID = (id, cb) => {
-    users.findOne({session: id}, function(err, record){
+    var ObjectId = require('mongoose').Types.ObjectId;
+    users.findOne({_id: new ObjectId(id)}, function(err, record){
         if(err){
-            console.log(err);
+            console.log("Error : " + err);
         }
-        cb(record);
+        cb(err, record);
     });
 };
 
@@ -120,19 +122,23 @@ module.exports.compareID = (clientID, serverID) => {
   }
   return false;
 };
-
-
-module.exports.addId = (user, id, cb) => {
-    users.findOne({user: user}, function(err, result){
-        result.id = id;
-        cb();
-    })
-};
-
-module.exports.addId = (id, cb) => {
-    users.findOne({_id: id}, function(err, result){
-        if(err) throw err;
-        cb(result);
-    })
-};
-
+//
+//
+// module.exports.findUserById = (id, cb) => {
+//
+//     var ObjectId = require('mongoose').Types.ObjectId;
+//
+//     console.log("ID here: " + id);
+//     users.findOne({_id: new ObjectId(id)}, function(err, result){
+//         console.log("Result " + result._id);
+//         cb(result._id);
+//     });
+// };
+//
+// module.exports.test = (id, cb) => {
+//     users.findOne({name: "alex"}, function(err, result){
+//         console.log(result);
+//         cb(result);
+//     });
+//
+// };

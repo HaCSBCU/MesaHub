@@ -3,13 +3,9 @@ var router = express.Router();
 var passport = require('passport');
 // var utilities = require('../libs/middleware/utilities.js');
 // var config = require('../config/config.js');
+var db = require('../db/users.js');
 
 router.get('/', function(req, res){
-  if(!req.session.count){
-    req.session.count = 1;
-  } else{
-    req.session.count++;
-  }
   res.render('pages/index', {title: 'Home', pageName: 'index', verified: false});
 });
 
@@ -25,21 +21,28 @@ router.get('/test-login', function(req, res){
       res.render('pages/login-test', {title: 'Login', pageName: 'login', verified: false});
 });
 
-router.get('/auth',
-    passport.authenticate('login', {
-      successRedirect: '/dashboard',
-      failureRedirect: '/login'
-    }),
+router.post('/auth-login',
+    passport.authenticate('login', { failureRedirect: '/login' }),
+    function(req, res) {
+        res.redirect('/post-login');
+    });
+
+router.get('/post-login',
+    require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
-  res.render('pages/timeline', {title: 'Timeline', pageName: 'timeline', verified: false});
-});
+        console.log(req.session);
+        db.findUserByID(req.session.passport.user, function(err, record){
+            res.send(record.name);
+        });
 
-router.post('/auth-login', passport.authenticate('login', {successRedirect: '/timeline', failureRedirect: '/login'}), function(req, res){
-  console.log(req.body);
-});
+    }
+);
 
-router.post('/auth-test', function(req, res){
-  console.log(req.body);
+router.get('/user', function(req, res){
+    var id = "58c0034b0000004a09000002";
+    db.findUserByID(id, function(record){
+        console.log(record);
+    });
 });
 
 ////////////////////////
