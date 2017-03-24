@@ -38,11 +38,8 @@ router.get('/post-login',
     }
 );
 
-router.get('/user', function(req, res){
-    var id = "58c0034b0000004a09000002";
-    db.findUserByID(id, function(record){
-        console.log(record);
-    });
+router.get('/custom-page', function(req, res){
+    res.render('pages/custom-page', {title: "Custom Page", pageName: "index", verified: false})
 });
 
 ////////////////////////

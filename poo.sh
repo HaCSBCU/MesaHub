@@ -1,0 +1,13 @@
+#!/bin/bash
+export TWILIO_ACCOUNT_SID="AC5fbdc92c84bfe1f94ba5bb685ba5569a"
+export TWILIO_AUTH_TOKEN="a8c83ac2a1f60319a18895bab708a6e4"
+export TWILIO_SERVICE_SID="MGf66273d2247f57184dbf7a974a3a895d"
+export MONGO_URI="mongodb://bullhacks:bullhacks@ds021172.mlab.com:21172/bullhacks-staging"
+export AWS_ACCESS_KEY_ID="AKIAJR4AQQDMFLUTSL6Q"
+export AWS_REGION="eu-west-2"
+export AWS_SECRET_ACCESS_KEY="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"
+export PGUSER="mesahubAdmin"
+export PGDATABASE="mesahub_testing"
+export PGPASSWORD="jo33LXsMeVQu"
+export PGPORT="5432"
+export PG_HOST="mesahubdb.cueefshnasyf.eu-west-2.rds.amazonaws.com"

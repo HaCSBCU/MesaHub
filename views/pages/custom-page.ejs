@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/headers/index %>
+
+    <link type="text/css" rel="stylesheet" href="./stylesheets/css/modules/timeline.css"/>
+
+  </head>
+  <body>
+
+    <% include ../partials/side-bar %>
+
+    <section class="page">
+      <nav>
+        <% include ../partials/nav %>
+      </nav>
+      <section id="main">
+
+        <div class="page__custom">
+          <div class="page__custom__header">
+            <img src="#">
+            <h2>Page Name</h2>
+          </div>
+          <div class="page__custom__body">
+            here is some page conytent
+          </div>
+        </div>
+
+      </section>
+
+    <script>
+
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        $('.main-content__button').html("Auto-refresh Active");
+        checkCookie()
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return false;
+      }
+
+      function checkCookie(){
+        if(getCookie("uniq") == false){
+          Push.create("Notifications Enabled", {
+            body: "Thank you for turning notifications on for MesaHub! I hope I can be of great help.",
+            icon: "/img/bullhacks-head.png",
+            timeout: 4000,
+            onClick: function () {
+              window.focus();
+              this.close();
+            }
+          });
+          setCookie("uniq", true, 999);
+        }
+      }
+      checkCookie();
+
+    </script>
+
+    <% include ../partials/footers/footer-vue %>
+
+  </body>
+</html>
