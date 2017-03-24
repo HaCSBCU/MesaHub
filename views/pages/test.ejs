@@ -10,9 +10,6 @@
 
 <section class="page">
 
-    <nav>
-        <% include ../partials/nav %>
-    </nav>
 
     <section id="main">
 
@@ -22,9 +19,9 @@
                     <img class="vertC__relative" src="/img/icons/login.svg"/>
                 </div>
                 <h3>Admin Login</h3>
-                <form id="login" method="post" action="/login/sign-in">
-                    <input id="user" type="text" name="username" placeholder="Username"/>
-                    <input id="pass" type="password" name="password" placeholder="Password"/>
+                <form id="login" method="post" action="get-user">
+                    <input id="user" type="text" name="user" placeholder="Username"/>
+                    <input id="pass" type="password" name="pass" placeholder="Password"/>
                     <input type="submit" placeholder="Login"/>
                 </form>
             </div>
