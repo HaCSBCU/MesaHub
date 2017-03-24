@@ -1,4 +1,4 @@
-const sql = require('../scripts/db/query')
+const sql = require('./query')
 const crypto = require('crypto')
 
 function checksum (str) {
@@ -13,9 +13,11 @@ function getId(subdomain) {
         sql.select(`select hackathonid from hackathon where subdomain='${subdomain}'`)
         .then((res)=>{
             if (res[0] !== []){
-                return resolve(res[0].hackathonid)
+                resolve(res[0].hackathonid)
+            }else{
+                return reject('No hackathon with matching subdomain')
             }
-            return reject('No hackathon with matching subdomain')
+            
         }).catch((e)=>{
             return reject(e)
         })
@@ -25,23 +27,36 @@ function getId(subdomain) {
 
 function addAnnouncement(subdomain, ownerid, title, body) {
 
-    let timestamp = new Date().now()
-    let annid = checksum(body)
+    let timestamp = new Date()
+    timestamp = timestamp.toISOString()
+    let annid = checksum(body + timestamp)
 
-    getId(subdomain)
-    .then((hackathonid)=>{
         let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
-        values (${hackathonid}, ${annid}, ${ownerid}, ${title}, ${body}, ${timestamp})`
+        values (1, '${annid}', ${ownerid}, '${title}', '${body}', '${timestamp}')`
         return new Promise((resolve, reject)=>{
             sql.insert(queryString)
             .then((res)=>{
+                console.log(res)
                 resolve()
+            }).catch((e)=>{
+                console.log(e)
+                reject(e)
             })
         })
-    })
-    .catch((e)=>{
-        return reject(e)
-    })
+
+
+        // let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
+        // values (1, '${annid}', ${ownerid}, '${title}', '${body}', '${timestamp}')`
+        // let queryString =`insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
+        // values (1, 'test5', 1, 'test5', 'from postgresql', '2011-05-16 15:36:38')`
+        // return new Promise((resolve, reject)=>{
+        //     sql.insert(queryString)
+        //     .then((res)=>{
+        //         resolve()
+        //     }).catch((e)=>{
+        //         return reject(e)
+        //     })
+        // })
 
 }
 
@@ -66,12 +81,9 @@ function getAnnouncements(hackathonid){
     })
 
 }
-<<<<<<< HEAD
-=======
 
 
 module.exports = {
     getAnnouncements: getAnnouncements,
     addAnnouncement: addAnnouncement
 }
->>>>>>> subdomains#52
