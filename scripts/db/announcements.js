@@ -30,10 +30,11 @@ function addAnnouncement(subdomain, ownerid, title, body) {
     let timestamp = new Date()
     timestamp = timestamp.toISOString()
     let annid = checksum(body + timestamp)
-
+    return new Promise((resolve, reject)=>{
+    getId(subdomain).then((hackathonid)=>{
         let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
-        values (1, '${annid}', ${ownerid}, '${title}', '${body}', '${timestamp}')`
-        return new Promise((resolve, reject)=>{
+        values (${hackathonid}, '${annid}', ${ownerid}, '${title}', '${body}', '${timestamp}')`
+        
             sql.insert(queryString)
             .then((res)=>{
                 console.log(res)
@@ -43,6 +44,11 @@ function addAnnouncement(subdomain, ownerid, title, body) {
                 reject(e)
             })
         })
+    }).catch((e)=>{
+        console.log(e)
+    })
+
+        
 
 
         // let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
