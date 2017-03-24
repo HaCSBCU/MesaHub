@@ -8,23 +8,42 @@ function checksum (str) {
         .digest('hex')
 }
 
-
-
-function addAnnouncement(hackathonid, ownerid, title, body) {
-
-    let timestamp = new Date().now()
-    let annid = checksum(body)
-
-    let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
-    values (${hackathonid}, ${annid}, ${ownerid}, ${title}, ${body}, ${timestamp})`
+function getId(subdomain) {
     return new Promise((resolve, reject)=>{
-        sql.insert(queryString)
+        sql.select(`select hackathonid from hackathon where subdomain='${subdomain}'`)
         .then((res)=>{
-            resolve()
+            if (res[0] !== []){
+                return resolve(res[0].hackathonid)
+            }
+            return reject('No hackathon with matching subdomain')
         }).catch((e)=>{
             return reject(e)
         })
     })
+}
+
+
+function addAnnouncement(subdomain, ownerid, title, body) {
+
+    let timestamp = new Date().now()
+    let annid = checksum(body)
+
+    getId(subdomain)
+    .then((hackathonid)=>{
+        let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
+        values (${hackathonid}, ${annid}, ${ownerid}, ${title}, ${body}, ${timestamp})`
+        return new Promise((resolve, reject)=>{
+            sql.insert(queryString)
+            .then((res)=>{
+                resolve()
+            })
+        })
+    })
+    .catch((e)=>{
+        return reject(e)
+    })
+
+
 }
 
 
@@ -47,4 +66,10 @@ function getAnnouncements(hackathonid){
         })
     })
 
+}
+
+
+module.exports = {
+    getAnnouncements: getAnnouncements,
+    addAnnouncement: addAnnouncement
 }
