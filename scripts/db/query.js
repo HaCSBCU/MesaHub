@@ -52,10 +52,51 @@ function select(queryString){
 
 }
 
+function insert(queryString) {
+
+    return new Promise((resolve,reject) => {
+
+        pool.connect(function(err, client, done) {
+            if(err) {
+                 return reject(new Error('error fetching client from pool'))
+            }
+                client.query(queryString , function(err) {
+
+                    if(err) {
+                        return reject(new Error('error running query'))
+                    }
+                    resolve('Added reccord')
+                });
+        });
+    })
+}
+
 
 module.exports = {
-    select: select
+    select: select,
+    insert: insert
 }
+
+
+
+// let queryString = `select * 
+//   from hackathon_config 
+//   inner join hackathon on hackathon.hackathonid=hackathon_config.hackathonid
+//   where hackathon.subdomain='${req.subdomains[0]}'`
+
+//   res.locals.hackathon = {name: 'Not a valid Hackathon'}
+//   sql.select(queryString)
+//   .then((query)=>{
+//     if(query.name !== []){
+//       console.log(query)
+//        res.locals.hackathon = query[0]
+//     }
+//     next()
+//   }).catch((e)=>{
+//     console.log(e)
+//     res.locals.hackathon.name = 'Name missconfigured'
+//     next()
+//   })
 
 
 // select('SELECT * FROM hackathon').then((res)=>{
