@@ -16,18 +16,13 @@ router.use(function (req, res, next) {
   res.locals.hackathon = {name: 'Not a valid Hackathon'}
   sql.select(queryString)
   .then((query)=>{
-    if(query.name !== []){
-      console.log(query)
        res.locals.hackathon = query[0]
-    }
-    next()
+       next()
   }).catch((e)=>{
     console.log(e)
     res.locals.hackathon.name = 'Name missconfigured'
     next()
   })
-
-
   
 })
 

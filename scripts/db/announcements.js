@@ -25,16 +25,14 @@ function getId(subdomain) {
 }
 
 
-function addAnnouncement(subdomain, ownerid, title, body) {
+function addAnnouncement(hackathonid, ownerid, title, body) {
 
     let timestamp = new Date()
     timestamp = timestamp.toISOString()
     let annid = checksum(body + timestamp)
     return new Promise((resolve, reject)=>{
-    getId(subdomain).then((hackathonid)=>{
         let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
         values (${hackathonid}, '${annid}', ${ownerid}, '${title}', '${body}', '${timestamp}')`
-        
             sql.insert(queryString)
             .then((res)=>{
                 console.log(res)
@@ -43,26 +41,7 @@ function addAnnouncement(subdomain, ownerid, title, body) {
                 console.log(e)
                 reject(e)
             })
-        })
-    }).catch((e)=>{
-        console.log(e)
     })
-
-        
-
-
-        // let queryString = `insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
-        // values (1, '${annid}', ${ownerid}, '${title}', '${body}', '${timestamp}')`
-        // let queryString =`insert into hackathon_announcements (hackathonid, annid, ownerid, title, body, timestamp)
-        // values (1, 'test5', 1, 'test5', 'from postgresql', '2011-05-16 15:36:38')`
-        // return new Promise((resolve, reject)=>{
-        //     sql.insert(queryString)
-        //     .then((res)=>{
-        //         resolve()
-        //     }).catch((e)=>{
-        //         return reject(e)
-        //     })
-        // })
 
 }
 
@@ -75,8 +54,8 @@ function addAnnouncement(subdomain, ownerid, title, body) {
 function getAnnouncements(hackathonid){
 
     let queryString = `select * from hackathon_announcements
-    where hakcathonid=${hackathonid}
-    order by timestamp DESC`
+    where hackathonid=${hackathonid}
+    order by timestamp ASC`
     return new Promise((resolve, reject)=>{
         sql.select(queryString)
         .then((res)=>{

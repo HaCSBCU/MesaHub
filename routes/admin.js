@@ -8,6 +8,7 @@ const csvImport = require('../scripts/csvconversion');
 const text = require('../scripts/texting');
 const aws = require('../scripts/s3');
 var passport = require("passport");
+const moment = require('moment')
 
 //Other modules
 const escape = require('escape-html');
@@ -154,19 +155,22 @@ router.get('/announcement', auth, function(req, res){
 });
 
 router.get('/get-announcements', function(req, res){
-    var announcement = require('../db/announcements.js');
-    announcement.getAnnouncements(function(data){
-        res.send(data);
-    })
+    var announcement = require('../scripts/db/announcements.js');
+    announcement.getAnnouncements(res.locals.hackathon.hackathonid).then((data)=>{
+        let formattedData = data.map((x)=>{
+            let time = moment(x.timestamp).format('dddd, h:mm a')
+            return {title: x.title, body: x.body, date: time}
+        })
+        res.send(formattedData)
+    }).catch()
 });
 
 router.post('/create-announcement', function(req, res){
     var announcements = require('../scripts/db/announcements.js');
     var title = req.body.title;
     var body = req.body.body;
-    let subdomain = req.subdomains[0]
 
-    announcements.addAnnouncement(subdomain, 1, title, body).then(()=>{
+    announcements.addAnnouncement(res.locals.hackathon.hackathonid, 1, title, body).then(()=>{
         res.send('Worshop added!')
     }).catch((e)=>{
         console.log(e)

@@ -29,18 +29,13 @@ function select(queryString){
 
     return new Promise((resolve,reject) => {
 
-            // pool.query(queryString, function(err, result) {
-            //     // handle an error from the query
-            //     if(err) return reject(new Error('error fetching client from pool'))
-            //     resolve(result.rows)
-            //     });
         pool.connect(function(err, client, done) {
             if(err) {
                  return reject(new Error('error fetching client from pool'))
             }
                 client.query(queryString , function(err, result) {
                     //call `done(err)` to release the client back to the pool (or destroy it if there is an error)
-                    
+                    done(err)
 
                     if(err) {
                         return reject(new Error('error running query'))
