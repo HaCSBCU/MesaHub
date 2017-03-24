@@ -95,9 +95,15 @@ router.get('/event', auth, function(req, res){
 });
 
 router.get('/get-events', function(req, res){
-    var events = require('../db/events.js');
-    events.getEvents(function(data){
-        res.send(data);
+    var events = require('../scripts/db/events.js');
+    events.getEvents(res.locals.hackathon.hackathonid).then((data)=>{
+        let formattedData = data.map((x)=>{
+            let time = moment(x.timestamp).format('dddd, h:mm a')
+            return {name: x.title, picture: x.icon, location: x.location, time: time}
+        })
+        res.send(formattedData)
+    }).catch((e)=>{
+        console.log(e)
     })
 });
 
@@ -110,36 +116,21 @@ router.post('/create-event', function(req, res){
   var storage = multer.memoryStorage()
   var upload = multer({ storage: storage}).single('upl');
 
-
-
-
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        var events = require('../db/events.js');
-        var name = escape(req.body.name);
-        var location = escape(req.body.location);
-        var time = escape(req.body.time);
-        var timeA;
-        var timeB = "";
-        if(time.split(":").length > 1){
-            timeA = time.split(":")[0];
-            timeB = time.split(":")[1];
-            console.log("Time A: " + parseInt(timeA));
-            console.log(timeB);
-        }
-        else{
-            timeA = time;
-            timeB = "";
-        }
+        var events = require('../scripts/db/events.js');
+        var name = escape(req.body.name)
+        var location = escape(req.body.location)
+        var time = req.body.time
+
         aws.upload(req.file.buffer).then((url) => {
             var filePath = url
-            console.log("Time A: " + timeA);
-            console.log("TimeB: " + timeB);
-            events.addEvent(name, location, parseInt(timeA), timeB, filePath, function(){
-                res.send("Workshop added!");
-            });
+
+            events.addEvent(1, res.locals.hackathon.hackathonid, name, location, time, filePath ).then(()=>{
+                res.send('Event Added')
+            }).catch()
           }).catch((err)=>{
             console.log(err)
           })

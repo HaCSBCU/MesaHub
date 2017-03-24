@@ -56,7 +56,7 @@ function insert(queryString) {
                  return reject(new Error('error fetching client from pool'))
             }
                 client.query(queryString , function(err) {
-
+                    done(err)
                     if(err) {
                         return reject(new Error('error running query'))
                     }
