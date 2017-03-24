@@ -235,6 +235,24 @@ body{
   width: 100%;
   overflow: auto;
   padding-bottom: 20px;
+  &__custom{
+    &__header{
+      padding: 30px 0px;
+      text-align: center;
+      img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+      h2{
+        padding-top: 15px
+      }
+    }
+    &__body{
+      width: 80%;
+      margin: auto;
+    }
+  }
 }
 
 #main{
