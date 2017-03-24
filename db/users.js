@@ -115,30 +115,23 @@ module.exports.verifyPassword = (username, password, cb) => {
 
 };
 
+module.exports.addUser = (name, password, picture, email, cb) => {
+    var organiser = new users({
+        email: email,
+        name: name,
+        picture: picture,
+        passhash: password
+    });
+    organiser.save(function(err){
+        cb(err, "Done!")
+    })
+};
+
 
 module.exports.compareID = (clientID, serverID) => {
-  if(clientID == serverID){
-      return true;
-  }
-  return false;
-};
-//
-//
-// module.exports.findUserById = (id, cb) => {
-//
-//     var ObjectId = require('mongoose').Types.ObjectId;
-//
-//     console.log("ID here: " + id);
-//     users.findOne({_id: new ObjectId(id)}, function(err, result){
-//         console.log("Result " + result._id);
-//         cb(result._id);
-//     });
-// };
-//
-// module.exports.test = (id, cb) => {
-//     users.findOne({name: "alex"}, function(err, result){
-//         console.log(result);
-//         cb(result);
-//     });
-//
-// };
+    if (clientID == serverID) {
+        return true;
+    }
+    return false;
+}
+

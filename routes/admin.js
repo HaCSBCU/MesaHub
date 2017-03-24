@@ -223,6 +223,8 @@ router.post('/create-user', auth, function(req, res){
 
     var upload = multer({ storage : storage}).single('upl');
 
+    var users = require('../db/users');
+
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
@@ -233,6 +235,10 @@ router.post('/create-user', auth, function(req, res){
         var password = escape(req.body.password);
 
         var filePath = '/img/users/' + fileName.toString();
+        users.addUser(name, password, filePath, email, function(err, message){
+            if(err) throw err;
+            console.log("Message");
+        });
         // users.add(email, name, password, function(err, success){
         //     if(err) throw err;
         //     if(success){
@@ -242,7 +248,7 @@ router.post('/create-user', auth, function(req, res){
         //         })
         //     }
         // });
-        //Add new user
+
 
 
     });
