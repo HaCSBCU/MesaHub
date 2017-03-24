@@ -22,7 +22,7 @@
                     <img class="vertC__relative" src="/img/icons/login.svg"/>
                 </div>
                 <h3>Admin Login</h3>
-                <form id="login" method="post" action="/login/sign-in">
+                <form id="login" method="post" action="/auth-login">
                     <input id="user" type="text" name="username" placeholder="Username"/>
                     <input id="pass" type="password" name="password" placeholder="Password"/>
                     <input type="submit" placeholder="Login"/>
@@ -39,13 +39,13 @@
             <!--var name = $(this).children('#user').val();-->
             <!--var pass = $(this).children('#pass').val();-->
             <!--var data = {-->
-                <!--name: name,-->
-                <!--pass: pass-->
+                <!--username: name,-->
+                <!--password: pass-->
             <!--};-->
             <!--console.log(data);-->
             <!--$.ajax({-->
                 <!--type: 'POST',-->
-                <!--url: '/login/sign-in',-->
+                <!--url: '/auth-login',-->
                 <!--data: data,-->
                 <!--success: function (returnData) {-->
                     <!--window.location = returnData.redirect;-->
