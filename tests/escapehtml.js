@@ -7,188 +7,132 @@ text = `
             </div>
             <div id="timetable-item" class="component__timetable">
             <div class="timeline timeline__component">
-          <table>
+          
+												<table class="table">
+													<tr>
+														<td><strong>Time</strong</td>
+														<td><strong>Activity</strong></td>
+														<td><strong>Location</strong></td>
+													</tr>
+													<tr>
+														<td>10:00</td>
+														<td>Registration</td>
+														<td>Main Reception </td>
+													</tr>
+													<tr>
+														<td>11:00</td>
+														<td>Opening Ceremony</td>
+														<td>B200 Lecture Theatre</td>
+													</tr>
+													<tr>
+														<td>11:30</td>
+														<td>Ice Breaker</td>
+														<td>B200 Lecture Theatre</td>
+													</tr>
+													<tr>
+														<td>12:00</td>
+														<td><strong>Hacking Begins</strong></td>
+														<td>Everywhere</td>
+													</tr>
+													<tr>
+														<td>13:00</td>
+														<td>Lunch</td>
+														<td>Canteen</td>
+													</tr>
+													<tr>
+														<td>14:00</td>
+														<td>Git & GitHub Workshop - GitHub</td>
+														<td>Workshop Room</td>
+													</tr>
+													<tr>
+														<td>15:00</td>
+														<td>Design Thinking Workshop - Accenture</td>
+														<td>Workshop Room</td>
+													</tr>
+													<tr>
+														<td>16:00</td>
+														<td>iOS Workshop - City Tech Society</td>
+														<td>Workshop Room</td>
+													</tr>
+													<tr>
+														<td>17:00</td>
+														<td>Web Development (Reactjs) Workshop - Findmypast</td>
+														<td>Workshop Room</td>
+													</tr>
+													<tr>
+														<td>18:00</td>
+														<td>Mini Event - Accenture</td>
+														<td>Workshop Room</td>
+													</tr>
+													<tr>
+														<td>19:00</td>
+														<td>Dinner</td>
+														<td>Canteen</td>
+													</tr>
+													<tr>
+														<td>20:30</td>
+														<td>Mini Game - !Light</td>
+														<td>B200 Lecture Theatre</td>
+													</tr>
+													<tr>
+														<td>22:30</td>
+														<td>Mini Game - Werewolf</td>
+														<td>B200 Lecture Theatre</td>
+													</tr>
+													<tr>
+														<td>00:00</td>
+														<td>Midnight Snack</td>
+														<td>OTLT Foyer</td>
+													</tr>
+												</table>
+											</div>
+											<div class="col-md-6 text-center">
+												<table class="table">
+													<tr>
+														<th class="text-center"> Sunday </th>
+													</tr>
+												</table>
+												<table class="table">
+													<tr>
+														<td><strong>Time</strong</td>
+														<td><strong>Activity</strong></td>
+														<td><strong>Location</strong></td>
+													</tr>
+													<tr>
+														<td>08:00</td>
+														<td>Breakfast</td>
+														<td>Canteen</td>
+													</tr>
+													<tr>
+														<td>12:00</td>
+														<td><b>Hacking Ends</b></td>
+														<td>Everywhere</td>
+													</tr>
+													<tr>
+														<td>12:15</td>
+														<td>Lunch</td>
+														<td>Canteen</td>
+													</tr>
+													<tr>
+														<td>13:00</td>
+														<td>Judging & Presentations Begin</td>
+														<td>Hacking Space</td>
+													</tr>
+													<tr>
+														<td>16:00</td>
+														<td>Awards and Closing Ceremony</td>
+														<td>B200 Lecture Theatre</td>
+													</tr>
+													<tr>
+														<td>17:00</td>
+														<td>End of event</td>
+														<td>Everywhere</td>
+													</tr>
+												</table>
 
-            <tr>
-              <td>Curzon Building</td>
-              <td>9:30am</td>
-              <td>11am</td>
-              <td>Arrival</td>
-              <td class="description">Register at the front desk and get settled into the hackathon</td>
-            </tr>
-
-            <tr>
-              <td>Main Hall</td>
-              <td>11am</td>
-              <td>12pm</td>
-              <td>Opening talk</td>
-              <td class="description">We shall brief you on the hackathon and give you any information that you may need!</td>
-            </tr>
-
-            <tr>
-              <td>Main Hall</td>
-              <td>12pm</td>
-              <td>Sunday 4pm</td>
-              <td>Start hacking</td>
-              <td class="description">Hacking can now begin! Make something awesome <3</td>
-            </tr>
-
-            <tr>
-              <td>Main Hall</td>
-              <td>12pm</td>
-              <td>12:30pm</td>
-              <td>Team Building</td>
-              <td class="description">Alex & Pandelis are hosting a team building session in-case anybody does not have a
-                team yet. Come along, don't be shy!
-              </td>
-            </tr>
-
-            <tr>
-              <td>Eagle & Ball</td>
-              <td>12:30pm</td>
-              <td>1:30pm</td>
-              <td>Lunch</td>
-              <td class="description">Lunch will be served in the Eagle & Ball. Don't worry, we shall announce lunch on
-                MesaHub and will lead groups down as and when places are available!
-              </td>
-            </tr>
-
-            <tr>
-              <td>Workshop Room</td>
-              <td>2pm</td>
-              <td>3pm</td>
-              <td>Algolia Workshop</td>
-              <td class="description">Pandelis will be doing a workshop on using Algolia, a live search API, to make your
-                website a more friendly and produtive experience. This is a powerful tool and one that you do not want
-                to miss out on!
-              </td>
-            </tr>
-
-            <tr>
-              <td>Workshop</td>
-              <td>3pm</td>
-              <td>4pm</td>
-              <td>Capgemini Workshop</td>
-              <td class="description">Capgemini will be hosting a workshop, be sure to come and check it out!</td>
-            </tr>
-
-            <tr>
-              <td>Workshop</td>
-              <td>4pm</td>
-              <td>5pm</td>
-              <td>Drawing art with p5.js - Kevin</td>
-              <td class="description">Kevin will be walking us through how to draw with the p5.js library. This is a
-              rapidly growing library and one which is incredibly powerful. Kevin is a MLH rep and studies at GoldSmiths
-              university, this is sure set to be an amazing workshop!</td>
-            </tr>
-
-            <tr>
-              <td>Eagle & Ball</td>
-              <td>6pm</td>
-              <td>8pm</td>
-              <td>Dinner</td>
-              <td class="description">Dinner will be served! Please wait to be called via MesaHub or in person please!</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>8pm</td>
-              <td>10pm</td>
-              <td>Games Competiton</td>
-              <td class="description">Ollie will be hosting a games competition in the main room. Head on over for some chill time
-                to relax and play some games with fellow hackers.
-              </td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>10pm</td>
-              <td>11pm</td>
-              <td></td>
-              <td class="description">Werewolf will be hosted Kevin, this is a legendary MLH game and will not let down at
-                BullHacks!
-              </td>
-            </tr>
-
-            <tr>
-              <td>Workshop Room</td>
-              <td>11pm</td>
-              <td>12am</td>
-              <td></td>
-              <td class="description">
-                Alex & Pandelis will be doing a short talk on how they built MesaHub, what challenges they faced and
-                how they intend for it to benefit the Hackathon community in the long run. You will also get to hear about
-                upcoming opportunities to join onto the open source project.
-              </td>
-            </tr>
-
-            <!-- CHANGE DAY -->
-            <tr class="timeline__page__day">
-              <td colspan="5">Sunday</td>
-            </tr>
-
-            <tr>
-              <td>Sleeping Room</td>
-              <td>12am</td>
-              <td>8am</td>
-              <td>Sleep Time!</td>
-              <td class="description">You've worked real hard, take some well deserved time to get some shut eye so that
-              you are even just a little bit more refreshed in the morning.</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>8am</td>
-              <td>10pm</td>
-              <td>Breakfast</td>
-              <td class="description">The best time of the morning... breakfast! We shall be serving this in the main room!</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>12pm</td>
-              <td>-</td>
-              <td>Hacking Ends!</td>
-              <td class="description">Stop your hacking! The hackathon has drawn to an end :( But prizes are on the way!</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>12:30pm</td>
-              <td>1:30pm</td>
-              <td>Lunch</td>
-              <td class="description">The last supper, come and feast on some amazing food at the Eangle & Ball. As before, please wait to be called!</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>2pm</td>
-              <td>3pm</td>
-              <td>Presentations</td>
-              <td class="description">Get your chance to present your idea. The floor is all yours, but keep in mind; you only have two minutes!</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>3pm</td>
-              <td>3:30pm</td>
-              <td>Games Intermission</td>
-              <td class="description">Whilst we are judging, come and chill out and play a few games. It'll be the perfect way to pass 20 minutes.</td>
-            </tr>
-
-            <tr>
-              <td>Main Room</td>
-              <td>2pm</td>
-              <td>3pm</td>
-              <td>Winners Presentation</td>
-              <td class="description">Find out who is the BullHacks champion!</td>
-            </tr>
-
-
-          </table>
         </div>
-</div>
-        </div>
+      </div>
+    </div>
 `
 
 console.log(escape(text))
