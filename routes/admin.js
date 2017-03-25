@@ -13,6 +13,7 @@ const moment = require('moment')
 //Other modules
 const escape = require('escape-html');
 var auth = require('connect-ensure-login').ensureLoggedIn();
+var events = require('../scripts/db/events.js');
 
 // CONFIG
 const config = require('../config/config.js');
@@ -75,17 +76,16 @@ router.post(config.routes.uploadCSV, auth, function(req, res){
 // EVENTS
 
 
-router.get('/event', auth, function(req, res){
-    res.render('pages/create-event', {title: 'Create Event', pageName: 'admin', verified: true});
+router.get(config.routes.createEvent, auth, function(req, res){
+    res.render(config.pages.createEvent, {title: 'Create Event', pageName: 'admin', verified: true});
 });
 
-router.get('/get-events', function(req, res){
-    var events = require('../scripts/db/events.js');
+router.get(config.routes.getEvents, function(req, res){
     events.getEvents(res.locals.hackathon.hackathonid).then((data)=>{
         let formattedData = data.map((x)=>{
-            let timeConverted = moment(x.time).format('dddd, h:mm a')
+            let timeConverted = moment(x.time).format('dddd, h:mm a');
             return {name: x.title, picture: x.icon, location: x.location, time: timeConverted}
-        })
+        });
         res.send(formattedData)
     }).catch((e)=>{
         console.log(e)
@@ -96,24 +96,24 @@ router.get('/get-events', function(req, res){
 
 
 
-router.post('/create-event', function(req, res){
+router.post(config.routes.createEvent, function(req, res){
 
-  var storage = multer.memoryStorage()
+  var storage = multer.memoryStorage();
   var upload = multer({ storage: storage}).single('upl');
 
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        var events = require('../scripts/db/events.js');
-        var name = escape(req.body.name)
-        var location = escape(req.body.location)
-        var time = req.body.time
+
+        var name = escape(req.body.name);
+        var location = escape(req.body.location);
+        var time = req.body.time;
 
         aws.upload(req.file.buffer).then((url) => {
-            var filePath = url
 
-            events.addEvent(1, res.locals.hackathon.hackathonid, name, location, time, filePath ).then(()=>{
+            events.addEvent(1, res.locals.hackathon.hackathonid, name, location, time, url ).then(()=>{
+                //TODO: Event created page
                 res.send('Event Added')
             }).catch()
           }).catch((err)=>{
@@ -126,22 +126,22 @@ router.post('/create-event', function(req, res){
 
 // ANNOUNCEMENTS
 
-router.get('/announcement', auth, function(req, res){
-    res.render('pages/create-announcement', {title: 'Create Announcement', pageName: 'admin', verified: true});
+router.get(config.routes.createAnnouncement, auth, function(req, res){
+    res.render(config.pages.createAnnouncement, {title: config.pageNames.createAnnouncement, pageName: 'admin', verified: true});
 });
 
-router.get('/get-announcements', function(req, res){
+router.get(config.routes.getAnnouncements, function(req, res){
     var announcement = require('../scripts/db/announcements.js');
     announcement.getAnnouncements(res.locals.hackathon.hackathonid).then((data)=>{
         let formattedData = data.map((x)=>{
-            let time = moment(x.timestamp).format('dddd, h:mm a')
+            let time = moment(x.timestamp).format('dddd, h:mm a');
             return {title: x.title, body: x.body, date: time}
-        })
-        res.send(formattedData)
+        });
+        res.send(formattedData);
     }).catch()
 });
 
-router.post('/create-announcement', function(req, res){
+router.post(config.routes.createAnnouncement, function(req, res){
     var announcements = require('../scripts/db/announcements.js');
     var title = req.body.title;
     var body = req.body.body;
@@ -155,12 +155,12 @@ router.post('/create-announcement', function(req, res){
 
 // TEXT SYSTEM
 
-router.get('/send-text', auth, function(req, res){
-    res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin', verified: true});
+router.get(config.routes.sendText, auth, function(req, res){
+    res.render(config.pages.sendText, {title: config.pageNames.sendText, pageName: 'admin', verified: true});
 });
 
 
-router.post('/send-text-request', function(req, res, next) {
+router.post(config.routes.sendText, function(req, res, next) {
     if(req.isAuthenticated()){
         attendeeDB.getAll().then((attendee)=>{
             let phones = attendee.map((x)=>{
@@ -186,11 +186,11 @@ router.post('/send-text-request', function(req, res, next) {
 // PAGES
 
 
-router.get('/page', auth, function(req, res){
-    res.render('pages/create-page', {title: 'Create Event', pageName: 'admin', verified: true});
+router.get(config.routes.customPage, auth, function(req, res){
+    res.render(config.pages.createPage, {title: config.pageNames.createPage, pageName: 'admin', verified: true});
 });
 
-router.post('/create-page', function(req, res){
+router.post(config.routes.createPage, function(req, res){
 const pages = require('../scripts/db/pages')
   var storage = multer.memoryStorage()
   var upload = multer({ storage: storage}).single('upl');

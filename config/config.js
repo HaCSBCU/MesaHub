@@ -7,7 +7,14 @@ module.exports = {
         admin: '/admin',
         timeline: '/timeline',
         signIn: '/sign-in',
-        uploadCSV: '/upload-csv'
+        uploadCSV: '/upload-csv',
+        createEvent: '/create-event',
+        getEvents: '/get-events',
+        createAnnouncement: '/create-announcement',
+        getAnnouncements: '/get-announcements',
+        sendText: '/send-text',
+        createPage: '/create-page',
+        customPage: '/custom-page'
     },
     pages: {
         index: 'pages/index',
@@ -20,7 +27,8 @@ module.exports = {
         createUser: 'pages/create-user',
         customPage: 'pages/custom-page',
         workshops: 'pages/workshops',
-        timeline: '/pages/timeline'
+        timeline: 'pages/timeline',
+        sendText: 'pages/send-text'
     },
     pageNames: {
         index: "Hub",
