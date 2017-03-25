@@ -30,7 +30,6 @@ router.use(function (req, res, next) {
 
 router.use(function (req, res, next) {
   const pages = require('../scripts/db/pages')
-  
   pages.getAll(res.locals.hackathon.hackathonid).then((data)=>{
     res.locals.pages = data
     next()

@@ -12,11 +12,14 @@ var uniqid = require('uniqid');
 
 
 router.get('/', function(req, res, next) {
-    if(req.isAuthenticated()){
+    if(!req.isAuthenticated()){
+        res.render('pages/login', {title: "login", pageName: "admin", verified: false});
+    }
+    else{
         res.redirect('/admin');
     }
-    console.log(req.session);
-    res.render('pages/login', {title: "login", pageName: "admin", verified: false});
+
+
 });
 
 router.post('/sign-in',
