@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/headers/login-head %>
+
+</head>
+<body>
+
+<% include ../partials/side-bar %>
+
+<section class="page">
+
+    <nav>
+        <% include ../partials/nav %>
+    </nav>
+
+    <section id="main">
+
+        <div class="floating-box floating-box__large floating-box__event vertC__relative">
+            <div class="floating-box__event__content">
+                <div class="floating-box__large__icon">
+                    <img src="/img/icons/add-event.svg"/>
+                    <h3>Create Page</h3>
+                </div>
+                <form id="send-text" method="post" action="/admin/create-page" enctype="multipart/form-data">
+                    <input id="name" name="title" class="send-text-name" type="text" placeholder="Event Name"/>
+                    <input id="name" name="arrangement" class="send-text-name" type="text" placeholder="arrangement"/>
+                    <textarea name="html" placeholder="Page content"></textarea>
+                    <input type="file" name="upl"/>
+                    <input class="button __blue" type="submit" placeholder="ADD"/>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+<!--<script>-->
+<!--$('#send-text').submit(function(e){-->
+<!--e.preventDefault();-->
+<!--var confirm = $(this).children('#confirm');-->
+<!--var checkBox = $(this).children("input[type='checkbox']");-->
+<!--var confirmText = $(this).children(".confirm-text")-->
+<!--var messageBox = $(this).children("textarea");-->
+<!--var message = messageBox.val();-->
+
+
+
+
+<!--var data = {-->
+<!--message: message-->
+<!--}-->
+<!--if(confirm.prop("checked") == true){-->
+<!--$.ajax({-->
+<!--type: 'POST',-->
+<!--url: '/admin/create-event',-->
+<!--data: data,-->
+<!--success: function(data){-->
+<!--console.log(data);-->
+<!--messageBox.val("");-->
+<!--checkBox.prop('checked', false);-->
+<!--confirmText.removeClass("red");-->
+<!--swal({-->
+<!--title: "Message Sent!",-->
+<!--text: "Your message has been sent out to all participants at this hackathon",-->
+<!--type: "success",-->
+<!--confirmButtonText: "Great!"-->
+<!--});-->
+<!--},-->
+<!--error: function(data){-->
+<!--swal({-->
+<!--title: "Message not sent",-->
+<!--text: data.responseText,-->
+<!--type: "error",-->
+<!--confirmButtonText: "Okay"-->
+<!--});-->
+<!--}-->
+<!--})-->
+<!--}-->
+<!--else{-->
+<!--confirmText.addClass("red");-->
+<!--}-->
+
+<!--});-->
+<!--</script>-->
+
+<% include ../partials/footers/admin-footer %>
+
+</body>
+</html>

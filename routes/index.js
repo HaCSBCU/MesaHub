@@ -4,6 +4,7 @@ var passport = require('passport');
 // var utilities = require('../libs/middleware/utilities.js');
 // var config = require('../config/config.js');
 const sql = require('../scripts/db/query')
+const unescape = require('unescape')
 
 
 //Send locals to all router instances
@@ -17,10 +18,24 @@ router.use(function (req, res, next) {
   sql.select(queryString)
   .then((query)=>{
        res.locals.hackathon = query[0]
+       res.locals.hackathon.timeline = unescape(res.locals.hackathon.timeline)
        next()
   }).catch((e)=>{
     console.log(e)
     res.locals.hackathon.name = 'Name missconfigured'
+    next()
+  })
+  
+})
+
+router.use(function (req, res, next) {
+  const pages = require('../scripts/db/pages')
+  
+  pages.getAll(res.locals.hackathon.hackathonid).then((data)=>{
+    res.locals.pages = data
+    next()
+  }).catch((e)=>{
+    console.log(e)
     next()
   })
   
@@ -61,13 +76,21 @@ router.get('/post-login',
     }
 );
 
-router.get('/custom-page', function(req, res){
-    res.render('pages/custom-page', {title: "Custom Page", pageName: "index", verified: false})
-});
+
 
 ////////////////////////
 // PASSPORT TESTS END //
 ///////////////////////
+
+router.get('/page/:id', function(req, res){
+  const pages = require('../scripts/db/pages')
+  pages.getPage(parseInt(req.params.id)).then((data)=>{
+    res.render('pages/custom-page', {title: "Custom Page", pageName: "index", pageContent: data, verified: false})
+  }).catch((e)=>{
+    console.log(e)
+  })
+    
+});
 
 router.get('/workshops', function(req, res){
   res.render('pages/workshops', {title: 'Timeline', pageName: 'workshops', verified: false});
