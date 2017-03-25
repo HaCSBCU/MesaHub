@@ -6,7 +6,8 @@ module.exports = {
         register: '/register',
         admin: '/admin',
         timeline: '/timeline',
-        signIn: '/sign-in'
+        signIn: '/sign-in',
+        uploadCSV: '/upload-csv'
     },
     pages: {
         index: 'pages/index',

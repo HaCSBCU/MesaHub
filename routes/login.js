@@ -28,13 +28,11 @@ router.get('/', function(req, res, next) {
 router.post(config.routes.signIn,
     passport.authenticate('login', { failureRedirect: config.pageNames.login }),
     function(req,res){
-        console.log("CALLED")
         res.redirect(config.routes.admin);
     });
 
 
 router.get(config.routes.logout, function(req, res){
-    console.log(req);
     delete req.session.passport.user;
     res.clearCookie("uID");
     res.clearCookie("connect.sid");

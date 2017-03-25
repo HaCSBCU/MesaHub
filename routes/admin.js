@@ -14,7 +14,8 @@ const moment = require('moment')
 const escape = require('escape-html');
 var auth = require('connect-ensure-login').ensureLoggedIn();
 
-//Other Config
+// CONFIG
+const config = require('../config/config.js');
 
 //Default route
 
@@ -22,67 +23,51 @@ router.get('/', auth, function(req, res){
     db.findUserByID(req.session.passport.user, function(err, user){
         if(err) throw err;
         console.log('user');
-        res.render('pages/admin-dashboard', {title: "Dashboard", pageName: "admin", verified: "true", name: user.name, picture: user.picture});
+        res.render(config.pages.admin, {title: config.pageNames.admin, pageName: "admin", verified: "true", name: user.name, picture: user.picture});
     })
 
 });
 
 // ATTENDEES
 
-router.post('/upload-csv', function(req, res){
-    console.log("Upload");
-    var id = req.cookies.uID;
-    console.log(id);
-    if(id){
-        auth.verifySession(id, function(user){
-          console.log("User:");
-          console.log(user.user.session);
-            if(user.user.session === id){
-                var storage = multer.memoryStorage()
-                var upload = multer({ storage: storage,
-                    onFileUploadComplete: function (file) {
-                        console.log(file.fieldname + ' uploaded to ' + file.path)
-                    }}).single('csv');
+router.post(config.routes.uploadCSV, auth, function(req, res){
 
-                upload(req, res, function (err) {
-                    if(err) {
-                        return res.end("Error uploading file.");
-                    }
-                    console.log(req.file);
-                    csvImport.processFile(req.file.buffer)
-                        .then( (data) => {
-                            console.log(data)
+    var storage = multer.memoryStorage();
+    var upload = multer({ storage: storage,
+        onFileUploadComplete: function (file) {
+            console.log(file.fieldname + ' uploaded to ' + file.path)
+        }}).single('csv');
+
+    upload(req, res, function (err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        console.log(req.file);
+        csvImport.processFile(req.file.buffer)
+            .then( (data) => {
+                console.log(data);
 
 
-                            var debugNum = 0
-                            data.forEach(item => {
-                                debugNum += 1
-                                attendeeDB.add(
-                                    item[1],
-                                    item[2],
-                                    item[4],
-                                    item[3],
-                                    item[6]
-                                ).then(()=>{
-                                    console.log(item[0] + ' added successfully ' + debugNum)
-                                }).catch((err)=>{
-                                    console.log(err)
-                                })
+                var debugNum = 0;
+                data.forEach(item => {
+                    debugNum += 1;
+                    attendeeDB.add(
+                        item[1],
+                        item[2],
+                        item[4],
+                        item[3],
+                        item[6]
+                    ).then(()=>{
+                        console.log(item[0] + ' added successfully ' + debugNum)
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
 
-                            })
-                        })
-                        .catch( (err)=>{console.log(err)})
-                    res.end("File is uploaded");
                 })
-            }
-            else{
-                res.redirect('/login')
-            }
-        });
-    }
-    else{
-        res.redirect('/')
-    }
+            })
+            .catch( (err)=>{console.log(err)});
+        res.end("File is uploaded");
+    })
 
 });
 
