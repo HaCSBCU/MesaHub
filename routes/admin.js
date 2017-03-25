@@ -224,7 +224,10 @@ const pages = require('../scripts/db/pages')
 
             pages.add(res.locals.hackathon.hackathonid, title, filePath, html, arrangement).then(()=>{
                 res.send('Event Added')
-            }).catch()
+            }).catch((err)=>{
+                console.log(err)
+                res.send('an error occured')
+            })
           }).catch((err)=>{
             console.log(err)
           })

@@ -1,10 +1,6 @@
 const escape = require('escape-html')
 
 text = `
-<div class="component float__right">
-            <div class="component__header">
-                <h3>Timeline</h3>
-            </div>
             <div id="timetable-item" class="component__timetable">
             <div class="timeline timeline__component">
           
@@ -85,8 +81,7 @@ text = `
 														<td>OTLT Foyer</td>
 													</tr>
 												</table>
-											</div>
-											<div class="col-md-6 text-center">
+											
 												<table class="table">
 													<tr>
 														<th class="text-center"> Sunday </th>
@@ -129,8 +124,7 @@ text = `
 														<td>Everywhere</td>
 													</tr>
 												</table>
-
-        </div>
+		</div>
       </div>
     </div>
 `
