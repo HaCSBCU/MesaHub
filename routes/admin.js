@@ -98,8 +98,8 @@ router.get('/get-events', function(req, res){
     var events = require('../scripts/db/events.js');
     events.getEvents(res.locals.hackathon.hackathonid).then((data)=>{
         let formattedData = data.map((x)=>{
-            let time = moment(x.timestamp).format('dddd, h:mm a')
-            return {name: x.title, picture: x.icon, location: x.location, time: time}
+            let timeConverted = moment(x.time).format('dddd, h:mm a')
+            return {name: x.title, picture: x.icon, location: x.location, time: timeConverted}
         })
         res.send(formattedData)
     }).catch((e)=>{
