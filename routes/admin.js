@@ -197,6 +197,43 @@ router.post('/send-text-request', function(req, res, next) {
     }
 });
 
+
+// PAGES
+
+
+router.get('/page', auth, function(req, res){
+    res.render('pages/create-page', {title: 'Create Event', pageName: 'admin', verified: true});
+});
+
+router.post('/create-page', function(req, res){
+const pages = require('../scripts/db/pages')
+  var storage = multer.memoryStorage()
+  var upload = multer({ storage: storage}).single('upl');
+
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        var pages = require('../scripts/db/pages.js');
+        var title = escape(req.body.title)
+        var html = escape(req.body.html)
+        var arrangement = parseInt(req.body.arrangement)
+
+        aws.upload(req.file.buffer).then((url) => {
+            var filePath = url
+
+            pages.add(res.locals.hackathon.hackathonid, title, filePath, html, arrangement).then(()=>{
+                res.send('Event Added')
+            }).catch()
+          }).catch((err)=>{
+            console.log(err)
+          })
+
+
+    });
+});
+
+
 // CREATE USER
 
 router.get('/create-user', auth, function(req, res){

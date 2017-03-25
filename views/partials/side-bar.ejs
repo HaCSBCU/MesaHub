@@ -1,4 +1,16 @@
 <div class="side-bar">
+
+<% pages.forEach(function(item) { %>
+
+ <a href="/page/<%= item.pageid %>">
+        <div class="side-bar__item">
+            <img src="<%= item.icon %>"/>
+            <p><%= item.title %> </p>
+        </div>
+    </a>
+
+            <% }); %>
+
     <a href="/" <% if(pageName === 'index') { %> class="side-bar__active" <% } %>>
         <div class="side-bar__item">
             <img src="/img/icons/home.svg"/>
