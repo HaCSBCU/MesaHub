@@ -33,15 +33,11 @@ passport.use('login', new LocalStrategy({
     }));
 
 passport.serializeUser(function(user, done) {
-    console.log("SERIALIZING");
-    console.log(user);
     done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
-    console.log("DESERIALIZING");
     userDb.findUserByID(id, function(err, user) {
-        console.log(user);
         done(null, user);
     });
 });
