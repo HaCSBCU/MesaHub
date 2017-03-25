@@ -1,5 +1,14 @@
 <div class="side-bar">
 
+
+
+    <a href="/" <% if(pageName === 'index') { %> class="side-bar__active" <% } %>>
+        <div class="side-bar__item">
+            <img src="/img/icons/home.svg"/>
+            <p>Home</p>
+        </div>
+    </a>
+
 <% pages.forEach(function(item) { %>
 
  <a href="/page/<%= item.pageid %>">
@@ -11,30 +20,7 @@
 
             <% }); %>
 
-    <a href="/" <% if(pageName === 'index') { %> class="side-bar__active" <% } %>>
-        <div class="side-bar__item">
-            <img src="/img/icons/home.svg"/>
-            <p>Home</p>
-        </div>
-    </a>
-    <a href="/timeline" <% if(pageName === 'timeline') { %> class="side-bar__active" <% } %>>
-        <div class="side-bar__item">
-            <img src="/img/icons/timeline.svg"/>
-            <p>Timeline</p>
-        </div>
-    </a>
-    <a href="/feedback" <% if(pageName === 'feedback') { %> class="side-bar__active" <% } %>>
-        <div class="side-bar__item">
-            <img src="/img/icons/feedback.svg"/>
-            <p>Feedback</p>
-        </div>
-    </a>
-    <a href="/bullhacks" <% if(pageName === 'bullhacks') { %> class="side-bar__active" <% } %>>
-        <div class="side-bar__item">
-            <img src="/img/bullhacks-head.png"/>
-            <p>BullHacks 2.0</p>
-        </div>
-    </a>
+
     <a href="/login" <% if(pageName === 'admin') { %> class="side-bar__active" <% } %>>
         <div class="side-bar__item">
             <img class="side-bar__item__lock" src="/img/icons/login.svg"/>
