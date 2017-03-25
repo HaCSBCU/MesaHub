@@ -12,6 +12,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = require('./db/users.js');
 var auth = require('./auth/authentication.js');
 
+
 //Other modules
 var escape = require('escape-html');
 var multer = require('multer');
@@ -92,6 +93,7 @@ passport.deserializeUser(function(id, done) {
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 // API ROUTES

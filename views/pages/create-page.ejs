@@ -2,8 +2,7 @@
 <html>
 <head>
     <% include ../partials/headers/login-head %>
-<script type="text/javascript" src="https://cdn.rawgit.com/mugifly/jquery-simple-datetimepicker/master/jquery.simple-dtpicker.js"></script>
-	<link type="text/css" href="https://cdn.rawgit.com/mugifly/jquery-simple-datetimepicker/master/jquery.simple-dtpicker.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -21,22 +20,18 @@
             <div class="floating-box__event__content">
                 <div class="floating-box__large__icon">
                     <img src="/img/icons/add-event.svg"/>
-                    <h3>Create Event</h3>
+                    <h3>Create Page</h3>
                 </div>
-                <form id="send-text" method="post" action="/admin/create-event" enctype="multipart/form-data">
-                    <input id="name" name="name" class="send-text-name" type="text" placeholder="Event Name"/>
-                    <input id="time" name="time" class="input-half send-text-title" type="text" placeholder="Event Time"/>
-                    <input id="location" name="location" class="input-half send-text-location" type="text" placeholder="Where"/>
+                <form id="send-text" method="post" action="/admin/create-page" enctype="multipart/form-data">
+                    <input id="name" name="title" class="send-text-name" type="text" placeholder="Event Name"/>
+                    <input id="name" name="arrangement" class="send-text-name" type="text" placeholder="arrangement"/>
+                    <textarea name="html" placeholder="Page content"></textarea>
                     <input type="file" name="upl"/>
                     <input class="button __blue" type="submit" placeholder="ADD"/>
                 </form>
             </div>
         </div>
-<script type="text/javascript">
-		$('#time').appendDtpicker({
-            "autodateOnStart": true
-        });
-	</script>
+
     </section>
 </section>
 

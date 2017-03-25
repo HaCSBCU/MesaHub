@@ -8,6 +8,7 @@ const csvImport = require('../scripts/csvconversion');
 const text = require('../scripts/texting');
 const aws = require('../scripts/s3');
 var passport = require("passport");
+const moment = require('moment')
 
 //Other modules
 const escape = require('escape-html');
@@ -94,9 +95,15 @@ router.get('/event', auth, function(req, res){
 });
 
 router.get('/get-events', function(req, res){
-    var events = require('../db/events.js');
-    events.getEvents(function(data){
-        res.send(data);
+    var events = require('../scripts/db/events.js');
+    events.getEvents(res.locals.hackathon.hackathonid).then((data)=>{
+        let formattedData = data.map((x)=>{
+            let time = moment(x.timestamp).format('dddd, h:mm a')
+            return {name: x.title, picture: x.icon, location: x.location, time: time}
+        })
+        res.send(formattedData)
+    }).catch((e)=>{
+        console.log(e)
     })
 });
 
@@ -109,36 +116,21 @@ router.post('/create-event', function(req, res){
   var storage = multer.memoryStorage()
   var upload = multer({ storage: storage}).single('upl');
 
-
-
-
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        var events = require('../db/events.js');
-        var name = escape(req.body.name);
-        var location = escape(req.body.location);
-        var time = escape(req.body.time);
-        var timeA;
-        var timeB = "";
-        if(time.split(":").length > 1){
-            timeA = time.split(":")[0];
-            timeB = time.split(":")[1];
-            console.log("Time A: " + parseInt(timeA));
-            console.log(timeB);
-        }
-        else{
-            timeA = time;
-            timeB = "";
-        }
+        var events = require('../scripts/db/events.js');
+        var name = escape(req.body.name)
+        var location = escape(req.body.location)
+        var time = req.body.time
+
         aws.upload(req.file.buffer).then((url) => {
             var filePath = url
-            console.log("Time A: " + timeA);
-            console.log("TimeB: " + timeB);
-            events.addEvent(name, location, parseInt(timeA), timeB, filePath, function(){
-                res.send("Workshop added!");
-            });
+
+            events.addEvent(1, res.locals.hackathon.hackathonid, name, location, time, filePath ).then(()=>{
+                res.send('Event Added')
+            }).catch()
           }).catch((err)=>{
             console.log(err)
           })
@@ -154,22 +146,26 @@ router.get('/announcement', auth, function(req, res){
 });
 
 router.get('/get-announcements', function(req, res){
-    var announcement = require('../db/announcements.js');
-    announcement.getAnnouncements(function(data){
-        res.send(data);
-    })
+    var announcement = require('../scripts/db/announcements.js');
+    announcement.getAnnouncements(res.locals.hackathon.hackathonid).then((data)=>{
+        let formattedData = data.map((x)=>{
+            let time = moment(x.timestamp).format('dddd, h:mm a')
+            return {title: x.title, body: x.body, date: time}
+        })
+        res.send(formattedData)
+    }).catch()
 });
 
-router.post('/create-announcement', auth, function(req, res){
-    var announcements = require('../db/announcements.js');
+router.post('/create-announcement', function(req, res){
+    var announcements = require('../scripts/db/announcements.js');
     var title = req.body.title;
     var body = req.body.body;
-    var date = new Date();
-    date.toString().split(" ").splice(1,4);
-    announcements.addAnnouncement(title, date, body, function(){
-        console.log('Callback received');
-        res.send("Workshop added!");
-    });
+
+    announcements.addAnnouncement(res.locals.hackathon.hackathonid, 1, title, body).then(()=>{
+        res.send('Worshop added!')
+    }).catch((e)=>{
+        console.log(e)
+    })
 });
 
 // TEXT SYSTEM
@@ -200,6 +196,43 @@ router.post('/send-text-request', function(req, res, next) {
        res.status(500).send("Not authenticated");
     }
 });
+
+
+// PAGES
+
+
+router.get('/page', auth, function(req, res){
+    res.render('pages/create-page', {title: 'Create Event', pageName: 'admin', verified: true});
+});
+
+router.post('/create-page', function(req, res){
+const pages = require('../scripts/db/pages')
+  var storage = multer.memoryStorage()
+  var upload = multer({ storage: storage}).single('upl');
+
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        var pages = require('../scripts/db/pages.js');
+        var title = escape(req.body.title)
+        var html = escape(req.body.html)
+        var arrangement = parseInt(req.body.arrangement)
+
+        aws.upload(req.file.buffer).then((url) => {
+            var filePath = url
+
+            pages.add(res.locals.hackathon.hackathonid, title, filePath, html, arrangement).then(()=>{
+                res.send('Event Added')
+            }).catch()
+          }).catch((err)=>{
+            console.log(err)
+          })
+
+
+    });
+});
+
 
 // CREATE USER
 
