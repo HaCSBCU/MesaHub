@@ -2,9 +2,11 @@ module.exports = {
     routes: {
         index: '/',
         login: '/login',
+        logout: '/logout',
         register: '/register',
         admin: '/admin',
-        timeline: '/timeline'
+        timeline: '/timeline',
+        signIn: '/sign-in'
     },
     pages: {
         index: 'pages/index',

@@ -10,28 +10,34 @@ var escape = require('escape-html');
 //Require ID.
 var uniqid = require('uniqid');
 
+// CONFIG
+const config = require('../config/config.js');
+
 
 router.get('/', function(req, res, next) {
     if(!req.isAuthenticated()){
-        res.render('pages/login', {title: "login", pageName: "admin", verified: false});
+        res.render(config.pages.login, {title: config.pageNames.login, pageName: "admin", verified: false});
     }
     else{
-        res.redirect('/admin');
+        res.redirect(config.routes.admin);
     }
 
 
 });
 
-router.post('/sign-in',
-    passport.authenticate('login', { failureRedirect: '/timeline' }),
+router.post(config.routes.signIn,
+    passport.authenticate('login', { failureRedirect: config.pageNames.login }),
     function(req,res){
-        res.redirect('/admin');
+        console.log("CALLED")
+        res.redirect(config.routes.admin);
     });
 
 
-router.get('/logout', function(req, res){
+router.get(config.routes.logout, function(req, res){
+    console.log(req);
     delete req.session.passport.user;
     res.clearCookie("uID");
+    res.clearCookie("connect.sid");
     res.redirect('/')
 });
 
