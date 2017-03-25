@@ -86,7 +86,7 @@ Vue.component('workshop-item', {
     template: `
         <div class="component__workshops__item">
             <img id="workshop-item-image" :src="picture"/>
-            <div class="component__workshops__item__info">
+            <div class="component__workshops__item__info" style="width:300px;">
                 <h4>{{name}}</h4>
                 <p>{{location}} | {{time}}</p>
             </div>
