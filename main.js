@@ -6,12 +6,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+// AUTHENTICATION
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
-var db = require('./db/users.js');
 var auth = require('./auth/authentication.js');
 
+// DATABASE
+var db = require('./db/users.js');
+
+// CONFIG
+const config = require('./config/config.js');
 
 //Other modules
 var escape = require('escape-html');
@@ -80,7 +85,6 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-    console.log("deserialize");
     db.findUserByID(id, function(err, user) {
         if(err){
             console.log(err)
@@ -98,32 +102,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API ROUTES
 //Homepage
-app.use('/', require('./routes/index.js'));
+app.use(config.routes.index, require('./routes/index.js'));
 
 //Login
-app.use('/login', require('./routes/login.js'));
+app.use(config.routes.login, require('./routes/login.js'));
 
 //Create user
-app.use('/register', require('./routes/register.js'));
+app.use(config.routes.register, require('./routes/register.js'));
 
 //Admin-backend
-app.use('/admin', require('./routes/admin.js'));
-
-//Routes test
-
-app.get('/test', function(req, res){
-    console.log(req.session);
-    res.render('pages/test', {title: 'Test', pageName: 'test'});
-});
-
-app.post('/get-user', function(req, res){
-   var user = req.body.user;
-    db.findUser(user, function(record){
-        console.log(record);
-        res.send("Found")
-    })
-});
-
+app.use(config.routes.admin, require('./routes/admin.js'));
 
 
 module.exports = app;

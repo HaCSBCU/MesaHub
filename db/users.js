@@ -116,14 +116,22 @@ module.exports.verifyPassword = (username, password, cb) => {
 };
 
 module.exports.addUser = (name, password, picture, email, cb) => {
-    var organiser = new users({
-        email: email,
-        name: name,
-        picture: picture,
-        passhash: password
-    });
-    organiser.save(function(err){
-        cb(err, "Done!")
+
+    return new Promise((resolve, reject)=>{
+        var organiser = new users({
+            email: email,
+            name: name,
+            picture: picture,
+            passhash: password
+        });
+        organiser.save().then((res) => {
+            console.log(res);
+            resolve(res)
+        }).catch((e) => {
+            console.log(e);
+            reject(e);
+        });
+
     })
 };
 

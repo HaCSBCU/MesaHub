@@ -22,11 +22,12 @@
                     <img src="/img/icons/add-event.svg"/>
                     <h3>Create User</h3>
                 </div>
-                <form id="send-text" method="post" action="/admin/create-user" enctype="multipart/form-data">
-                    <input name="name" class="send-text-name" type="text" placeholder="Event Username"/>
-                    <input name="email" class="send-text-name" type="text" placeholder="Event Email"/>
-                    <input name="password" class="input-half send-text-title" type="password" placeholder="Event Password"/>
-                    <input type="file" name="upl"/>
+                <form id="create-user" enctype="multipart/form-data">
+                    <input name="name" id="name" class="send-text-name" type="text" placeholder="Event Username" required/>
+                    <input name="email" id="email" class="send-text-name" type="text" placeholder="Event Email" required/>
+                    <input name="password" id="password" class="input-half send-text-title" type="password" placeholder="Event Password" required/>
+                    <input name="confirm-pass" id="confirm-password" class="input-half send-text-title" type="password" placeholder="Event Password" required/>
+                    <input type="file" id="upl" name="upl"/>
                     <input class="button __blue" type="submit" placeholder="ADD"/>
                 </form>
             </div>
@@ -35,54 +36,48 @@
     </section>
 </section>
 
-<!--<script>-->
-    <!--$('#send-text').submit(function(e){-->
-        <!--e.preventDefault();-->
-        <!--var confirm = $(this).children('#confirm');-->
-        <!--var checkBox = $(this).children("input[type='checkbox']");-->
-        <!--var confirmText = $(this).children(".confirm-text")-->
-        <!--var messageBox = $(this).children("textarea");-->
-        <!--var message = messageBox.val();-->
+<script>
+    $('#create-user').submit(function(e){
+        e.preventDefault();
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var confirmPass = document.getElementById("confirm-password").value;
+        var upl = document.getElementById("upl").files;
 
+        var formData = new FormData(document.getElementById("create-user"));
 
+        if(password === confirmPass){
+            console.log("inside")
+            $.ajax({
+                type: 'POST',
+                url: '/admin/create-user',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data){
+                    console.log(data);
+                    swal({
+                        title: "User " + data.name + ", has been created!",
+                        text: data.name + " will now be able to login using their username and password",
+                        type: "success",
+                        confirmButtonText: "Great!"
+                    });
+                },
+                error: function(err){
+                    swal({
+                        title: "User not created",
+                        text: "An error occurred whilst creating this user: \n" + err,
+                        type: "error",
+                        confirmButtonText: "Okay"
+                    });
+                }
+            })
+        }
 
-
-        <!--var data = {-->
-            <!--message: message-->
-        <!--}-->
-        <!--if(confirm.prop("checked") == true){-->
-            <!--$.ajax({-->
-                <!--type: 'POST',-->
-                <!--url: '/admin/create-event',-->
-                <!--data: data,-->
-                <!--success: function(data){-->
-                    <!--console.log(data);-->
-                    <!--messageBox.val("");-->
-                    <!--checkBox.prop('checked', false);-->
-                    <!--confirmText.removeClass("red");-->
-                    <!--swal({-->
-                        <!--title: "Message Sent!",-->
-                        <!--text: "Your message has been sent out to all participants at this hackathon",-->
-                        <!--type: "success",-->
-                        <!--confirmButtonText: "Great!"-->
-                    <!--});-->
-                <!--},-->
-                <!--error: function(data){-->
-                    <!--swal({-->
-                        <!--title: "Message not sent",-->
-                        <!--text: data.responseText,-->
-                        <!--type: "error",-->
-                        <!--confirmButtonText: "Okay"-->
-                    <!--});-->
-                <!--}-->
-            <!--})-->
-        <!--}-->
-        <!--else{-->
-            <!--confirmText.addClass("red");-->
-        <!--}-->
-
-    <!--});-->
-<!--</script>-->
+    });
+</script>
 
 <% include ../partials/footers/admin-footer %>
 

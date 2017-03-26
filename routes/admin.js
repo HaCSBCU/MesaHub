@@ -13,8 +13,10 @@ const moment = require('moment')
 //Other modules
 const escape = require('escape-html');
 var auth = require('connect-ensure-login').ensureLoggedIn();
+var events = require('../scripts/db/events.js');
 
-//Other Config
+// CONFIG
+const config = require('../config/config.js');
 
 //Default route
 
@@ -22,67 +24,51 @@ router.get('/', auth, function(req, res){
     db.findUserByID(req.session.passport.user, function(err, user){
         if(err) throw err;
         console.log('user');
-        res.render('pages/admin-dashboard', {title: "Dashboard", pageName: "admin", verified: "true", name: user.name, picture: user.picture});
+        res.render(config.pages.admin, {title: config.pageNames.admin, pageName: "admin", verified: "true", name: user.name, picture: user.picture});
     })
 
 });
 
 // ATTENDEES
 
-router.post('/upload-csv', function(req, res){
-    console.log("Upload");
-    var id = req.cookies.uID;
-    console.log(id);
-    if(id){
-        auth.verifySession(id, function(user){
-          console.log("User:");
-          console.log(user.user.session);
-            if(user.user.session === id){
-                var storage = multer.memoryStorage()
-                var upload = multer({ storage: storage,
-                    onFileUploadComplete: function (file) {
-                        console.log(file.fieldname + ' uploaded to ' + file.path)
-                    }}).single('csv');
+router.post(config.routes.uploadCSV, auth, function(req, res){
 
-                upload(req, res, function (err) {
-                    if(err) {
-                        return res.end("Error uploading file.");
-                    }
-                    console.log(req.file);
-                    csvImport.processFile(req.file.buffer)
-                        .then( (data) => {
-                            console.log(data)
+    var storage = multer.memoryStorage();
+    var upload = multer({ storage: storage,
+        onFileUploadComplete: function (file) {
+            console.log(file.fieldname + ' uploaded to ' + file.path)
+        }}).single('csv');
+
+    upload(req, res, function (err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        console.log(req.file);
+        csvImport.processFile(req.file.buffer)
+            .then( (data) => {
+                console.log(data);
 
 
-                            var debugNum = 0
-                            data.forEach(item => {
-                                debugNum += 1
-                                attendeeDB.add(
-                                    item[1],
-                                    item[2],
-                                    item[4],
-                                    item[3],
-                                    item[6]
-                                ).then(()=>{
-                                    console.log(item[0] + ' added successfully ' + debugNum)
-                                }).catch((err)=>{
-                                    console.log(err)
-                                })
+                var debugNum = 0;
+                data.forEach(item => {
+                    debugNum += 1;
+                    attendeeDB.add(
+                        item[1],
+                        item[2],
+                        item[4],
+                        item[3],
+                        item[6]
+                    ).then(()=>{
+                        console.log(item[0] + ' added successfully ' + debugNum)
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
 
-                            })
-                        })
-                        .catch( (err)=>{console.log(err)})
-                    res.end("File is uploaded");
                 })
-            }
-            else{
-                res.redirect('/login')
-            }
-        });
-    }
-    else{
-        res.redirect('/')
-    }
+            })
+            .catch( (err)=>{console.log(err)});
+        res.end("File is uploaded");
+    })
 
 });
 
@@ -90,17 +76,16 @@ router.post('/upload-csv', function(req, res){
 // EVENTS
 
 
-router.get('/event', auth, function(req, res){
-    res.render('pages/create-event', {title: 'Create Event', pageName: 'admin', verified: true});
+router.get(config.routes.createEvent, auth, function(req, res){
+    res.render(config.pages.createEvent, {title: 'Create Event', pageName: 'admin', verified: true});
 });
 
-router.get('/get-events', function(req, res){
-    var events = require('../scripts/db/events.js');
+router.get(config.routes.getEvents, function(req, res){
     events.getEvents(res.locals.hackathon.hackathonid).then((data)=>{
         let formattedData = data.map((x)=>{
-            let timeConverted = moment(x.time).format('dddd, h:mm a')
+            let timeConverted = moment(x.time).format('dddd, h:mm a');
             return {name: x.title, picture: x.icon, location: x.location, time: timeConverted}
-        })
+        });
         res.send(formattedData)
     }).catch((e)=>{
         console.log(e)
@@ -111,24 +96,24 @@ router.get('/get-events', function(req, res){
 
 
 
-router.post('/create-event', function(req, res){
+router.post(config.routes.createEvent, function(req, res){
 
-  var storage = multer.memoryStorage()
+  var storage = multer.memoryStorage();
   var upload = multer({ storage: storage}).single('upl');
 
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        var events = require('../scripts/db/events.js');
-        var name = escape(req.body.name)
-        var location = escape(req.body.location)
-        var time = req.body.time
+
+        var name = escape(req.body.name);
+        var location = escape(req.body.location);
+        var time = req.body.time;
 
         aws.upload(req.file.buffer).then((url) => {
-            var filePath = url
 
-            events.addEvent(1, res.locals.hackathon.hackathonid, name, location, time, filePath ).then(()=>{
+            events.addEvent(1, res.locals.hackathon.hackathonid, name, location, time, url ).then(()=>{
+                //TODO: Event created page
                 res.send('Event Added')
             }).catch()
           }).catch((err)=>{
@@ -141,22 +126,22 @@ router.post('/create-event', function(req, res){
 
 // ANNOUNCEMENTS
 
-router.get('/announcement', auth, function(req, res){
-    res.render('pages/create-announcement', {title: 'Create Announcement', pageName: 'admin', verified: true});
+router.get(config.routes.createAnnouncement, auth, function(req, res){
+    res.render(config.pages.createAnnouncement, {title: config.pageNames.createAnnouncement, pageName: 'admin', verified: true});
 });
 
-router.get('/get-announcements', function(req, res){
+router.get(config.routes.getAnnouncements, function(req, res){
     var announcement = require('../scripts/db/announcements.js');
     announcement.getAnnouncements(res.locals.hackathon.hackathonid).then((data)=>{
         let formattedData = data.map((x)=>{
-            let time = moment(x.timestamp).format('dddd, h:mm a')
+            let time = moment(x.timestamp).format('dddd, h:mm a');
             return {title: x.title, body: x.body, date: time}
-        })
-        res.send(formattedData)
+        });
+        res.send(formattedData);
     }).catch()
 });
 
-router.post('/create-announcement', function(req, res){
+router.post(config.routes.createAnnouncement, function(req, res){
     var announcements = require('../scripts/db/announcements.js');
     var title = req.body.title;
     var body = req.body.body;
@@ -170,12 +155,12 @@ router.post('/create-announcement', function(req, res){
 
 // TEXT SYSTEM
 
-router.get('/send-text', auth, function(req, res){
-    res.render('pages/send-text', {title: 'Admin Dashboard', pageName: 'admin', verified: true});
+router.get(config.routes.sendText, auth, function(req, res){
+    res.render(config.pages.sendText, {title: config.pageNames.sendText, pageName: 'admin', verified: true});
 });
 
 
-router.post('/send-text-request', function(req, res, next) {
+router.post(config.routes.sendText, function(req, res, next) {
     if(req.isAuthenticated()){
         attendeeDB.getAll().then((attendee)=>{
             let phones = attendee.map((x)=>{
@@ -201,13 +186,13 @@ router.post('/send-text-request', function(req, res, next) {
 // PAGES
 
 
-router.get('/page', auth, function(req, res){
-    res.render('pages/create-page', {title: 'Create Event', pageName: 'admin', verified: true});
+router.get(config.routes.customPage, auth, function(req, res){
+    res.render(config.pages.createPage, {title: config.pageNames.createPage, pageName: 'admin', verified: true});
 });
 
-router.post('/create-page', function(req, res){
-const pages = require('../scripts/db/pages')
-  var storage = multer.memoryStorage()
+router.post(config.routes.createPage, function(req, res){
+const pages = require('../scripts/db/pages');
+  var storage = multer.memoryStorage();
   var upload = multer({ storage: storage}).single('upl');
 
     upload(req,res,function(err) {
@@ -215,17 +200,15 @@ const pages = require('../scripts/db/pages')
             return res.end("Error uploading file.");
         }
         var pages = require('../scripts/db/pages.js');
-        var title = escape(req.body.title)
-        var html = escape(req.body.html)
-        var arrangement = parseInt(req.body.arrangement)
+        var title = escape(req.body.title);
+        var html = escape(req.body.html);
+        var arrangement = parseInt(req.body.arrangement);
 
         aws.upload(req.file.buffer).then((url) => {
-            var filePath = url
-
-            pages.add(res.locals.hackathon.hackathonid, title, filePath, html, arrangement).then(()=>{
+            pages.add(res.locals.hackathon.hackathonid, title, url, html, arrangement).then(()=>{
                 res.send('Event Added')
             }).catch((err)=>{
-                console.log(err)
+                console.log(err);
                 res.send('an error occured')
             })
           }).catch((err)=>{
@@ -239,11 +222,11 @@ const pages = require('../scripts/db/pages')
 
 // CREATE USER
 
-router.get('/create-user', auth, function(req, res){
-    res.render('pages/create-user', {title: 'create-user', pageName: 'admin', verified: true});
+router.get(config.routes.createUser, auth, function(req, res){
+    res.render(config.pages.createUser, {title: config.pageNames.createUser, pageName: 'admin', verified: true});
 });
 
-router.post('/create-user', auth, function(req, res){
+router.post(config.routes.createUser, auth, function(req, res){
 
     var fileName;
     //File uploaded
@@ -271,22 +254,13 @@ router.post('/create-user', auth, function(req, res){
         var password = escape(req.body.password);
 
         var filePath = '/img/users/' + fileName.toString();
-        users.addUser(name, password, filePath, email, function(err, message){
-            if(err) throw err;
-            console.log("Message");
+        //TODO: Returned promise
+        users.addUser(name, password, filePath, email).then((result) => {
+            res.send({name: result.name});
+        }).catch((e) => {
+            console.log(e);
+            res.status(500).send("User could not be created");
         });
-        // users.add(email, name, password, function(err, success){
-        //     if(err) throw err;
-        //     if(success){
-        //         userDB.addPicture(email, filePath, function(data){
-        //             console.log("File at: " + data.picture);
-        //             res.send("Done!");
-        //         })
-        //     }
-        // });
-
-
-
     });
 });
 
