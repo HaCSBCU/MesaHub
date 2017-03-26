@@ -191,8 +191,8 @@ router.get(config.routes.customPage, auth, function(req, res){
 });
 
 router.post(config.routes.createPage, function(req, res){
-const pages = require('../scripts/db/pages')
-  var storage = multer.memoryStorage()
+const pages = require('../scripts/db/pages');
+  var storage = multer.memoryStorage();
   var upload = multer({ storage: storage}).single('upl');
 
     upload(req,res,function(err) {
@@ -200,17 +200,15 @@ const pages = require('../scripts/db/pages')
             return res.end("Error uploading file.");
         }
         var pages = require('../scripts/db/pages.js');
-        var title = escape(req.body.title)
-        var html = escape(req.body.html)
-        var arrangement = parseInt(req.body.arrangement)
+        var title = escape(req.body.title);
+        var html = escape(req.body.html);
+        var arrangement = parseInt(req.body.arrangement);
 
         aws.upload(req.file.buffer).then((url) => {
-            var filePath = url
-
-            pages.add(res.locals.hackathon.hackathonid, title, filePath, html, arrangement).then(()=>{
+            pages.add(res.locals.hackathon.hackathonid, title, url, html, arrangement).then(()=>{
                 res.send('Event Added')
             }).catch((err)=>{
-                console.log(err)
+                console.log(err);
                 res.send('an error occured')
             })
           }).catch((err)=>{
@@ -224,11 +222,11 @@ const pages = require('../scripts/db/pages')
 
 // CREATE USER
 
-router.get('/create-user', auth, function(req, res){
-    res.render('pages/create-user', {title: 'create-user', pageName: 'admin', verified: true});
+router.get(config.routes.createUser, auth, function(req, res){
+    res.render(config.pages.createUser, {title: config.pageNames.createUser, pageName: 'admin', verified: true});
 });
 
-router.post('/create-user', auth, function(req, res){
+router.post(config.routes.createUser, auth, function(req, res){
 
     var fileName;
     //File uploaded
@@ -256,22 +254,13 @@ router.post('/create-user', auth, function(req, res){
         var password = escape(req.body.password);
 
         var filePath = '/img/users/' + fileName.toString();
-        users.addUser(name, password, filePath, email, function(err, message){
-            if(err) throw err;
-            console.log("Message");
+        //TODO: Returned promise
+        users.addUser(name, password, filePath, email).then((result) => {
+            res.send({name: result.name});
+        }).catch((e) => {
+            console.log(e);
+            res.status(500).send("User could not be created");
         });
-        // users.add(email, name, password, function(err, success){
-        //     if(err) throw err;
-        //     if(success){
-        //         userDB.addPicture(email, filePath, function(data){
-        //             console.log("File at: " + data.picture);
-        //             res.send("Done!");
-        //         })
-        //     }
-        // });
-
-
-
     });
 });
 

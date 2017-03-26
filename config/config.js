@@ -14,7 +14,8 @@ module.exports = {
         getAnnouncements: '/get-announcements',
         sendText: '/send-text',
         createPage: '/create-page',
-        customPage: '/custom-page'
+        customPage: '/custom-page',
+        createUser: '/create-user'
     },
     pages: {
         index: 'pages/index',
