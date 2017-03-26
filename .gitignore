@@ -55,4 +55,5 @@ jspm_packages
 
 
 # Public
-public/img/*
+public/img/users/*
+public/img/workshops/*
