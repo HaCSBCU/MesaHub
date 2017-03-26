@@ -14,14 +14,6 @@ router.get('/', function(req, res){
     res.render('pages/register', {title: 'Register', pageName: 'register', verified: false});
 });
 
-router.post('/create-user', function(req, res){
-    users.add(req.body.email, req.body.user, req.body.pass, function(err, success) {
-        return res.end(JSON.stringify({
-            error: err,
-            success: success
-        }));
-    });
-});
 
 
 
