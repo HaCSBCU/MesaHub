@@ -52,3 +52,7 @@ jspm_packages
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+
+# Public
+public/img/*
