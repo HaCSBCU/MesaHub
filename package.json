@@ -2,10 +2,13 @@
   "name": "mesahub",
   "version": "0.2.0",
   "private": true,
+  "engines": {
+    "node": "6"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "test1": "node ./app.js",
-    "test": "mocha -R spec tests/spec.js"
+    "test": "echo 'Lol we never actually wrote unit tests, the tests are for debugging'"
   },
   "dependencies": {
     "aws-sdk": "^2.27.0",
@@ -25,7 +28,7 @@
     "login-mongo": "^1.2.0",
     "moment": "^2.18.1",
     "mongoose": "^4.8.5",
-    "morgan": "~1.7.0",
+    "morgan": "~1.9.1",
     "multer": "^1.3.0",
     "node-sass-middleware": "0.9.8",
     "passport": "^0.3.2",
