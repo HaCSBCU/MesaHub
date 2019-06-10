@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test1": "node ./app.js",
-    "test": "mocha -R spec tests/spec.js"
+    "test": "echo 'Lol we never actually wrote unit tests, the tests are for debugging'"
   },
   "dependencies": {
     "aws-sdk": "^2.27.0",
