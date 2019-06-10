@@ -4,11 +4,11 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY package.json /app
-RUN npm install
+RUN yarn
 
 COPY . /app
 
 EXPOSE 8000
 EXPOSE 27017
 
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]

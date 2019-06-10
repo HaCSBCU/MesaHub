@@ -6,6 +6,8 @@ services:
       - ./:/app
     ports:
       - "8000:8000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017
   mongo:
     image: mongo
     ports:
