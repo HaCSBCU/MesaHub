@@ -2,6 +2,9 @@
   "name": "mesahub",
   "version": "0.2.0",
   "private": true,
+  "engines": {
+    "node": "6"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "test1": "node ./app.js",
