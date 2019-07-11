@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/HaCSBCU/MesaHub.svg?branch=master)](https://travis-ci.org/HaCSBCU/MesaHub)
 
+# Important info
+This repo is not being actively maintained and anyone wishing to use this should first address the security vulnerabilities in the repo.
+___
 
 # Building the project
 
