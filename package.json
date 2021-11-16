@@ -11,7 +11,7 @@
     "test": "echo 'Lol we never actually wrote unit tests, the tests are for debugging'"
   },
   "dependencies": {
-    "aws-sdk": "^2.27.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt": "^1.0.2",
     "body-parser": "~1.16.0",
     "connect-ensure-login": "^0.1.1",
