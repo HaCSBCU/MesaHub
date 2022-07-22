@@ -24,7 +24,7 @@
     "escape-html": "^1.0.3",
     "express": "~4.14.1",
     "express-session": "^1.15.1",
-    "file-type": "^4.1.0",
+    "file-type": "^16.5.4",
     "login-mongo": "^1.2.0",
     "moment": "^2.18.1",
     "mongoose": "^4.8.5",
