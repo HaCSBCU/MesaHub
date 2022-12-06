@@ -22,7 +22,7 @@
     "debug": "~2.6.0",
     "ejs": "~2.5.5",
     "escape-html": "^1.0.3",
-    "express": "~4.14.1",
+    "express": "~4.17.3",
     "express-session": "^1.15.1",
     "file-type": "^4.1.0",
     "login-mongo": "^1.2.0",
